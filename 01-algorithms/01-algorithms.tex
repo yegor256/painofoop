@@ -48,7 +48,8 @@
 % }
 % \end{ffcode}
 
-\pptChapter{History}
+
+\plush{\pptChapter{History}}
 
 \plush{
     \pptSection[Sketchpad]{Who started it?}
@@ -108,17 +109,16 @@ a deposit: 42
 \plush{\pptQuote{professor.png}{Everyone will be in a favor of OOP. Every manufacturer will promote his products as supporting it. Every manager will pay lip service to it. Every programmer will practice it (differently). And no one will know just what it is.}{Tim Rentsch, \newline \emph{Object Oriented Programming}, \newline ACM SIGPLAN Notices 17.9, 1982}}
 
 \plush{
-    \pptSection[C++]{Who made it all {\renewcommand{\ULthickness}{4pt}\sout{procedural}} popular?}
+    \pptSection[C++]{Who made it all popular?}
     \pptPic{0.7}{bjarne-stroustrup.jpg}\\
-    \textbf{C++} was created by Danish computer scientist Bjarne Stroustrup in 1985, by enhancing C language with Simula-like features. C was chosen because it was general-purpose, fast, portable and widely used.\\
+    \textbf{C++} was created by Danish computer scientist Bjarne Stroustrup in 1985, by enhancing C language with Simula-like features. C was chosen because it was general-purpose, fast, portable and widely used.\par
     {\small You may enjoy watching this \href{https://www.youtube.com/watch?v=ae6nFZn3auQ}{one-hour dialog} of Dr. Stroustrup and me.}
 }
 
 \plush{\pptQuote{ole-lehrmann-madsen.jpg}{There are as many definitions of OOP as there papers and books on the topic}{Ole Lehrmann Madsen et al., \newline \emph{What Object-Oriented Programming May Be---And What It Does Not Have to Be}, ECOOP'89}}
 
 \plush{
-    \pptQuote{alan-kay-oopsla.jpg}{I made up the term `object-oriented,' and I can tell you I didn't have C++ in mind}{Alan Kay, OOPSLA'97}
-
+    \pptQuote{alan-kay-oopsla.jpg}{I made up the term `object-oriented,' and I can tell you I didn't have C++ in mind}{Alan Kay, OOPSLA'97}\par
     {\small There was an interesting debate between Alan Kay and a few readers of my blog, in the comments section under this blog post:
     \href{https://www.yegor256.com/2017/12/12/alan-kay-was-wrong.html}{Alan Kay Was Wrong About Him Being Wrong}\par}
 }
@@ -145,16 +145,91 @@ Swift 2014
 \end{multicols}
 }
 
-\plush{\pptQuote{oscar-nierstrasz.jpg}{There is no uniformity or an agreement on the set of features and mechanisms that belong in an OO language as the paradigm itself is far too general}{Oscar Nierstrasz, \newline \emph{A Survey of Object-Oriented Concepts}, 1989}}
-
-\plush{\pptThought{Thus, we don't know what exactly is OOP :(}}
-
 % \plush{
 %     \pptSection[Java]{Who gave us Java?}
 %     \pptPic{0.6}{james-gosling.jpg}\\
 %     \textbf{Java} was originally developed by James Gosling at Sun Microsystems and released in May 1995.
 % }
 
-% \plush{\pptQuote{david-west.jpg}{The contemporary mainstream understanding of objects (which is not behavioral) is but a pale shadow of the original idea and anti-ethical to the original intent}{David West, \newline \emph{Object Thinking}, 2004}}
+\plush{\pptQuote{oscar-nierstrasz.jpg}{There is no uniformity or an agreement on the set of features and mechanisms that belong in an OO language as the paradigm itself is far too general}{Oscar Nierstrasz, \newline \emph{A Survey of Object-Oriented Concepts}, 1989}}
+
+\plush{
+\pptSection[Features]{Incomplete list of OOP features, so far:}
+{\small\begin{pptWide}{4}
+Polymorphism \\
+Nested Objects \\
+Traits \\
+Templates \\
+Generics \\
+Invariants \\
+Classes \\
+NULL \\
+Exceptions \\
+Operators \\
+Methods \\
+Static Blocks \\
+Virtual Tables \\
+Coroutines \\
+Monads \\
+Algebraic Types \\
+Annotations \\
+Interfaces \\
+Constructors \\
+Destructors \\
+Lifetimes \\
+Volatile Variables \\
+Synchronization \\
+Macros \\
+Inheritance \\
+Overloading \\
+Tuple Types \\
+Closures \\
+Access Modifiers \\
+Pattern Matching \\
+Enumerated Types \\
+Namespaces \\
+Modules \\
+Type Aliases \\
+Decorators \\
+Lambda Functions \\
+Type Inference \\
+Properties \\
+Value Types \\
+Multiple Inheritance \\
+Events \\
+Callbacks \\
+NULL Safety \\
+Streams \\
+Buffers \\
+Iterators \\
+Generators \\
+Aspects \\
+Anonymous Objects \\
+Anonymous Functions \\
+Reflection \\
+Type Casting \\
+Lazy Evaluation \\
+Garbage Collection \\
+Immutability
+\end{pptWide}}
+}
+
+\plush{\pptThought{Thus, we don't know anymore what exactly is object-oriented programming :(}}
+
+\plush{\pptChapter{Original Intent}}
+
+\plush{
+    \pptQuote{david-west.jpg}{The contemporary mainstream understanding of objects (which is not behavioral) is but a pale shadow of the original idea and anti-ethical to the original intent}{David West, \newline \emph{Object Thinking}, 2004}\par
+    {\small You may enjoy watching our conversation with Dr. West:
+    \href{https://www.youtube.com/watch?v=s-hdZZzMCac}{part I}
+    and
+    \href{https://www.youtube.com/watch?v=bW5K5cJ-AVs}{part II}.\par}
+}
+
+% show example of Java vs OOP
+
+\plush{\pptChapter{Abstraction}}
+
+...
 
 \end{document}
