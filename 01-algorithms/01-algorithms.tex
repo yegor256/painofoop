@@ -1,0 +1,160 @@
+% (The MIT License)
+%
+% Copyright (c) 2023 Yegor Bugayenko
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the 'Software'), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+
+\documentclass{article}
+\usepackage{../painofoop}
+\newcommand*\thetitle{Algorithms}
+\newcommand*\thesubtitle{...}
+\begin{document}
+
+\plush{\poopTitlePage{1}}
+
+\pptToc
+
+% \begin{ffcode}
+% class Calculator {
+%   static int add(int x, int y) { return x + y; }
+%   static int sub(int x, int y) { return x - y; }
+%   static int mul(int x, int y) { return x * y; }
+%   static int div(int x, int y) { return x / y; }
+% }
+% class Main {
+%   public static void main(String... args) {
+%     int ret = Calculator.add(42, 7);
+%     ret = Calculator.sub(ret, 12);
+%     ret = Calculator.mul(ret, ret);
+%     ret = Calculator.div(ret, 2);
+%     System.out.println("Result is: " + ret);
+%   }
+% }
+% \end{ffcode}
+
+\pptChapter{History}
+
+\plush{
+    \pptSection[Sketchpad]{Who started it?}
+    \pptPic{0.5}{ivan-sutherland.png}\\
+    Ivan Sutherland's seminal \textbf{Sketchpad} \emph{application} was an early inspiration for OOP, created between 1961 and 1962 and published in his Sketchpad Thesis in 1963. Any object could become a ``master,'' and additional instances of the objects were called “occurrences”. Sketchpad's masters share a lot in common with JavaScript's prototypal inheritance. \textcolor{gray}{(c)~Wikipedia}
+}
+
+\plush{
+    \pptSection[Objects]{Who invented Objects, Classes, and Inheritance?}
+    \pptPic{0.6}{dahl-and-nygaard.jpg}\\
+    \textbf{Simula} was developed in the 1965 at the Norwegian Computing Center in Oslo, by Ole-Johan Dahl and Kristen Nygaard. Like Sketchpad, Simula featured objects, and eventually introduced classes, class inheritance, subclasses, and virtual methods. \textcolor{gray}{(c)~Wikipedia}
+}
+
+\pptSection[Simula-67]{Simula-67: Sample Code}
+\begin{ffcode}
+Class Figure;
+  Virtual: Real Procedure square Is Procedure square;;
+Begin
+End;
+Figure Class Circle (c, r);
+  Real c, r;
+Begin
+  Real Procedure square;
+  Begin
+    square := 3.1415 * r * r;
+  End;
+End;
+\end{ffcode}
+\plush{}
+
+\plush{
+    \pptSection[OOP]{Who coined the ``Object-Oriented Programming'' term?}
+    \pptPic{0.6}{smalltalk-guys.jpg}\\
+    \textbf{Smalltalk} was created in the 1970s at Xerox PARC by Learning Research Group (LRG) scientists, including
+    Alan Kay, Dan Ingalls, Adele Goldberg, Ted Kaehler, Diana Merry, and Scott Wallace. \textcolor{gray}{(c)~Wikipedia}
+}
+
+\pptSection[Smalltalk]{Smalltalk: Sample Code}
+{\small\begin{ffcode}
+Object subclass: Account [
+    |$\vert$| balance |$\vert$|
+    Account class >> new [
+        |$\vert$| r |$\vert$|
+        r := super new. r init. ^r
+    ]
+    init [ balance := 0 ]
+]
+Account extend [
+    deposit: amount [ balance := balance + amount ]
+]
+a := Account new
+a deposit: 42
+\end{ffcode}
+}
+\plush{}
+
+\plush{\pptQuote{professor.png}{Everyone will be in a favor of OOP. Every manufacturer will promote his products as supporting it. Every manager will pay lip service to it. Every programmer will practice it (differently). And no one will know just what it is.}{Tim Rentsch, \newline \emph{Object Oriented Programming}, \newline ACM SIGPLAN Notices 17.9, 1982}}
+
+\plush{
+    \pptSection[C++]{Who made it all {\renewcommand{\ULthickness}{4pt}\sout{procedural}} popular?}
+    \pptPic{0.7}{bjarne-stroustrup.jpg}\\
+    \textbf{C++} was created by Danish computer scientist Bjarne Stroustrup in 1985, by enhancing C language with Simula-like features. C was chosen because it was general-purpose, fast, portable and widely used.\\
+    {\small You may enjoy watching this \href{https://www.youtube.com/watch?v=ae6nFZn3auQ}{one-hour dialog} of Dr. Stroustrup and me.}
+}
+
+\plush{\pptQuote{ole-lehrmann-madsen.jpg}{There are as many definitions of OOP as there papers and books on the topic}{Ole Lehrmann Madsen et al., \newline \emph{What Object-Oriented Programming May Be---And What It Does Not Have to Be}, ECOOP'89}}
+
+\plush{
+    \pptQuote{alan-kay-oopsla.jpg}{I made up the term `object-oriented,' and I can tell you I didn't have C++ in mind}{Alan Kay, OOPSLA'97}
+
+    {\small There was an interesting debate between Alan Kay and a few readers of my blog, in the comments section under this blog post:
+    \href{https://www.yegor256.com/2017/12/12/alan-kay-was-wrong.html}{Alan Kay Was Wrong About Him Being Wrong}\par}
+}
+
+\plush{
+\pptSection[Later]{What happened later?}
+C++ was released in 1985. And then...\par
+\begin{multicols}{2}
+Erlang 1986 \\
+Eiffel 1986 \\
+Self 1987 \\
+Perl 1988 \\
+Haskell 1990 \\
+Python 1991 \\
+Lua 1993 \\
+JavaScript 1995 \\
+Ruby 1995 \\
+Java 1995 \\
+Go 1995 \\
+PHP3 1998 \\
+C\# 2000 \\
+Rust 2010 \\
+Swift 2014
+\end{multicols}
+}
+
+\plush{\pptQuote{oscar-nierstrasz.jpg}{There is no uniformity or an agreement on the set of features and mechanisms that belong in an OO language as the paradigm itself is far too general}{Oscar Nierstrasz, \newline \emph{A Survey of Object-Oriented Concepts}, 1989}}
+
+\plush{\pptThought{Thus, we don't know what exactly is OOP :(}}
+
+% \plush{
+%     \pptSection[Java]{Who gave us Java?}
+%     \pptPic{0.6}{james-gosling.jpg}\\
+%     \textbf{Java} was originally developed by James Gosling at Sun Microsystems and released in May 1995.
+% }
+
+% \plush{\pptQuote{david-west.jpg}{The contemporary mainstream understanding of objects (which is not behavioral) is but a pale shadow of the original idea and anti-ethical to the original intent}{David West, \newline \emph{Object Thinking}, 2004}}
+
+\end{document}
