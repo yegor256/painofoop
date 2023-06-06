@@ -106,22 +106,40 @@ a deposit: 42
 }
 \plush{}
 
-\plush{\pptQuote{professor.png}{Everyone will be in a favor of OOP. Every manufacturer will promote his products as supporting it. Every manager will pay lip service to it. Every programmer will practice it (differently). And no one will know just what it is.}{Tim Rentsch, \newline \emph{Object Oriented Programming}, \newline ACM SIGPLAN Notices 17.9, 1982}}
+\plush{\begin{pptMiddle}
+    \pptQuote{professor.png}{Everyone will be in a favor of OOP. Every manufacturer will promote his products as supporting it. Every manager will pay lip service to it. Every programmer will practice it (differently). And no one will know just what it is.}{Tim Rentsch, \newline \emph{Object Oriented Programming}, \newline ACM SIGPLAN Notices 17.9, 1982}
+\end{pptMiddle}}
 
 \plush{
-    \pptSection[C++]{Who made it all popular?}
+    \pptSection[Stroustrup]{Who made it all popular?}
     \pptPic{0.7}{bjarne-stroustrup.jpg}\\
     \textbf{C++} was created by Danish computer scientist Bjarne Stroustrup in 1985, by enhancing C language with Simula-like features. C was chosen because it was general-purpose, fast, portable and widely used.\par
     {\small You may enjoy watching this \href{https://www.youtube.com/watch?v=ae6nFZn3auQ}{one-hour dialog} of Dr. Stroustrup and me.}
 }
 
-\plush{\pptQuote{ole-lehrmann-madsen.jpg}{There are as many definitions of OOP as there papers and books on the topic}{Ole Lehrmann Madsen et al., \newline \emph{What Object-Oriented Programming May Be---And What It Does Not Have to Be}, ECOOP'89}}
+\pptSection[C++]{C++: Sample Code}
+\begin{ffcode}
+class Figure {
+  virtual float square() = 0;
+};
+class Circle : public Figure {
+  Circle(float c, float r) : c(c), r(r) {};
+  float square() { return 3.1415 * r * r; };
+private:
+  float c, r;
+};
+\end{ffcode}
+\plush{}
 
-\plush{
+\plush{\begin{pptMiddle}
+    \pptQuote{ole-lehrmann-madsen.jpg}{There are as many definitions of OOP as there papers and books on the topic}{Ole Lehrmann Madsen et al., \newline \emph{What Object-Oriented Programming May Be---And What It Does Not Have to Be}, ECOOP'89}
+\end{pptMiddle}}
+
+\plush{\begin{pptMiddle}
     \pptQuote{alan-kay-oopsla.jpg}{I made up the term `object-oriented,' and I can tell you I didn't have C++ in mind}{Alan Kay, OOPSLA'97}\par
     {\small There was an interesting debate between Alan Kay and a few readers of my blog, in the comments section under this blog post:
     \href{https://www.yegor256.com/2017/12/12/alan-kay-was-wrong.html}{Alan Kay Was Wrong About Him Being Wrong}\par}
-}
+\end{pptMiddle}}
 
 \plush{
 \pptSection[Later]{What happened later?}
@@ -151,7 +169,9 @@ Swift 2014
 %     \textbf{Java} was originally developed by James Gosling at Sun Microsystems and released in May 1995.
 % }
 
-\plush{\pptQuote{oscar-nierstrasz.jpg}{There is no uniformity or an agreement on the set of features and mechanisms that belong in an OO language as the paradigm itself is far too general}{Oscar Nierstrasz, \newline \emph{A Survey of Object-Oriented Concepts}, 1989}}
+\plush{\begin{pptMiddle}
+    \pptQuote{oscar-nierstrasz.jpg}{There is no uniformity or an agreement on the set of features and mechanisms that belong in an OO language as the paradigm itself is far too general}{Oscar Nierstrasz, \newline \emph{A Survey of Object-Oriented Concepts}, 1989}
+\end{pptMiddle}}
 
 \plush{
 \pptSection[Features]{Incomplete list of OOP features, so far:}
@@ -214,17 +234,33 @@ Immutability
 \end{pptWide}}
 }
 
-\plush{\pptThought{Thus, we don't know anymore what exactly is object-oriented programming :(}}
+\plush{\begin{pptMiddle}
+    \pptQuote{edsger-dijkstra.jpg}{Object oriented programs are offered as alternatives to correct ones... Object-oriented programming is an exceptionally bad idea which could only have originated in California.}{Edsger W. Dijkstra, 1989}
+\end{pptMiddle}}
 
-\plush{\pptChapter{Original Intent}}
+\plush{\begin{pptMiddle}
+    \pptQuote{linus-torvalds.jpg}{C++ is a horrible language$\dots$ C++ leads to really, really bad design choices$\dots$ In other words, the only way to do good, efficient, and system-level and portable C++ ends up to limit yourself to all the things that are basically available in C.}{Linus Torvalds, 2007 \newline Creator of Linux}
+\end{pptMiddle}}
 
-\plush{
+\plush{\begin{pptMiddle}
+    \pptQuote{jeff-atwood.jpg}{OO seems to bring at least as many problems to the table as it solves}{Jeff Atwood, 2007 \newline Co-founder of Stack Overflow}
+\end{pptMiddle}}
+
+\plush{\begin{pptMiddle}
+    \pptQuote{rich-hickey.jpg}{I think that large objected-oriented programs struggle with increasing complexity as you build this large object graph of mutable objects. You know, trying to understand and keep in your mind what will happen when you call a method and what will the side effects be.}{Rich Hickey, 2010 \newline Creator of Clojure}
+\end{pptMiddle}}
+
+\plush{\pptThought{Thus, we don't know anymore what exactly is object-oriented programming, and whether it helps us write better code :(}}
+
+\plush{\pptChapter[Intent]{Original Intent}}
+
+\plush{\begin{pptMiddle}
     \pptQuote{david-west.jpg}{The contemporary mainstream understanding of objects (which is not behavioral) is but a pale shadow of the original idea and anti-ethical to the original intent}{David West, \newline \emph{Object Thinking}, 2004}\par
     {\small You may enjoy watching our conversation with Dr. West:
     \href{https://www.youtube.com/watch?v=s-hdZZzMCac}{part I}
     and
     \href{https://www.youtube.com/watch?v=bW5K5cJ-AVs}{part II}.\par}
-}
+\end{pptMiddle}}
 
 % show example of Java vs OOP
 
