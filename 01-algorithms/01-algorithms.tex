@@ -267,6 +267,68 @@ Immutability
     \href{https://www.youtube.com/watch?v=bW5K5cJ-AVs}{part II}.\par}
 \end{pptMiddle}}
 
+\plush{\pptThought{The original intent: encapsulate functionality in objects, thus increasing the level of \emph{abstraction}}}
+
+\pptSection[Rectangle]{Square of a Rectangle}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+int square(x1, y1, x2, y2) {
+  int w = x2 - x1;
+  if (w < 0) { w = w * -1; }
+  int h = y2 - y1;
+  if (h < 0) { h = h * -1; }
+  return w * h;
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+int distance(left, right) {
+  int d = right - left;
+  if (d < 0) { d = d * -1; }
+  return d;
+}
+int square(x1, y1, x2, y2) {
+  return distance(x2, x1)
+    * distance(y2, y1);
+}
+\end{ffcode}
+}
+\end{pptWide}\par
+There are two levels of abstraction at the right snippet, while only one at the left snippet.
+\plush{}
+
+\pptSection[Function]{An Object as a Function}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+int distance(left, right) {
+  int d = right - left;
+  if (d < 0) { d = d * -1; }
+  return d; }
+int square(x1, y1, x2, y2) {
+  return distance(x2, x1)
+    * distance(y2, y1); }
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+class Distance implements Number {
+  private int r; private int l;
+  Distance(l, r) { l = l; r = r; }
+  @Override int intValue() {
+    int d = right - left;
+    if (d < 0) { d = d * -1; }
+    return d; } }
+int square(x1, y1, x2, y2) {
+  return new Distance(x2, x1).intValue()
+    * new Distance(y2, y1).intValue(); } }
+\end{ffcode}
+}
+\end{pptWide}\par
+The Java object \ff{Distance} on the right snippet is semantically equivalent to the C function \ff{distance()} on the left one.
+\plush{}
+
+
 \pptSection[Square]{Square of a Circle}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
@@ -301,7 +363,7 @@ float s = c.square();
 \end{pptWide}
 \plush{}
 
-\plush{\pptChapter{Abstraction}}
+\plush{\pptChapter{What is an Object?}}
 
 ...
 
