@@ -267,7 +267,39 @@ Immutability
     \href{https://www.youtube.com/watch?v=bW5K5cJ-AVs}{part II}.\par}
 \end{pptMiddle}}
 
-% show example of Java vs OOP
+\pptSection[Square]{Square of a Circle}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+class Circle {
+  private float r;
+  void setR(float r) { this.r = r; }
+  float getR() { return this.r; }
+}
+class FigureUtils {
+  static float calcuateSquare(Circle c) {
+    return 3.14 * c.getR() * c.getR();
+  }
+}
+Circle c = new Circle();
+c.setR(42.0);
+float s = FigureUtils.square(c);
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+class Circle {
+  private float r;
+  Circle(float r) { this.r = r; }
+  float square() {
+    return 3.14 * this.r * this.r;
+  }
+}
+Circle c = new Circle(42.0);
+float s = c.square();
+\end{ffcode}
+}
+\end{pptWide}
+\plush{}
 
 \plush{\pptChapter{Abstraction}}
 
@@ -275,18 +307,14 @@ Immutability
 
 \plush{\pptChapter[Enemies]{Enemies of Object Thinking}}
 
-\plush{
-    \pptBanner{What makes us think as algorithms}
-    \begin{itemize}
-        \item Global scope (static methods)
-        \item Anemic objects (getters)
-        \item Mutability (setters)
-        \item Workers (``-er'' suffix)
-        \item NULL references
-        \item Type casting (reflection)
-        \item Inheritance
-    \end{itemize}
-}
+\print{\pptSection[List]{What makes us think as algorithms}}
+\print{Global scope (static methods)}
+\print{Anemic objects (getters)}
+\print{Mutability (setters)}
+\print{Workers (``-er'' suffix)}
+\print{NULL references}
+\print{Type casting (reflection)}
+\plush{Inheritance}
 
 \plush{\pptChapter{Read \& Watch}}
 
@@ -295,6 +323,8 @@ Immutability
 David West, \emph{Object Thinking}, 2004
 
 Yegor Bugayenko, \emph{Elegant Objects}, 2016
+
+Watch my 15+ lectures about OOP, \href{https://www.youtube.com/playlist?list=PLaIsQH4uc08yw2CsNv5OV30GfKE6XVGii}{on YouTube}
 
 ``Object Thinking'' meetup, \href{https://www.youtube.com/watch?v=yT6oO28wEik&list=PLaIsQH4uc08yetzX86w1pPck1QtGEy_ik}{watch on YouTube}.
 
