@@ -289,7 +289,7 @@ Immutability
     {\small * This is how I understand the original intent.}
 }
 
-\pptSection[Rectangle]{What is an ``abstraction''?}
+\pptSection[Rectangle]{1) What is an ``abstraction''?}
 \begin{pptWide}{2}
 ... apple ...
 \par
@@ -367,6 +367,28 @@ int square(x1, y1, x2, y2) {
 \end{tikzpicture}
 \end{pptWide}\par
 Higher level abstractions must not know and/or rely on semantics of lower level abstractions.
+\plush{}
+
+\pptSection[Rectangle]{2) What is ``data hiding''?}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+f = new File("/tmp/data.txt");
+// The data escapes the object! :(
+p = f.getPath();
+FileUtils.deleteFile(p);
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+f = new File("/tmp/data.txt");
+// The boolean data escapes too :)
+done = f.delete();
+assert(done);
+\end{ffcode}
+}
+\end{pptWide}
+\par
+Obviously, some data must escape your objects.
 \plush{}
 
 \pptSection[Function]{An object as a function}
