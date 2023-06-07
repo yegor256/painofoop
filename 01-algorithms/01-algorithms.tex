@@ -30,24 +30,6 @@
 
 \pptToc
 
-% \begin{ffcode}
-% class Calculator {
-%   static int add(int x, int y) { return x + y; }
-%   static int sub(int x, int y) { return x - y; }
-%   static int mul(int x, int y) { return x * y; }
-%   static int div(int x, int y) { return x / y; }
-% }
-% class Main {
-%   public static void main(String... args) {
-%     int ret = Calculator.add(42, 7);
-%     ret = Calculator.sub(ret, 12);
-%     ret = Calculator.mul(ret, ret);
-%     ret = Calculator.div(ret, 2);
-%     System.out.println("Result is: " + ret);
-%   }
-% }
-% \end{ffcode}
-
 \plush{
     \pptBanner[red]{WARNING!}
     In the pursuit of academic enlightenment within this course, it is paramount to caution that the doctrines disseminated may present a potentially hazardous venture if employed in real-life software projects. This inherent risk arises from the potential incongruity with the broadly accepted canon of object-oriented programming and recognized best programming practices. If one remains resolute in their decision to adapt their coding methodologies to align with the principles propagated in this course, it would be prudent to employ a certain degree of foresight. A humorous, yet sincere suggestion, would be to secure alternate employment prior to a possible premature termination of one's current professional engagement.\par
@@ -65,7 +47,7 @@
 \plush{
     \pptSection[Objects]{Who invented Objects, Classes, and Inheritance?}
     \pptPic{0.6}{dahl-and-nygaard.jpg}\\
-    \textbf{Simula} was developed in the 1965 at the Norwegian Computing Center in Oslo, by Ole-Johan Dahl and Kristen Nygaard. Like Sketchpad, Simula featured objects, and eventually introduced classes, class inheritance, subclasses, and virtual methods. \textcolor{gray}{(c)~Wikipedia}
+    \textbf{Simula} was developed in the 1965 at the Norwegian Computing Center in Oslo, by Ole-Johan Dahl and Kristen Nygaard. Like Sketchpad, Simula featured objects, and eventually introduced \emph{classes}, class \emph{inheritance}, \emph{subclasses}, and \emph{virtual methods}. \textcolor{gray}{(c)~Wikipedia}
 }
 
 \pptSection[Simula-67]{Simula-67: Sample Code}
@@ -86,7 +68,7 @@ End;
 \plush{}
 
 \plush{
-    \pptSection[OOP]{Who coined the ``Object-Oriented Programming'' term?}
+    \pptSection[OOP]{Who coined the ``OOP'' term?}
     \pptPic{0.6}{smalltalk-guys.jpg}\\
     \textbf{Smalltalk} was created in the 1970s at Xerox PARC by Learning Research Group (LRG) scientists, including
     Alan Kay, Dan Ingalls, Adele Goldberg, Ted Kaehler, Diana Merry, and Scott Wallace. \textcolor{gray}{(c)~Wikipedia}
@@ -312,6 +294,10 @@ var file = {
 \end{ffcode}
 }
 \end{pptWide}
+\par
+We deal with an abstraction as if it was a real thing, but eliminating unnecessary details.
+We do \ff{file.read()} instead of ``open file handler for data.txt, read byte by byte, store in
+byte buffer, wait for the end of file, return the result.''
 \plush{}
 
 \pptSection[Rectangle]{How many abstractions are needed?}
@@ -527,6 +513,198 @@ How to decide what is \emph{state} and what is \emph{behavior}?
 \end{pptWide}
 \plush{}
 
+\plush{\pptChapter[Object Thinking]{Object Thinking vs. Algorithms}}
+
+\pptSection[While]{While-Do loop}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+buffer = []
+while true
+  c = STDIN.readchar
+  break if c == "\n"
+  if buffer.length > 3
+    STDOUT.puts buffer.join
+    buffer = []
+  end
+  buffer << c
+end
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+$ echo 'Hello, world!' |$\vert$| ruby a.rb
+Hell
+o, w
+orld
+\end{ffcode}
+}
+\end{pptWide}
+\plush{}
+
+\pptSection[Buffer]{Buffer abstraction}
+\begin{pptWide}{2}
+{\scriptsize\begin{ffcode}
+buffer = []
+while true
+  c = STDIN.readchar
+  break if c == "\n"
+  if buffer.length > 3
+    STDOUT.puts buffer.join
+    buffer = []
+  end
+  buffer << c
+end
+\end{ffcode}
+}
+\par\columnbreak\par
+{\scriptsize\begin{ffcode}
+class Buffer
+  def initialize; @data = []; end
+  def push(c)
+    if @data.length > 3
+      STDOUT.puts @data.join
+      @data = []
+    end
+    @data << c
+  end
+end
+buffer = Buffer.new
+while true
+  c = STDIN.readchar
+  break if c == "\n"
+  buffer.push c
+end
+\end{ffcode}
+}
+\end{pptWide}
+\plush{}
+
+\pptSection[Loop]{Loop abstraction}
+\begin{pptWide}{2}
+{\scriptsize\begin{ffcode}
+class Buffer
+  def initialize; @data = []; end
+  def push(c)
+    if @data.length > 3
+      STDOUT.puts @data.join
+      @data = []
+    end
+    @data << c
+  end
+end
+buffer = Buffer.new
+while true
+  c = STDIN.readchar
+  break if c == "\n"
+  buffer.push c
+end
+\end{ffcode}
+}
+\par\columnbreak\par
+{\scriptsize\begin{ffcode}
+class Buffer
+  # the same
+end
+class Pull
+  def initialize(b); @buf = b; end
+  def again
+    c = STDIN.readchar
+    return false if c == "\n"
+    @buf.push c
+    true
+  end
+end
+buffer = Buffer.new
+pull = Pull.new(buffer)
+while pull.again; end
+\end{ffcode}
+}
+\end{pptWide}
+\plush{}
+
+\pptSection[Loop]{Loop abstraction}
+\begin{pptWide}{2}
+{\scriptsize\begin{ffcode}
+class Buffer
+  # the same
+end
+class Pull
+  def initialize(b); @buf = b; end
+  def again
+    c = STDIN.readchar
+    return false if c == "\n"
+    @buf.push c
+    true
+  end
+end
+buffer = Buffer.new
+pull = Pull.new(buffer)
+while pull.again; end
+\end{ffcode}
+}
+\par\columnbreak\par
+{\scriptsize\begin{ffcode}
+class Buffer
+  # the same
+end
+class Pull
+  # the same
+end
+class Pulls
+  def initialize(p); @pull = p; end
+  def fetch
+    while @pull.again; end
+  end
+end
+Pulls.new(Pull.new(Buffer.new)).fetch
+\end{ffcode}
+}
+\end{pptWide}
+\plush{}
+
+\pptSection[Composition]{Object composition}
+\begin{pptWide}{2}
+{\scriptsize\begin{ffcode}
+class Buffer
+  def initialize; @data = []; end
+  def push(c)
+    if @data.length > 3
+      STDOUT.puts @data.join
+      @data = []
+    end
+    @data << c
+  end
+end
+
+class Pull
+  def initialize(b); @buf = b; end
+  def again
+    c = STDIN.readchar
+    return false if c == "\n"
+    @buf.push c
+    true
+  end
+end
+
+class Pulls
+  def initialize(p); @pull = p; end
+  def fetch
+    while @pull.again; end
+  end
+end
+
+Pulls.new(
+  Pull.new(
+    Buffer.new
+  )
+).fetch
+\end{ffcode}
+}
+\end{pptWide}
+\plush{}
+
+
+
 \plush{\pptChapter[Enemies]{Enemies of Object Thinking}}
 
 \print{\pptSection[List]{What makes us think as algorithms}}
@@ -547,7 +725,7 @@ How to decide what is \emph{state} and what is \emph{behavior}?
 \print{... has no getters or public attributes,}
 \print{... doesn't use NULL references,}
 \print{... has only immutable objects,}
-\print{... doesn't use interitance.}
+\print{... doesn't use inheritance.}
 \plush{Otherwise, just attend 75\% of all lectures and you will get your ``C''.}
 
 \plush{\pptChapter{Read and Watch}}
