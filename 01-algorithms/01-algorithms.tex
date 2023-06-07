@@ -284,7 +284,7 @@ Immutability
 }
 
 \plush{
-    \pptThought{Objects are abstractions that hide data and expose functionality*}
+    \pptThought{A system is a composition of objects that are abstractions, which hide data and expose behavior*}
     \par
     {\small * This is how I understand the original intent.}
 }
@@ -389,6 +389,40 @@ assert(done);
 \end{pptWide}
 \par
 Obviously, some data must escape your objects.
+\plush{}
+
+\pptSection[Rectangle]{3) What is ``behavior exposing''?}
+\begin{pptWide}{2}
+This is so called ``anemic'' object:
+{\small\begin{ffcode}
+var user = {
+  login: 'jeff',
+  password: 'swordfish',
+  age: 32
+}
+function print(u) {
+  console.log(`Hello, ${u.login},
+    you are ${u.age} today!`);
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+This object is ``alive'':
+{\small\begin{ffcode}
+var user = {
+  login: 'jeff',
+  password: 'swordfish',
+  age: 32,
+  print: function() {
+    console.log(`Hello, ${this.login},
+      you are ${this.age} today!`);
+  }
+}
+user.print();
+\end{ffcode}
+}
+\end{pptWide}
+\par
 \plush{}
 
 \pptSection[Function]{An object as a function}
