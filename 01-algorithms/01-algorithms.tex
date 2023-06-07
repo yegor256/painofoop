@@ -23,7 +23,7 @@
 \documentclass{article}
 \usepackage{../painofoop}
 \newcommand*\thetitle{Algorithms}
-\newcommand*\thesubtitle{...}
+\newcommand*\thesubtitle{History, State, Behavior, Enemies of OOP}
 \begin{document}
 
 \plush{\poopTitlePage{1}}
@@ -140,11 +140,12 @@ private:
     \pptQuote{ole-lehrmann-madsen.jpg}{There are as many definitions of OOP as there papers and books on the topic}{Ole Lehrmann Madsen et al., \newline \emph{What Object-Oriented Programming May Be---And What It Does Not Have to Be}, ECOOP'89}
 \end{pptMiddle}}
 
-\plush{\begin{pptMiddle}
-    \pptQuote{alan-kay-oopsla.jpg}{I made up the term `object-oriented,' and I can tell you I didn't have C++ in mind}{Alan Kay, OOPSLA'97}\par
+\plush{
+    \begin{pptMiddle}\pptQuote{alan-kay-oopsla.jpg}{I made up the term `object-oriented,' and I can tell you I didn't have C++ in mind}{Alan Kay, OOPSLA'97}\end{pptMiddle}
+    \par
     {\small There was an interesting debate between Alan Kay and a few readers of my blog, in the comments section under this blog post:
     \href{https://www.yegor256.com/2017/12/12/alan-kay-was-wrong.html}{Alan Kay Was Wrong About Him Being Wrong}\par}
-\end{pptMiddle}}
+}
 
 \plush{
 \pptSection[Later]{What happened later?}
@@ -265,19 +266,28 @@ Immutability
     \pptQuote{zeba-khanam.jpg}{Object oriented programming promotes ease in designing reusable software but the long coded methods makes it unreadable and enhances the complexity of the methods}{Zeba Khanam, 2018 \newline \emph{Barriers to Refactoring: Issues and Solutions}, International Journal on Future Revolution in Computer Science \& Communication Engineering}
 \end{pptMiddle}}
 
-\plush{\pptThought{Thus, we don't know anymore what exactly is object-oriented programming, and whether it helps us write better code :(}}
+\plush{
+    \pptThought{Thus, we don't know anymore what exactly is object-oriented programming, and whether it helps us write better code :(}
+    \par
+    {\small You can find more quotes in this blog post of mine: \href{https://www.yegor256.com/2016/08/15/what-is-wrong-object-oriented-programming.html}{What's Wrong With Object-Oriented Programming?}}\par
+}
 
 \plush{\pptChapter[Intent]{Original Intent}}
 
-\plush{\begin{pptMiddle}
-    \pptQuote{david-west.jpg}{The contemporary mainstream understanding of objects (which is not behavioral) is but a pale shadow of the original idea and anti-ethical to the original intent}{David West, \newline \emph{Object Thinking}, 2004}\par
+\plush{
+    \begin{pptMiddle}\pptQuote{david-west.jpg}{The contemporary mainstream understanding of objects (which is not behavioral) is but a pale shadow of the original idea and anti-ethical to the original intent}{David West, \newline \emph{Object Thinking}, 2004}\end{pptMiddle}
+    \par
     {\small You may enjoy watching our conversation with Dr. West:
     \href{https://www.youtube.com/watch?v=s-hdZZzMCac}{part I}
     and
     \href{https://www.youtube.com/watch?v=bW5K5cJ-AVs}{part II}.\par}
-\end{pptMiddle}}
+}
 
-\plush{\pptThought{The original intent: encapsulate functionality in objects, thus increasing the level of \emph{abstraction}}}
+\plush{
+    \pptThought{The original intent: objects are abstractions that hide data and expose functionality*}
+    \par
+    {\small * This is how I understand it.}
+}
 
 \pptSection[Rectangle]{Square of a Rectangle}
 \begin{pptWide}{2}
@@ -305,7 +315,33 @@ int square(x1, y1, x2, y2) {
 \end{ffcode}
 }
 \end{pptWide}\par
-There are two levels of abstraction at the right snippet, while only one at the left snippet.
+There are two abstraction at the right snippet, while only one at the left snippet.
+\plush{}
+
+\pptSection[Levels]{Levels of Abstraction}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+int distance(left, right) {
+  int d = right - left;
+  if (d < 0) { d = d * -1; }
+  return d;
+}
+int square(x1, y1, x2, y2) {
+  return distance(x2, x1)
+    * distance(y2, y1);
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+\begin{tikzpicture}[line width=2pt]
+\node[draw,rectangle,anchor=center] (square) {\texttt{square(3, 9, 13, 2)}};
+\node[draw,rectangle,below left=3cm and 0cm of square,anchor=center] (d1) {\texttt{distance(13, 3)}};
+\node[draw,rectangle,below right=3cm and 0cm of square,anchor=center] (d2) {\texttt{distance(2, 9)}};
+\draw[->] (square) -- (d1);
+\draw[->] (square) -- (d2);
+\end{tikzpicture}
+\end{pptWide}\par
+Higher level must not know and/or rely on semantics of lower levels.
 \plush{}
 
 \pptSection[Function]{An Object as a Function}
@@ -322,59 +358,62 @@ int square(x1, y1, x2, y2) {
 }
 \par\columnbreak\par
 {\small\begin{ffcode}
-class Distance implements Number {
+class Distance {
   private int r; private int l;
   Distance(l, r) { l = l; r = r; }
-  @Override int intValue() {
+  int value() {
     int d = right - left;
     if (d < 0) { d = d * -1; }
     return d; } }
 int square(x1, y1, x2, y2) {
-  return new Distance(x2, x1).intValue()
-    * new Distance(y2, y1).intValue(); } }
+  return new Distance(x2, x1).value()
+    * new Distance(y2, y1).value(); } }
 \end{ffcode}
 }
 \end{pptWide}\par
 The Java object \ff{Distance} on the right snippet is semantically equivalent to the C function \ff{distance()} on the left one.
 \plush{}
 
-\pptSection[State]{State Ruied Everything}
+\pptSection[State]{Identity, State, Behavior}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
-class Distance implements Number {
-  private int r; private int l;
-  Distance(l, r) { l = l; r = r; }
-  @Override int intValue() {
-    int d = right - left;
-    if (d < 0) { d = d * -1; }
-    return d; } }
-int square(x1, y1, x2, y2) {
-  return new Distance(x2, x1).intValue()
-    * new Distance(y2, y1).intValue(); } }
+class Circle {
+  private float radius;
+  Circle(float r) {
+    radius = r; }
+  void getRadius() {
+    return radius; }
+  void setRadius(float r) {
+    radius = r; }
+  float square() {
+    return 3.14 * radius * radius; }
+}
 \end{ffcode}
 }
 \par\columnbreak\par
 {\small\begin{ffcode}
-class Distance {
-  private int r; private int l;
-  Distance(l, r) { l = l; r = r; }
-  int calculate() {
-    int d = right - left;
-    if (d < 0) { d = d * -1; }
-    return d; } }
-int square(x1, y1, x2, y2) {
-  new Distance(x2, x1)
-  return .intValue()
-    * new Distance(y2, y1).intValue(); } }
+// Identity:
+c1 = new Circle(42.0);
+c2 = new Circle(42.0);
+c1 != c2;
+
+// State:
+c1 = new Circle(42.0);
+c2 = new Circle(42.0);
+c1.getRadius() == c2.getRadius();
+
+// Behavior:
+c1 = new Circle(42.0);
+c2 = new Circle(-42.0);
+c1.square() == c2.square();
 \end{ffcode}
 }
 \end{pptWide}\par
-The Java object \ff{Distance} on the right snippet is semantically equivalent to the C function \ff{distance()} on the left one.
 \plush{}
 
-\plush{\pptChapter[Encapsulation]{How Much to Encapsulate?}}
+\plush{\pptThought{Rule of thumb: encapsulate (hide) state and expose behavior}}
 
-\pptSection[Square]{Square of a Circle}
+\pptSection[FigureUtils]{State vs. Behavior}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 class Circle {
@@ -404,11 +443,10 @@ class Circle {
 Circle c = new Circle(42.0);
 float s = c.square();
 \end{ffcode}
-}
+}\par
+How to decide what is \emph{state} and what is \emph{behavior}?
 \end{pptWide}
 \plush{}
-
-\plush{\pptThought{Your objects should expose as little data as possible}}
 
 \plush{\pptChapter[Enemies]{Enemies of Object Thinking}}
 
@@ -433,7 +471,7 @@ float s = c.square();
 \print{... doesn't use interitance.}
 \plush{Otherwise, just attend 75\% of all lectures and you will get your ``C''.}
 
-\plush{\pptChapter{Read \& Watch}}
+\plush{\pptChapter{Read and Watch}}
 
 \pptBanner{Read and watch:}
 
