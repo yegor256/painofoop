@@ -28,8 +28,8 @@
 \begin{document}
 
 {\sffamily{\bfseries\Large Pain of OOP}\\
-Series of lectures by \href{https://www.yegor256.com}{Yegor Bugayenko}
-% to students of \href{https://innopolis.university/en/}{Innopolis University} in 2021,\\
+Series of lectures by \href{https://www.yegor256.com}{Yegor Bugayenko} presented
+to students of \href{https://innopolis.university/en/}{Innopolis University} in 2023.\\
 % and \href{https://www.youtube.com/playlist?list=PLaIsQH4uc08woJKRAA7mmjs9fU0jeKjjM}{video recorded}}
 
 % The entire set of slide decks is in \href{https://github.com/yegor256/ssd16}{yegor256/ssd16} GitHub repository.
@@ -119,100 +119,23 @@ After the course a student \emph{hopefully} will understand:
 \item Why MVC is a bad design idea?
 \end{itemize}
 
-% \newpage
-% \section*{Lectures}
+\newpage
+\section*{Lectures}
 
-% The following topics are discussed:
+The following topics are discussed:
 
-% \newlist{lectures}{enumerate}{10}
-% \setlist[lectures]{label*=\arabic*.}
-% \begin{lectures}
-% \item Formal Grammar
-% 	\begin{itemize}
-% 	\item Notation
-% 	\item Production Rules
-% 	\item Parse Tree
-% 	\item Ambiguity of Grammar
-% 	\item Chomsky's Four Types of Grammars
-% 	\item Regular Grammar
-% 	\item Context Free Grammar (CFG)
-% 	\item Linear Grammars
-% 	\item Precedence and Associativity
-% 	\item Recursive Rules
-% 	\item Leftmost and Rightmost Derivation
-% 	\item Non-deterministic CFG
-% 	\item Left Factoring
-% 	\end{itemize}
-% \item Syntax Analysis
-% 	\begin{itemize}
-% 	\item Extended Backus-Naur Form
-% 	\item Lexical Analysis (Grammar + Lexer)
-% 	\item Tokenization
-% 	\item Syntactic Analysis (Parsing)
-% 	\item Top-down (LL) and Bottom-up (LR) Parsing
-% 	\item Flex and Bison
-% 	\item ANTLR
-% 	\item Off-side Rule
-% 	\end{itemize}
-% \item Abstract Syntax Tree
-% 	\begin{itemize}
-% 	\item Contextual Analysis
-% 	\item Semantic Analysis
-% 	\item Intermediate Language
-% 	\item Control Flow Graph
-% 	\item AST in XML
-% 	\end{itemize}
-% \item Formal Semantics
-% 	\begin{itemize}
-% 	\item Inference Rules, Axioms, Proof Trees
-% 	\item Natural Semantics (Denotational)
-% 	\item Structural Semantics (Operational)
-% 	\item Reduction Semantics
-% 	\end{itemize}
-% \item Abstract Machines
-% 	\begin{itemize}
-% 	\item Turing Machine
-% 	\item Finite-State Machine
-% 	\item SECD Machine
-% 	\item Graph-based VM
-% 	\end{itemize}
-% \item Program Analysis
-% 	\begin{itemize}
-% 	\item Rice's Theorem
-% 	\item Static vs Dynamic Analysis
-% 	\item Soundness and Completeness
-% 	\item Precision and Recall
-% 	\item Abstract Interpretation
-% 	\item Approximation
-% 	\item Lattices
-% 	\end{itemize}
-% \item Data Flow Analysis
-% 	\begin{itemize}
-% 	\item Basics Blocks, Transfer Function, and Join Operation
-% 	\item Iterative Round-Robin Algorithm
-% 	\item Work List Approach
-% 	\item Forward and Backward Analysis
-% 	\item Live Variable Analysis
-% 	\item Definite Assignment Analysis
-% 	\item Available Expressions Analysis
-% 	\item Taint Checking
-% 	\end{itemize}
-% \item Symbolic Execution
-% 	\begin{itemize}
-% 	\item Constraint Solvers (SAT/SMT)
-% 	\item Itra- vs Inter-procedural Analysis
-% 	\item Concolic Execution
-% 	\item Path Explosion
-% 	\item KLEE
-% 	\end{itemize}
-% \item Model Checking
-% 	\begin{itemize}
-% 	\item Verification vs. Validation
-% 	\item Program Graph
-% 	\item Transformation System
-% 	\item SPIN
-% 	\end{itemize}
-% \end{lectures}
+\newlist{lectures}{enumerate}{10}
+\setlist[lectures]{label*=\arabic*.}
+\begin{lectures}
+\item Algorithms
+\item Static Methods
+\item Getters
+\item Setters
+\item ``-er'' suffix
+\item NULL references
+\item Type casting and reflection
+\item Inheritance
+\end{lectures}
 
 \newpage
 \section*{Grading}
@@ -225,7 +148,7 @@ of code written personally by the students.
 Higher grades will be given
 for better object-oriented practices used in the code. Lower grades will be
 given for the precense of static methods, NULLs, getters, setters, mutability,
-ORM, DTO, factories, type casting, and other anit-OOP practices.
+ORM, DTO, factories, type casting, and other anit-OOP practices (as suggested during the course).
 
 \texttt{[30\%]} \\
 At the laboratory classes each group will have to complete three
@@ -240,11 +163,14 @@ The attendance is tracked at the lectures.
 The following books are highly recommended to read (in no particular order):
 
 \begin{multicols}{2}\small\raggedright
-{David West}, \emph{Object Thinking}\\[3pt]
-{David West}, \emph{Design Thinking}\\[3pt]
-{Robert Martin}, \emph{Clean Code}\\[3pt]
-{Steve McConnell}, \emph{Code Complete}\\[3pt]
-{Yegor Bugayenko}, \emph{Elegant Objects}\\[3pt]
+{David West}, \emph{Object Thinking}, 2004\\[3pt]
+{David West}, \emph{Design Thinking}, 2017\\[3pt]
+{Robert Martin}, \emph{Clean Code}, 2008\\[3pt]
+{Steve McConnell}, \emph{Code Complete}, 1993\\[3pt]
+{Yegor Bugayenko}, \emph{Elegant Objects}, 2016\\[3pt]
+Blog posts of Yegor Bugayenko, \href{https://www.yegor256.com/tag/oop}{on his blog}\\[3pt]
+Video lectures of Yegor Bugayenko \href{https://www.youtube.com/playlist?list=PLaIsQH4uc08yw2CsNv5OV30GfKE6XVGii}{on YouTube}\\[3pt]
+Object Thinking meetup presentations, \href{https://www.youtube.com/watch?v=yT6oO28wEik&list=PLaIsQH4uc08yetzX86w1pPck1QtGEy_ik}{on YouTube}\\[3pt]
 \end{multicols}
 
 \end{document}

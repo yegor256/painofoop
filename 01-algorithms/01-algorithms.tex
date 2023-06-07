@@ -255,6 +255,16 @@ Immutability
     \pptQuote{rich-hickey.jpg}{I think that large objected-oriented programs struggle with increasing complexity as you build this large object graph of mutable objects. You know, trying to understand and keep in your mind what will happen when you call a method and what will the side effects be.}{Rich Hickey, 2010 \newline Creator of Clojure}
 \end{pptMiddle}}
 
+\plush{\pptThought{The \emph{complexity} of object-oriented code remains its primary drawback}}
+
+\plush{\begin{pptMiddle}
+    \pptQuote{asaf-shelly.jpg}{Reading an OO code you can't see the big picture and it is often impossible to review all the small functions that call the one function that you modified}{Asaf Shelly, 2015 \newline \emph{Flaws of Object Oriented Modeling}}
+\end{pptMiddle}}
+
+\plush{\begin{pptMiddle}
+    \pptQuote{zeba-khanam.jpg}{Object oriented programming promotes ease in designing reusable software but the long coded methods makes it unreadable and enhances the complexity of the methods}{Zeba Khanam, 2018 \newline \emph{Barriers to Refactoring: Issues and Solutions}, International Journal on Future Revolution in Computer Science \& Communication Engineering}
+\end{pptMiddle}}
+
 \plush{\pptThought{Thus, we don't know anymore what exactly is object-oriented programming, and whether it helps us write better code :(}}
 
 \plush{\pptChapter[Intent]{Original Intent}}
@@ -328,6 +338,41 @@ int square(x1, y1, x2, y2) {
 The Java object \ff{Distance} on the right snippet is semantically equivalent to the C function \ff{distance()} on the left one.
 \plush{}
 
+\pptSection[State]{State Ruied Everything}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+class Distance implements Number {
+  private int r; private int l;
+  Distance(l, r) { l = l; r = r; }
+  @Override int intValue() {
+    int d = right - left;
+    if (d < 0) { d = d * -1; }
+    return d; } }
+int square(x1, y1, x2, y2) {
+  return new Distance(x2, x1).intValue()
+    * new Distance(y2, y1).intValue(); } }
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+class Distance {
+  private int r; private int l;
+  Distance(l, r) { l = l; r = r; }
+  int calculate() {
+    int d = right - left;
+    if (d < 0) { d = d * -1; }
+    return d; } }
+int square(x1, y1, x2, y2) {
+  new Distance(x2, x1)
+  return .intValue()
+    * new Distance(y2, y1).intValue(); } }
+\end{ffcode}
+}
+\end{pptWide}\par
+The Java object \ff{Distance} on the right snippet is semantically equivalent to the C function \ff{distance()} on the left one.
+\plush{}
+
+\plush{\pptChapter[Encapsulation]{How Much to Encapsulate?}}
 
 \pptSection[Square]{Square of a Circle}
 \begin{pptWide}{2}
@@ -363,9 +408,7 @@ float s = c.square();
 \end{pptWide}
 \plush{}
 
-\plush{\pptChapter{What is an Object?}}
-
-...
+\plush{\pptThought{Your objects should expose as little data as possible}}
 
 \plush{\pptChapter[Enemies]{Enemies of Object Thinking}}
 
@@ -378,6 +421,18 @@ float s = c.square();
 \print{Type casting (reflection)}
 \plush{Inheritance}
 
+\plush{\pptChapter[Exam]{How to Pass the Exam?}}
+
+\print{\pptSection[Project]{Make a software project, which...}}
+\print{... is larger than 5,000 lines of functional code,}
+\print{... compiles and works,}
+\print{... doesn't have static methods,}
+\print{... has no getters or public attributes,}
+\print{... doesn't use NULL references,}
+\print{... has only immutable objects,}
+\print{... doesn't use interitance.}
+\plush{Otherwise, just attend 75\% of all lectures and you will get your ``C''.}
+
 \plush{\pptChapter{Read \& Watch}}
 
 \pptBanner{Read and watch:}
@@ -385,6 +440,8 @@ float s = c.square();
 David West, \emph{Object Thinking}, 2004
 
 Yegor Bugayenko, \emph{Elegant Objects}, 2016
+
+Read my 80+ blog posts about OOP, \href{https://www.yegor256.com/tag/oop}{here}
 
 Watch my 15+ lectures about OOP, \href{https://www.youtube.com/playlist?list=PLaIsQH4uc08yw2CsNv5OV30GfKE6XVGii}{on YouTube}
 
