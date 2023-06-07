@@ -284,12 +284,37 @@ Immutability
 }
 
 \plush{
-    \pptThought{The original intent: objects are abstractions that hide data and expose functionality*}
+    \pptThought{Objects are abstractions that hide data and expose functionality*}
     \par
-    {\small * This is how I understand it.}
+    {\small * This is how I understand the original intent.}
 }
 
-\pptSection[Rectangle]{Square of a Rectangle}
+\pptSection[Rectangle]{What is an ``abstraction''?}
+\begin{pptWide}{2}
+... apple ...
+\par
+{\small\begin{ffcode}
+Kind: apple
+Color: red
+Weight: 120g
+Price: \$0.99
+\end{ffcode}
+}
+\par\columnbreak\par
+... file ...
+\par
+{\small\begin{ffcode}
+var file = {
+  path: '/tmp/data.txt',
+  read: function() { ... },
+  write: function(txt) { ... }
+}
+\end{ffcode}
+}
+\end{pptWide}
+\plush{}
+
+\pptSection[Rectangle]{How many abstractions are needed?}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 int square(x1, y1, x2, y2) {
@@ -315,10 +340,10 @@ int square(x1, y1, x2, y2) {
 \end{ffcode}
 }
 \end{pptWide}\par
-There are two abstraction at the right snippet, while only one at the left snippet.
+There are two abstractions at the right snippet (``square'' and ``distance''), while only one abstraction at the left one (just ``square'').
 \plush{}
 
-\pptSection[Levels]{Levels of Abstraction}
+\pptSection[Levels]{Levels of abstraction}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 int distance(left, right) {
@@ -341,10 +366,10 @@ int square(x1, y1, x2, y2) {
 \draw[->] (square) -- (d2);
 \end{tikzpicture}
 \end{pptWide}\par
-Higher level must not know and/or rely on semantics of lower levels.
+Higher level abstractions must not know and/or rely on semantics of lower level abstractions.
 \plush{}
 
-\pptSection[Function]{An Object as a Function}
+\pptSection[Function]{An object as a function}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 int distance(left, right) {
@@ -410,8 +435,6 @@ c1.square() == c2.square();
 }
 \end{pptWide}\par
 \plush{}
-
-\plush{\pptThought{Rule of thumb: encapsulate (hide) state and expose behavior}}
 
 \pptSection[FigureUtils]{State vs. Behavior}
 \begin{pptWide}{2}
