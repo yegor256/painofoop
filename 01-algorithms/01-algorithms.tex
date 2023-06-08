@@ -273,17 +273,14 @@ Immutability
 
 \pptSection[Rectangle]{1) What is an ``abstraction''?}
 \begin{pptWide}{2}
-... apple ...
-\par
-{\small\begin{ffcode}
-Kind: apple
-Color: red
-Weight: 120g
-Price: \$0.99
-\end{ffcode}
-}
+\includegraphics[width=1.3in]{apple.jpg}
+\begin{itemize}
+\item Color: red
+\item Weight: 120g
+\item Price: \$0.99
+\end{itemize}
 \par\columnbreak\par
-... file ...
+\includegraphics[width=0.8in]{file-on-disc.jpg}
 \par
 {\small\begin{ffcode}
 var file = {
@@ -294,7 +291,6 @@ var file = {
 \end{ffcode}
 }
 \end{pptWide}
-\par
 We deal with an abstraction as if it was a real thing, but eliminating unnecessary details.
 We do \ff{file.read()} instead of ``open file handler for data.txt, read byte by byte, store in
 byte buffer, wait for the end of file, return the result.''
@@ -511,6 +507,25 @@ float s = c.square();
 }\par
 How to decide what is \emph{state} and what is \emph{behavior}?
 \end{pptWide}
+\plush{}
+
+\pptSection[Composition]{4) What is ``composition''?}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+canvas = new Canvas();
+canvas.addCircle(new Circle(42));
+canvas.draw();
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+canvas = new Canvas();
+circle = new Circle(42);
+circle.drawOn(canvas);
+\end{ffcode}
+}\par
+\end{pptWide}
+What is composition? What is the ``right'' composition?
 \plush{}
 
 \plush{\pptChapter[Object Thinking]{Object Thinking vs. Algorithms}}
