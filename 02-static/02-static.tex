@@ -30,7 +30,7 @@
 
 \pptToc
 
-\plush{\pptChapter{Theory}}
+\plush{\pptChapter{Methods}}
 
 \pptSection[Purpose]{What static methods are for?}
 \begin{pptWide}{2}
@@ -60,6 +60,7 @@ Most notable Java examples:
 FileUtils, IOUtils, and StringUtils from Apache Commons;
 Files from JDK7;
 Iterators from Google Guava.
+Read \href{https://www.yegor256.com/2015/02/20/utility-classes-vs-functional-programming.html}{this}.
 \plush{}
 
 \print{\pptSection[Problems]{What's wrong with ``Utils''?}}
@@ -88,6 +89,7 @@ void paintIt(Circle c) {
 }
 \end{pptWide}\par
 Which snippet is easier to test? Try to write a test for the first one, expecting \ff{s} to be equal to \ff{42.0}.
+Read \href{https://www.yegor256.com/2014/05/05/oop-alternative-to-utility-classes.html}{this}.
 \plush{}
 
 \pptSection[Eagerness]{Imperative, not Declarative}
@@ -113,6 +115,7 @@ void paintIt(Circle c) {
 }
 \end{pptWide}\par
 Which snippet is more eager to calculate the square of the circle? Which one does it when it's \emph{really} necessary?
+Read \href{https://www.yegor256.com/2015/02/26/composable-decorators.html}{this}.
 \plush{}
 
 \pptSection[Cohesion]{Low Cohesion}
@@ -143,6 +146,65 @@ class Float {
 }
 \end{pptWide}\par
 Which class looks more cohesive to you, the utility class \ff{GeometryUtils} or the \ff{Circle}?
+\plush{}
+
+\plush{\pptChapter{Attributes}}
+
+\pptSection[Literals]{Public literals}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+class Constants {
+  public static float PI = 3.1415926;
+  public static String UTF_8 = "utf-8";
+  public static String LOCALE = "fr";
+  // and many more
+}
+println("S'il vous plaît",
+  Constants.LOCALE);
+printf("It is %see speech!",
+  Constants.LOCALE);
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+class Print { }
+class TextInFrench { }
+
+new Print(
+  new TextInFrench(
+    "S'il vous plaît"
+  )
+)
+\end{ffcode}
+}
+\end{pptWide}\par
+We must solve the problem of functionality duplication, not just data duplication.
+Read \href{https://www.yegor256.com/2015/07/06/public-static-literals.html}{this}.
+\plush{}
+
+\pptSection[Singletons]{Singletons}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+class Canvas {
+  public static Canvas INSTANCE =
+    new Canvas();
+  private Canvas() {}
+  public void addCircle(Circle c);
+}
+
+Canvas.INSTANCE.addCircle(c1);
+Canvas.INSTANCE.addCircle(c2);
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+c = new Canvas();
+c.addCircle(c1);
+c.addCircle(c2);
+\end{ffcode}
+}
+\end{pptWide}\par
+Read \href{https://www.yegor256.com/2016/06/27/singletons-must-die.html}{this}.
 \plush{}
 
 \end{document}
