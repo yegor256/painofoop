@@ -91,9 +91,58 @@ Which snippet is easier to test? Try to write a test for the first one, expectin
 \plush{}
 
 \pptSection[Eagerness]{Imperative, not Declarative}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+void paintIt(Circle c) {
+  float s = GeometryUtils.calcSquare(c);
+  if (t) { return; }
+  float p = s * 5.55;
+  // paint it using the "p"
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+void paintIt(Circle c) {
+  float s = new SquareOf(c);
+  if (t) { return; }
+  float p = s * 5.55;
+  // paint it using the "p"
+}
+\end{ffcode}
+}
+\end{pptWide}\par
+Which snippet is more eager to calculate the square of the circle? Which one does it when it's \emph{really} necessary?
 \plush{}
 
 \pptSection[Cohesion]{Low Cohesion}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+class GeometryUtils {
+  static float calcSquare(Circle c);
+  static float calcPerimeter(Circle c);
+  static float calcSinus(Angle a);
+  static float calcCosinus(float s);
+  // and many more...
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+class Circle {
+  float square();
+  float perimeter();
+}
+class Angle {
+  float sinus();
+}
+class Float {
+  float cosinus();
+}
+\end{ffcode}
+}
+\end{pptWide}\par
+Which class looks more cohesive to you, the utility class \ff{GeometryUtils} or the \ff{Circle}?
 \plush{}
 
 \end{document}
