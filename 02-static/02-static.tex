@@ -55,7 +55,8 @@ class Circle {
 }
 \end{ffcode}
 }
-\end{pptWide}\par
+\end{pptWide}
+\par
 Most notable Java examples:
 FileUtils, IOUtils, and StringUtils from Apache Commons;
 Files from JDK7;
@@ -87,7 +88,8 @@ void paintIt(Circle c) {
 }
 \end{ffcode}
 }
-\end{pptWide}\par
+\end{pptWide}
+\par
 Which snippet is easier to test? Try to write a test for the first one, expecting \ff{s} to be equal to \ff{42.0}.
 Read \href{https://www.yegor256.com/2014/05/05/oop-alternative-to-utility-classes.html}{this}.
 \plush{}
@@ -113,7 +115,8 @@ void paintIt(Circle c) {
 }
 \end{ffcode}
 }
-\end{pptWide}\par
+\end{pptWide}
+\par
 Which snippet is more eager to calculate the square of the circle? Which one does it when it's \emph{really} necessary?
 Read \href{https://www.yegor256.com/2015/02/26/composable-decorators.html}{this}.
 \plush{}
@@ -144,7 +147,8 @@ class Float {
 }
 \end{ffcode}
 }
-\end{pptWide}\par
+\end{pptWide}
+\par
 Which class looks more cohesive to you, the utility class \ff{GeometryUtils} or the \ff{Circle}?
 \plush{}
 
@@ -177,7 +181,8 @@ new Print(
 )
 \end{ffcode}
 }
-\end{pptWide}\par
+\end{pptWide}
+\par
 We must solve the problem of functionality duplication, not just data duplication.
 Read \href{https://www.yegor256.com/2015/07/06/public-static-literals.html}{this}.
 \plush{}
@@ -203,10 +208,21 @@ c.addCircle(c1);
 c.addCircle(c2);
 \end{ffcode}
 }
-\end{pptWide}\par
+\end{pptWide}
+\par
 Read \href{https://www.yegor256.com/2016/06/27/singletons-must-die.html}{this}.
 \plush{}
 
 \plush{\pptChapter{FastJson as Example}}
+
+\plush{\pptChapter{Read and Watch}}
+
+\href{https://www.yegor256.com/2015/02/20/utility-classes-vs-functional-programming.html}{Utility Classes Have Nothing to Do With Functional Programming}
+
+\href{https://www.yegor256.com/2014/05/05/oop-alternative-to-utility-classes.html}{OOP Alternative to Utility Classes}
+
+\href{https://www.yegor256.com/2015/02/26/composable-decorators.html}{Composable Decorators}
+
+\href{https://www.yegor256.com/2015/07/06/public-static-literals.html}{Public Static Literals ... Are Not a Solution for Data Duplication}
 
 \end{document}

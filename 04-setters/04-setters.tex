@@ -30,6 +30,34 @@
 
 \pptToc
 
-...
+\pptSection[ORM]{Object Relational Mapping (ORM)}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+class BookDTO {
+  private int id;
+  private String author;
+  private String title;
+  BookDTO(int i, String a, String t)
+    { id = i; author = a; title = t; }
+  int getId() { return id; }
+  String getAuthor() { return author; }
+  String getTitle() { return title; }
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+class Books {
+  BookDTO findById(int id) { /* ... */ }
+}
+BookDTO dto = books.findById(42);
+dto.getTitle();
+dto.getAuthor();
+\end{ffcode}
+}
+\end{pptWide}
+\par
+\plush{}
+
 
 \end{document}
