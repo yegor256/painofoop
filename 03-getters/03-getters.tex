@@ -23,7 +23,7 @@
 \documentclass{article}
 \usepackage{../painofoop}
 \newcommand*\thetitle{Getters}
-\newcommand*\thesubtitle{...}
+\newcommand*\thesubtitle{Accessors, Encapsulation, Printers}
 \begin{document}
 
 \plush{\poopTitlePage{3}}
@@ -146,7 +146,7 @@ Encapsulation provides \emph{explicit barriers} among different abstractions and
 
 \plush{\begin{pptMiddle}\pptQuote{../01-algorithms/david-west.jpg}{In most ways, encapsulation is a \emph{discipline} more than a real barrier; seldom is the \emph{integrity} of an object protected in any absolute sense, and this is especially true of software objects, so it is up to the user of an object to \emph{respect} that object’s encapsulation}{David West et al. (2006) \newline Object Thinking}\end{pptMiddle}}
 
-\pptSection[Hiding]{Who is protecting the integrity better?}
+\pptSection[Integrity]{Who is protecting the integrity better?}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 class User {
@@ -178,6 +178,41 @@ if (user.isEmployee()) {
 \end{pptWide}
 \par
 Which class hides data better?
+\plush{}
+
+\pptSection[Semantic]{Who knows about data semantic?}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+class Box {
+  private int weight;
+  Box(int kg) { weight = kg; }
+  int getWeight() {
+    return this.weight;
+  }
+}
+
+int w = box.getWeight();
+int lbs = w / 0.454;
+printf("The weight is \%d lbs\n");
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+class Box {
+  private int weight;
+  Box(int kg) { weight = kg; }
+  int getLbs() {
+    return this.weight / 0.454;
+  }
+}
+
+int lbs = box.getLbs();
+printf("The weight is \%d lbs\n");
+\end{ffcode}
+}
+\end{pptWide}
+\par
+What happens if the \ff{Box} decides to store the weight in pounds instead of kilograms? How will it know how many of its clients still assume that the weight is in kilograms?
 \plush{}
 
 \plush{\pptChapter{The Alternative}}
