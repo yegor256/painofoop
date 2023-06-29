@@ -248,7 +248,7 @@ class Book {
   private int id;
   private String author;
   private String title;
-  BookDTO(int i, String a, String t)
+  Book(int i, String a, String t)
     { id = i; author = a; title = t; }
   int id() { return id; }
   String author() { return author; }
@@ -273,10 +273,10 @@ print(book.title());
 \pptSection[NoPrefix]{Make fields public}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
-class Book {
-  private int id;
-  private String author;
-  private String title;
+class BookDTO {
+  public int id;
+  public String author;
+  public String title;
   BookDTO(int i, String a, String t)
     { id = i; author = a; title = t; }
 }
