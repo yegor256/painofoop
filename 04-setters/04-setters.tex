@@ -30,6 +30,233 @@
 
 \pptToc
 
+\plush{\pptChapter{Mutability}}
+
+\pptSection[Definition]{Which object is immutable?}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+class Book {
+  private String title;
+  Book(String t) { title = t; }
+  void setTitle(String t) {
+    this.title = t;
+  }
+  String getTitle() {
+    return this.title;
+  }
+}
+Book b = new Book("Object Thinking");
+b.setTitle("It");
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+class Book {
+  private final String title;
+  Book(String t) { title = t; }
+  void withTitle(String t) {
+    return new Book(t);
+  }
+  String getTitle() {
+    return this.title;
+  }
+}
+Book b1 = new Book("Object Thinking");
+Book b2 = b1.withTitle("It");
+\end{ffcode}
+}
+\end{pptWide}
+\par
+\plush{}
+
+\print{\pptSection[Gradients]{There are four gradients of immutability}}
+\print{I. Constant}
+\print{II. Not a Constant}
+\print{III. Represented Mutability}
+\plush{VI. Encapsulated Mutability}
+
+\pptSection[Constant]{Gradient I: Constant}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+class Book {
+  private final String t;
+  Book(String t) { this.t = t; }
+  String title() {
+    return this.t;
+  }
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+Book b = new Book("Object Thinking");
+String t1 = b.title();
+String t2 = b.title()
+\end{ffcode}
+}
+\end{pptWide}
+\par
+\plush{}
+
+\pptSection[NotConstant]{Gradient II: Not a Constant}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+class Book {
+  private final String t;
+  Book(String t) { this.t = t; }
+  String title() {
+    return String.format(
+      "%s / %s", title, new Date()
+    );
+  }
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+Book b = new Book("Object Thinking");
+String t1 = b.title();
+String t2 = b.title()
+\end{ffcode}
+}
+\end{pptWide}
+\par
+\plush{}
+
+\pptSection[NotConstant]{Gradient III: Represented Mutability}
+\begin{pptWide}{2}
+{\scriptsize\begin{ffcode}
+class Book {
+  private final Path path;
+  Book(Path p) { this.path = p; }
+  Book rename(String title) {
+    Files.write(
+      this.path,
+      title.getBytes(),
+      StandardOpenOption.CREATE
+    );
+    return this;
+  }
+  String title() {
+    return new String(
+      Files.readAllBytes(this.path)
+    );
+  }
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+Book b = new Book("Object Thinking");
+String t1 = b.title();
+b.rename("Elegant Objects");
+String t2 = b.title()
+\end{ffcode}
+}
+\end{pptWide}
+\par
+\plush{}
+
+\pptSection[NotConstant]{Gradient VI: Encapsulated Mutability}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+class Book {
+  private final StringBuffer buffer;
+  Book rename(String t) {
+    this.buffer.setLength(0);
+    this.buffer.append(t);
+    return this;
+  }
+  String title() {
+    return this.buffer.toString();
+  }
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+Book b = new Book("Object Thinking");
+String t1 = b.title();
+b.rename("Elegant Objects");
+String t2 = b.title()
+\end{ffcode}
+}
+\end{pptWide}
+\par
+\plush{}
+
+\plush{\pptChapter{Problems}}
+
+\pptSection[Side-effects]{Side effects}
+\begin{pptWide}{2}
+With a side effect:\par
+{\small\begin{ffcode}
+public String post(Request request) {
+  request.setMethod("POST");
+  return request.fetch();
+}
+
+Request r = new Request("http://...");
+r.setMethod("GET");
+String first = this.post(r);
+String second = r.fetch();
+\end{ffcode}
+}
+\par\columnbreak\par
+Without a side effect:\par
+{\small\begin{ffcode}
+public String post(Request request) {
+  return request
+    .withMethod("POST")
+    .fetch();
+}
+
+Request r = new Request("http://...")
+  .withMethod("GET");
+String first = this.post(r);
+String second = r.fetch();
+\end{ffcode}
+}
+\end{pptWide}
+\par
+\plush{}
+
+\pptSection[Concurrency]{Thread (un-)safety}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+class Books {
+  private int c = 0;
+  void add() {
+    this.c = this.s + 1;
+  }
+}
+\end{ffcode}
+\begin{tabular}{l>{\raggedright}p{11cm}}
+  \raisebox{-1\height}{\pptPic{0.2}{goetz.png}} & \small Goetz et al. explained the advantages of immutable objects
+  in more details in their very famous book ``Java Concurrency in Practice'' (highly recommended!) \\
+\end{tabular}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+ExecutorService e =
+  Executors.newCachedThreadPool();
+final Books books = new Books();
+for (int i = 0; i < 1000; i++) {
+  e.execute(
+    new Thread(
+      () -> {
+        books.add();
+      }
+    )
+  );
+}
+// What is the value of "books.c"?
+\end{ffcode}
+}
+\end{pptWide}
+\par
+\plush{}
+
 \pptSection[ORM]{Object Relational Mapping (ORM)}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
@@ -59,5 +286,16 @@ dto.getAuthor();
 \par
 \plush{}
 
+\plush{\pptChapter{Read and Watch}}
+
+\href{https://www.yegor256.com/2014/06/09/objects-should-be-immutable.html}{Objects Should Be Immutable} by me
+
+\href{https://www.yegor256.com/2016/09/07/gradients-of-immutability.html}{Gradients of Immutability} by me
+
+\href{https://www.yegor256.com/2014/12/22/immutable-objects-not-dumb.html}{Immutable Objects Are Not Dumb} by me
+
+\href{https://www.yegor256.com/2014/12/09/immutable-object-state-and-behavior.html}{How an Immutable Object Can Have State and Behavior?} by me
+
+\href{https://www.yegor256.com/2014/11/07/how-immutability-helps.html}{How Immutability Helps} by me
 
 \end{document}
