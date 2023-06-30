@@ -257,29 +257,113 @@ for (int i = 0; i < 1000; i++) {
 \par
 \plush{}
 
-\pptSection[ORM]{Object Relational Mapping (ORM)}
+\pptSection[Coupling]{Temporal Coupling}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
-class BookDTO {
-  private int id;
-  private String author;
-  private String title;
-  BookDTO(int i, String a, String t)
-    { id = i; author = a; title = t; }
-  int getId() { return id; }
-  String getAuthor() { return author; }
-  String getTitle() { return title; }
+Request r = new Request("http://...");
+r.method("POST");
+String first = r.fetch();
+r.body("text=hello");
+String second = r.fetch();
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+Request r = new Request("http://...");
+// r.method("POST");
+// String first = r.fetch();
+r.body("text=hello");
+String second = r.fetch();
+\end{ffcode}
+}
+\end{pptWide}
+\par
+\plush{}
+
+\pptSection[Identity]{Identity Mutability}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+Date first = new Date(1L);
+Date second = new Date(1L);
+first.setTime(2L);
+assert first.equals(second); // false
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+Map<Date, String> map = new HashMap<>();
+Date date = new Date();
+map.put(date, "hello, world!");
+date.setTime(12345L);
+assert map.containsKey(date); // false
+\end{ffcode}
+}
+\end{pptWide}
+\par
+\plush{}
+
+\plush{\pptChapter{ORM}}
+
+\pptSection[JPA]{Java Persistence API}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+@Entity
+@Table(name = "movie")
+public class Movie {
+  @Id
+  private Long id;
+  private String name;
+  private Integer year;
+  // ctors
+  // getters
+  // setters
 }
 \end{ffcode}
 }
 \par\columnbreak\par
 {\small\begin{ffcode}
-class Books {
-  BookDTO findById(int id) { /* ... */ }
+EntityManager em = getEntityManager();
+em.getTransaction().begin();
+Movie movie = new Movie();
+movie.setId(1L);
+movie.setName("The Godfather");
+movie.setYear(1972);
+em.persist(movie);
+em.getTransaction().commit();
+\end{ffcode}
 }
-BookDTO dto = books.findById(42);
-dto.getTitle();
-dto.getAuthor();
+\end{pptWide}
+\par
+\plush{}
+
+\pptSection[SQL-speaking]{SQL speaking objects}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+interface Movie {
+  int id();
+  String title();
+  String author();
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+{\scriptsize\begin{ffcode}
+final class PgMovie implements Movie
+  private final Source dbase;
+  private final int number;
+  public PgMovie(DataSource data, int id)
+    this.dbase = data;
+    this.number = id;
+  public String title()
+    return new JdbcSession(this.dbase)
+      .sql("SELECT title FROM movie WHERE id = ?")
+      .set(this.number)
+      .select(new SingleOutcome<String>(String.class));
+  public String author()
+    return new JdbcSession(this.dbase)
+      .sql("SELECT name FROM movie JOIN author ON author.id = movie.author WHERE movie.id = ?")
+      .set(this.number)
+      .select(new SingleOutcome<String>(String.class));
 \end{ffcode}
 }
 \end{pptWide}
@@ -297,5 +381,7 @@ dto.getAuthor();
 \href{https://www.yegor256.com/2014/12/09/immutable-object-state-and-behavior.html}{How an Immutable Object Can Have State and Behavior?} by me
 
 \href{https://www.yegor256.com/2014/11/07/how-immutability-helps.html}{How Immutability Helps} by me
+
+\href{https://www.yegor256.com/2014/12/01/orm-offensive-anti-pattern.html}{ORM Is an Offensive Anti-Pattern} by me
 
 \end{document}
