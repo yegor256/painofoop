@@ -30,6 +30,116 @@
 
 \pptToc
 
-...
+\plush{\pptQuote{carlo-pescio.jpg}{when you need a manager, it’s often a sign that the managed are just plain old data structures and that the manager is the smart procedure doing the real work}{Carlo Pescio \newline \href{http://www.carlopescio.com/2011/04/your-coding-conventions-are-hurting-you.html}{Your Coding Conventions Are Hurting You}}}
+
+\plush{\pptChapter{Examples and Alternatives}}
+
+\pptSection{Parser}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+class Parser {
+  static int parseInt(String t) {
+    // Parse String into Integer
+  }
+  static float parseFloat(String t) {
+    // Parse String into Float
+  }
+  // And many more methods...
+}
+
+int x = Parser.parseInt("42");
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+class StringAsInt implements Number {
+  private final String txt;
+  StringAsInt(String t) { this.txt = t; }
+  @Override int intValue() {
+    // Parse String into Integer
+    // and return the value
+  }
+}
+
+Number n = new StringAsInt("42");
+int x = n.intValue();
+\end{ffcode}
+}
+\end{pptWide}
+\par
+\plush{}
+
+\pptSection{Reader}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+class Reader {
+  static char readChar(InputStream i) {
+    // Read the next char from the
+    // stream and return it, or NULL
+    // if the stream is at the EOF
+  }
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+class CharsInStream {
+  private final InputStream is;
+  CharsInStream(InputStream i) { this.is = i; }
+  char next() {
+    // Read the next char from the
+    // stream and throw exception
+    // if !exists()
+  }
+  bool exists() {
+    // Return TRUE if not EOF
+  }
+}
+\end{ffcode}
+}
+\end{pptWide}
+\par
+\plush{}
+
+\pptSection{Controller}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+class SimpleController {
+  @GET("/index")
+  HttpResponse index(HttpRequest e) {
+    // Build an index page and return
+  }
+  @POST("/update")
+  HttpResponse update(HttpRequest e) {
+    // Save new user information
+    // and return HTTP 303
+  }
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+@GET("/index")
+class IndexPage implements HttpPage {
+  HttpResponse process(HttpRequest e) {
+    // Build an index page and return
+  }
+}
+@POST("/update")
+class UpdatePage implements HttpPage {
+  HttpResponse process(HttpRequest e) {
+    // Save new user information
+    // and return HTTP 303
+  }
+}
+\end{ffcode}
+}
+\end{pptWide}
+\par
+\plush{}
+
+\plush{\pptChapter[R\&W]{Read and Watch}}
+
+\href{https://www.yegor256.com/2015/03/09/objects-end-with-er.html}{Don't Create Objects That End With -ER} by me
 
 \end{document}

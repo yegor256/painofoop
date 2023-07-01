@@ -73,7 +73,7 @@ Book b2 = b1.withTitle("It");
 \print{I. Constant}
 \print{II. Not a Constant}
 \print{III. Represented Mutability}
-\plush{VI. Encapsulated Mutability}
+\plush{IV. Encapsulated Mutability}
 
 \pptSection[Constant]{Gradient I: Constant}
 \begin{pptWide}{2}
@@ -157,7 +157,7 @@ String t2 = b.title()
 \par
 \plush{}
 
-\pptSection[Encapsulated]{Gradient VI: Encapsulated Mutability}
+\pptSection[Encapsulated]{Gradient IV: Encapsulated Mutability}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 class Book {
@@ -186,6 +186,8 @@ String t2 = b.title()
 \plush{}
 
 \plush{\pptChapter{Problems}}
+
+\plush{\pptThought{Only gradients III and IV cause problems, while ``Constant'' and `Not a Constant'' objects are harmless}}
 
 \pptSection[Side-effects]{Side effects}
 \begin{pptWide}{2}
@@ -227,7 +229,7 @@ String second = r.fetch();
 class Books {
   private int c = 0;
   void add() {
-    this.c = this.s + 1;
+    this.c = this.c + 1;
   }
 }
 \end{ffcode}
@@ -304,6 +306,8 @@ assert map.containsKey(date); // false
 
 \plush{\pptChapter{ORM}}
 
+\plush{\pptThought{ORM stands for ``Object Relational Mapping,'' which is an attempt to represent a relational data model in objects and relations between them, such as attributes, methods, and inheritance}}
+
 \pptSection[JPA]{Java Persistence API}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
@@ -324,10 +328,8 @@ public class Movie {
 {\small\begin{ffcode}
 EntityManager em = getEntityManager();
 em.getTransaction().begin();
-Movie movie = new Movie();
-movie.setId(1L);
+Movie movie = em.findById(1L);
 movie.setName("The Godfather");
-movie.setYear(1972);
 em.persist(movie);
 em.getTransaction().commit();
 \end{ffcode}
@@ -344,11 +346,49 @@ interface Movie {
   String title();
   String author();
 }
+Movie m = new PgMovie(ds, 1L);
+m.update("The Godfather");
 \end{ffcode}
 }
 \par
 Here I'm using \href{https://github.com/jcabi/jcabi-jdbc}{jcabi-jdbc},
 an object-oriented wrapper around JDBC data source.
+\par\columnbreak\par
+{\scriptsize\begin{ffcode}
+final class PgMovie implements Movie
+  private final Source dbase;
+  private final int number;
+  public PgMovie(DataSource data, int id)
+    this.dbase = data;
+    this.number = id;
+  public String title()
+    return new JdbcSession(this.dbase)
+      .sql("SELECT title FROM movie WHERE id = ?")
+      .set(this.number)
+      .select(new SingleOutcome<String>(String.class));
+  public void rename(String n)
+    new JdbcSession(this.dbase)
+      .sql("UPDATE movie SET name = ? WHERE id = ?")
+      .set(n)
+      .set(this.number)
+      .execute();
+\end{ffcode}
+}
+\end{pptWide}
+\par
+\plush{}
+
+\pptSection[JOINs]{Complex SQL queries}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+final class PgMovies
+  private final Source dbase;
+  public PgMovies(DataSource data)
+    this.dbase = data;
+  public Movie movie(Long id)
+    return new PgMovie(this.dbase, id);
+\end{ffcode}
+}
 \par\columnbreak\par
 {\scriptsize\begin{ffcode}
 final class PgMovie implements Movie
