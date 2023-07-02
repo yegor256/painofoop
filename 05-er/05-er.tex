@@ -32,7 +32,7 @@
 
 \plush{\pptQuote{carlo-pescio.jpg}{When you need a \emph{manager}, it’s often a sign that the \emph{managed} are just plain old data structures and that the manager is the smart procedure doing the real work}{Carlo Pescio \newline \href{http://www.carlopescio.com/2011/04/your-coding-conventions-are-hurting-you.html}{Your Coding Conventions Are Hurting You}, 2011}}
 
-\plush{\pptChapter{Examples and Alternatives}}
+\plush{\pptChapter[Alternatives]{Examples and Alternatives}}
 
 \pptSection{Parser}
 \begin{pptWide}{2}
@@ -86,19 +86,19 @@ char c = Reader.readChar(i);
 }
 \par\columnbreak\par
 {\small\begin{ffcode}
-class CharsInStream {
+class Chars
   private final InputStream is;
-  CharsInStream(InputStream i)
+  Chars(InputStream i)
     this.is = i;
-  char next() {
+  char next()
     // Read the next char from the
     // stream and throw exception
     // if !exists()
-  bool exists() {
+  bool exists()
     // Return TRUE if not EOF
 
 InputStream i = new FileInputStream(..);
-CharsInStream chars = new CharsInStream(i);
+Chars chars = new Chars(i);
 char c = chars.next();
 \end{ffcode}
 }
@@ -146,42 +146,49 @@ new AllPages(
 \par
 \plush{}
 
-\pptSection{Manager}
+\pptSection{Validator}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
-class Manager {
-   parseInt(String t) {
-    // Parse String into Integer
+class Validator {
+  bool isValid(int age) {
+    return age >= 18;
   }
-  static float parseFloat(String t) {
-    // Parse String into Float
-  }
-  // And many more methods...
 }
-
-int x = Parser.parseInt("42");
+int a = 23;
+Validator v = new Validator();
+if (!v.isValid(a)) {
+  throw new Exception(
+    "Age is not valid"
+  );
+}
 \end{ffcode}
 }
 \par\columnbreak\par
-{\small\begin{ffcode}
-class StringAsInt implements Number {
-  private final String txt;
-  StringAsInt(String t) { this.txt = t; }
-  @Override int intValue() {
-    // Parse String into Integer
-    // and return the value
-  }
-}
+{\scriptsize\begin{ffcode}
+interface Age
+  int value();
+class DefaultAge implements Age
+  private final int a;
+  DefaultAge(int a)
+    this.a = a;
+  @Override int value()
+    return this.a;
+class ValidAge implements Age {
+  private final Age origin;
+  ValidAge(Age age)
+    this.origin = age;
+  @Override int value()
+    int v = this.origin.value();
+    if (v < 18)
+      throw new Exception("Age is not valid");
+    return v;
 
-Number n = new StringAsInt("42");
-int x = n.intValue();
+Age a = new ValidAge(new DefaultAge(23));
 \end{ffcode}
 }
 \end{pptWide}
 \par
 \plush{}
-
-
 
 \plush{\pptChapter[R\&W]{Read and Watch}}
 
