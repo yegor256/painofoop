@@ -263,18 +263,18 @@ for (int i = 0; i < 1000; i++) {
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 Request r = new Request("http://...");
-r.method("POST");
+r.setMethod("POST");
 String first = r.fetch();
-r.body("text=hello");
+r.setBody("text=hello");
 String second = r.fetch();
 \end{ffcode}
 }
 \par\columnbreak\par
 {\small\begin{ffcode}
 Request r = new Request("http://...");
-// r.method("POST");
+// r.setMethod("POST");
 // String first = r.fetch();
-r.body("text=hello");
+r.setBody("text=hello");
 String second = r.fetch();
 \end{ffcode}
 }

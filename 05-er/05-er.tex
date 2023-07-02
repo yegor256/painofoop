@@ -30,7 +30,7 @@
 
 \pptToc
 
-\plush{\pptQuote{carlo-pescio.jpg}{When you need a manager, it’s often a sign that the managed are just plain old data structures and that the manager is the smart procedure doing the real work}{Carlo Pescio \newline \href{http://www.carlopescio.com/2011/04/your-coding-conventions-are-hurting-you.html}{Your Coding Conventions Are Hurting You}}}
+\plush{\pptQuote{carlo-pescio.jpg}{When you need a \emph{manager}, it’s often a sign that the \emph{managed} are just plain old data structures and that the manager is the smart procedure doing the real work}{Carlo Pescio \newline \href{http://www.carlopescio.com/2011/04/your-coding-conventions-are-hurting-you.html}{Your Coding Conventions Are Hurting You}, 2011}}
 
 \plush{\pptChapter{Examples and Alternatives}}
 
@@ -79,22 +79,27 @@ class Reader {
     // if the stream is at the EOF
   }
 }
+
+InputStream i = new FileInputStream(..);
+char c = Reader.readChar(i);
 \end{ffcode}
 }
 \par\columnbreak\par
 {\small\begin{ffcode}
 class CharsInStream {
   private final InputStream is;
-  CharsInStream(InputStream i) { this.is = i; }
+  CharsInStream(InputStream i)
+    this.is = i;
   char next() {
     // Read the next char from the
     // stream and throw exception
     // if !exists()
-  }
   bool exists() {
     // Return TRUE if not EOF
-  }
-}
+
+InputStream i = new FileInputStream(..);
+CharsInStream chars = new CharsInStream(i);
+char c = chars.next();
 \end{ffcode}
 }
 \end{pptWide}
@@ -105,11 +110,13 @@ class CharsInStream {
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 class SimpleController {
-  @GET("/index")
+  @GET
+  @Path("/index")
   HttpResponse index(HttpRequest e) {
     // Build an index page and return
   }
-  @POST("/update")
+  @POST
+  @Path("/update")
   HttpResponse update(HttpRequest e) {
     // Save new user information
     // and return HTTP 303
@@ -119,24 +126,62 @@ class SimpleController {
 }
 \par\columnbreak\par
 {\small\begin{ffcode}
-@GET("/index")
-class IndexPage implements HttpPage {
+class IndexPage implements HttpPage
   HttpResponse process(HttpRequest e) {
     // Build an index page and return
   }
-}
-@POST("/update")
-class UpdatePage implements HttpPage {
+class UpdatePage implements HttpPage
   HttpResponse process(HttpRequest e) {
     // Save new user information
     // and return HTTP 303
   }
-}
+
+new AllPages(
+  new IndexPage(),
+  new UpdatePage()
+);
 \end{ffcode}
 }
 \end{pptWide}
 \par
 \plush{}
+
+\pptSection{Manager}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+class Manager {
+   parseInt(String t) {
+    // Parse String into Integer
+  }
+  static float parseFloat(String t) {
+    // Parse String into Float
+  }
+  // And many more methods...
+}
+
+int x = Parser.parseInt("42");
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+class StringAsInt implements Number {
+  private final String txt;
+  StringAsInt(String t) { this.txt = t; }
+  @Override int intValue() {
+    // Parse String into Integer
+    // and return the value
+  }
+}
+
+Number n = new StringAsInt("42");
+int x = n.intValue();
+\end{ffcode}
+}
+\end{pptWide}
+\par
+\plush{}
+
+
 
 \plush{\pptChapter[R\&W]{Read and Watch}}
 
