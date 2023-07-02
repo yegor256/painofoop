@@ -190,6 +190,48 @@ Age a = new ValidAge(new DefaultAge(23));
 \par
 \plush{}
 
+\pptSection{Encoder}
+\begin{pptWide}{2}
+{\scriptsize\begin{ffcode}
+package java.net;
+
+class URLEncoder {
+  static String encode(String s, String enc) {
+    // Encode the string "s" using
+    // the "enc" encoding and return
+    // the encoded string
+  }
+}
+
+String e = URLEncoder.encode("@foo");
+e.equals("%40foo");
+\end{ffcode}
+}
+\par\columnbreak\par
+{\scriptsize\begin{ffcode}
+class Encoded implements String {
+  private final String origin;
+  private final String encoding;
+  Encoded(String s, String enc) {
+    this.origin = s;
+    this.enc = encoding;
+  }
+  @Override String value() {
+    // Encode the string "origin" using
+    // the "encoding" and return
+    // the encoded string
+  }
+}
+
+String e = new Encoded("@foo");
+e.value().equals("%40foo");
+\end{ffcode}
+}
+\end{pptWide}
+\par
+The right snippet won't work in Java, since |String| is a final class, not an interface, unfortunately.
+\plush{}
+
 \plush{\pptChapter[R\&W]{Read and Watch}}
 
 \href{https://www.yegor256.com/2015/03/09/objects-end-with-er.html}{Don't Create Objects That End With -ER} by me
