@@ -273,6 +273,86 @@ and
 The right one is object-oriented.
 \plush{}
 
+\plush{\pptChapter[Performance]{What About Performance?}}
+
+\pptSection[Sticky]{Sticky Parser}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+class StringAsInt implements Number {
+  private final String txt;
+  StringAsInt(String t) { this.txt = t; }
+  @Override int intValue() {
+    // Parse String into Integer
+    // and return the value
+  }
+}
+
+Number n = new StringAsInt("42");
+int x = n.intValue();
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+class StickyInt implements Number {
+  private final Number origin;
+  private int cache = 0;
+  private bool cached = false;
+  StickyInt(Number n) { origin = n; }
+  @Override int intValue() {
+    if (!cached) {
+      cache = origin.intValue();
+    }
+    return cache;
+  }
+}
+\end{ffcode}
+}
+\end{pptWide}
+\par
+Is it thread-safe though?
+\plush{}
+
+\pptSection[Safe]{Thread-safe Sticky Parser}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+class StickyInt implements Number {
+  private final Number origin;
+  private int cache = 0;
+  private bool cached = false;
+  StickyInt(Number n) { origin = n; }
+  @Override int intValue() {
+    if (!cached) {
+      cache = origin.intValue();
+    }
+    return cache;
+  }
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+{\scriptsize\begin{ffcode}
+class StickyInt implements Number {
+  private final Number origin;
+  private final AtomicReference<Integer> cache =
+    new AtomicReference<Integer>(null);
+  StickyInt(Number n) { origin = n; }
+  @Override int intValue() {
+    return cache.updateAndGet(
+      x -> {
+        if (x == null) {
+          return origin.intValue();
+        }
+        return x;
+      }
+    );
+  }
+}
+\end{ffcode}
+}
+\end{pptWide}
+\par
+The left snippet is not thread-safety, while the right one is.
+\plush{}
 
 \plush{\pptChapter[R\&W]{Read and Watch}}
 
