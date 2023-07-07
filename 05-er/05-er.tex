@@ -23,7 +23,7 @@
 \documentclass{article}
 \usepackage{../painofoop}
 \newcommand*\thetitle{-ER}
-\newcommand*\thesubtitle{...}
+\newcommand*\thesubtitle{Alternatives, Clients, MVC}
 \begin{document}
 
 \plush{\poopTitlePage{5}}
@@ -353,6 +353,67 @@ class StickyInt implements Number {
 \par
 The left snippet is not thread-safety, while the right one is.
 \plush{}
+
+\plush{\pptChapter[MVC]{Model-View-Controller (MVC)}}
+
+\pptSection[Controller]{The Controller}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+class Controller {
+  @GET
+  @Path("/b{id}")
+  String index(int id) {
+    Book book = em.findById(id);
+    View v = new HtmlView("book.html");
+    v.set("title", book.getTitle());
+    return v.renderHtml();
+  }
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+\pptPic{0.7}{mvc.png}
+\end{pptWide}
+\par
+\plush{}
+
+\pptSection[HTML]{Book as HTML}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+class Controller {
+  @GET
+  @Path("/b{id}")
+  String index(int id) {
+    Book book = em.findById(id);
+    View v = new HtmlView("book.html");
+    v.set("title", book.getTitle());
+    return v.renderHtml();
+  }
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+{\scriptsize\begin{ffcode}
+interface Book
+  String title();
+class PgBook implements Book
+  String title() // loads from PostgreSQL
+interface Page
+  String html();
+class HtmlBook implements Book, Page
+  String html() // renders in HTML
+  String title() // returns origin.title()
+class PageOnPath implement Page
+  private final String path;
+  private final Page origin;
+  String html() // renders if path matches
+\end{ffcode}
+}
+\end{pptWide}
+\par
+Check \href{https://github.com/yegor256/jpages}{yegor256/jpages} and \href{https://github.com/yegor256/takes}{yegor256/takes}.
+\plush{}
+
 
 \plush{\pptChapter[R\&W]{Read and Watch}}
 
