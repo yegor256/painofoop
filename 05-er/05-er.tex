@@ -232,8 +232,52 @@ e.value().equals("%40foo");
 The right snippet won't work in Java, since |String| is a final class, not an interface, unfortunately.
 \plush{}
 
+\plush{\pptChapter[-Client]{-Client Suffix}}
+
+\pptSection[AWS]{AWS Java Client}
+\begin{pptWide}{2}
+{\scriptsize\begin{ffcode}
+class AmazonS3Client {
+  createBucket(String name);
+  deleteBucket(String name);
+  doesBucketExist(String name);
+  getBucketAcl(String name)
+  getBucketPolicy(String name);
+  listBuckets();
+  // 160+ more methods here
+}
+client = new AmazonS3Client("us-1");
+client.createBucket("foo");
+client.putObject("foo", "a.txt");
+client.writeObject("foo", "a.txt", "data");
+\end{ffcode}
+}
+\par\columnbreak\par
+{\scriptsize\begin{ffcode}
+region = new S3Region("us-1");
+bucket = region.createBucket("foo");
+object = bucket.putObject("a.txt");
+object.write("data");
+\end{ffcode}
+}
+\end{pptWide}
+\par
+The left snippet is:
+\begin{inparaenum}[1)]
+\item procedural,
+\item hard to test,
+\item resembles a utility class,
+and
+\item is hard to extend.
+\end{inparaenum}
+The right one is object-oriented.
+\plush{}
+
+
 \plush{\pptChapter[R\&W]{Read and Watch}}
 
 \href{https://www.yegor256.com/2015/03/09/objects-end-with-er.html}{Don't Create Objects That End With -ER} by me
+
+\href{https://www.yegor256.com/2017/09/12/evil-object-name-suffix-client.html}{Yet Another Evil Suffix For Object Names: Client} by me
 
 \end{document}
