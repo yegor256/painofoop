@@ -275,7 +275,7 @@ The right one is object-oriented.
 
 \plush{\pptChapter[Performance]{What About Performance?}}
 
-\pptSection[Sticky]{Sticky Parser}
+\pptSection[Sticky]{Sticky Parseable Object}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 class StringAsInt implements Number {
@@ -301,6 +301,7 @@ class StickyInt implements Number {
   @Override int intValue() {
     if (!cached) {
       cache = origin.intValue();
+      cached = true;
     }
     return cache;
   }
@@ -312,7 +313,7 @@ class StickyInt implements Number {
 Is it thread-safe though?
 \plush{}
 
-\pptSection[Safe]{Thread-safe Sticky Parser}
+\pptSection[Safe]{Thread-safe Sticky Parseable Object}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 class StickyInt implements Number {
@@ -403,7 +404,7 @@ interface Page
 class HtmlBook implements Book, Page
   String html() // renders in HTML
   String title() // returns origin.title()
-class PageOnPath implement Page
+class PageOnPath implements Page
   private final String path;
   private final Page origin;
   String html() // renders if path matches
