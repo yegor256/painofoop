@@ -36,7 +36,7 @@
 
 \plush{\pptQuote{james-shore.jpg}{Over time, more and more errors will fail fast, and you'll see the cost of debugging decrease and the quality of your system improve}{James Shore, IEEE Software, 2002}}
 
-\pptSection[Size]{Calculating file size}
+\pptBanner{Calculating file size}
 \begin{pptWide}{2}
 Fail Safe:\par
 {\small\begin{ffcode}
@@ -199,6 +199,43 @@ println(b?.length ?: -1) // Elvis operator
 \end{ffcode}
 }
 \plush{}
+
+\plush{\pptChapter[OT]{Object Thinking}}
+
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+d = getDepartment(42);
+e = d.getEmployee("Jeff");
+if (e != null) {
+  printf("Hello, %s", e.name());
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+- Hello, is it the department no.42?
+- Yes.
+- Let me talk to your employee "Jeff".
+- Hold the line please...
+- Hello.
+- Are you NULL?
+\end{ffcode}
+}
+\includegraphics[width=4in]{oops.jpg}
+\end{pptWide}
+\par
+\plush{}
+
+\plush{\pptChapter[Spring]{Spring Boot}}
+
+\plush{
+  \pptPic{0.8}{tweet.png}
+  \par
+  You can do you own analysis of existing Java open source GitHub repositories to see how often their developers use |null| keyword.
+  \par
+  The Takes framework is here: \href{https://github.com/yegor256/takes}{yegor256/takes}.
+}
+
 
 \plush{\pptChapter[R\&W]{Read and Watch}}
 
