@@ -123,6 +123,42 @@ List<String> nameOfEmployee(int id) {
 There are mo elegant alternatives in most languages, like |Optional| in Java~8+.
 \plush{}
 
+\plush{\begin{pptMiddle}
+  \pptPic{0.8}{tweet-vote.png}
+\end{pptMiddle}}
+
+\pptSection[Fake]{Returning a Fake Entity}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+Employee employee(int id) {
+  if (em.existsInDb(id)) {
+    return null;
+  }
+  return new PgEmployee(id);
+}
+e = employee(42);
+print(e.id());
+print(e.salary());
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+Employee employee(int id) {
+  if (em.existsInDb(id)) {
+    return FakeEmployee(id);
+  }
+  return new PgEmployee(id);
+}
+e = employee(42);
+print(e.id());
+
+print(e.salary());
+\end{ffcode}
+}
+\end{pptWide}
+\par
+\plush{}
+
 \plush{\pptChapter[Checking]{Alternatives to Checking for NULL}}
 
 \pptSection[??-operator]{null-coalescing operator in C\#}
