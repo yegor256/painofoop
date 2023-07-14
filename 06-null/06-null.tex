@@ -172,6 +172,7 @@ int? sizeOf(File f) {
   }
   return f.size();
 }
+
 int? s = sizeOf(f);
 if (s == null) {
   s = 0;
@@ -186,6 +187,7 @@ int? sizeOf(File f) {
   }
   return f.size();
 }
+
 int s = sizeOf(f) ?? 0;
 \end{ffcode}
 }
@@ -203,6 +205,7 @@ def employee(id)
   end
   return db.get(id)
 end
+
 e = employee(42)
 puts e.name unless e.nil?
 \end{ffcode}
@@ -215,6 +218,7 @@ def employee(id)
   end
   return db.get(id)
 end
+
 puts employee(42)&.name
 \end{ffcode}
 }
