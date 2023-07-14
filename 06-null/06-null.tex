@@ -100,7 +100,21 @@ String read(File file) {
 The right snippet is \emph{escalating}, while the left one is \emph{swallowing}.
 \plush{}
 
-\pptSection[SDLC]{}
+\pptSection[SDLC]{Software development lifecycle}
+\par
+\begin{tikzpicture}[every path/.style={->, draw, color=gray, line width=5pt}, every node/.style={font=\large, color=black}]
+\node[] (fix) {Fix};
+\node[above right=4cm of fix] (deploy) {Deploy};
+\node[right=9cm of fix] (use) {Use};
+\node[below right=4cm of fix] (report) {Report};
+\path (fix) -- (deploy);
+\path (deploy) -- (use);
+\path (use) -- (report);
+\path (report) -- (fix);
+\end{tikzpicture}
+\par
+Watch this video from DEVit'2016 conference: \\
+\href{https://www.youtube.com/watch?v=nCGBgI1MNwE}{Need It Robust?Make It Fragile!}
 \plush{}
 
 \plush{\pptChapter[Returning]{Alternatives to Returning NULL}}
@@ -265,7 +279,7 @@ Actually, the snippets produce different output when the employee is not found. 
 \plush{}
 
 \pptSection[Kotlin]{NULL-awareness in Kotlin}
-\pptPin{\pptPic{1}{elvis-operator.jpg}}
+\pptPin{\pptPic{0.9}{elvis-operator.jpg}}
 {\small\begin{ffcode}
 var a: String = "abc"
 a = null // compilation error
