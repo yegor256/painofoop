@@ -23,7 +23,7 @@
 \documentclass{article}
 \usepackage{../painofoop}
 \newcommand*\thetitle{NULL}
-\newcommand*\thesubtitle{...}
+\newcommand*\thesubtitle{Fail Fast, Returning, Checking, OT}
 \begin{document}
 
 \plush{\poopTitlePage{6}}
@@ -36,7 +36,7 @@
 
 \plush{\pptQuote{james-shore.jpg}{Over time, more and more errors will fail fast, and you'll see the cost of debugging decrease and the quality of your system improve}{James Shore, IEEE Software, 2002}}
 
-\pptBanner{Calculating file size}
+\pptSection{Defaults}
 \begin{pptWide}{2}
 Fail Safe:\par
 {\small\begin{ffcode}
@@ -64,6 +64,43 @@ int size(File file) {
 \end{pptWide}
 \par
 The right snippet is more \emph{fragile}, leading to more errors in runtime, but eventually ... leading to less bugs.
+\plush{}
+
+\pptSection[Swallowing]{Exception swallowing}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+String read(File file) {
+  try {
+    return new String(
+      Files.readBytes(file)
+    );
+  } catch (IOException e) {
+    e.printStackTrace();
+  }
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+String read(File file) {
+  try {
+    return new String(
+      Files.readBytes(file));
+  } catch (IOException e) {
+    throw new IllegalStateException(
+      String.format(
+        "Can't read file %s", e.name()),
+      e);
+  }
+}
+\end{ffcode}
+}
+\end{pptWide}
+\par
+The right snippet is \emph{escalating}, while the left one is \emph{swallowing}.
+\plush{}
+
+\pptSection[SDLC]{}
 \plush{}
 
 \plush{\pptChapter[Returning]{Alternatives to Returning NULL}}
