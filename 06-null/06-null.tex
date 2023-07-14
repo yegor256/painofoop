@@ -28,8 +28,187 @@
 
 \plush{\poopTitlePage{6}}
 
+\plush{\pptQuote{tony-hoare.jpg}{I call it my \emph{billion-dollar mistake}. It was the invention of the null reference in 1965. At that time, I was designing the first comprehensive type system for references in an object oriented language (ALGOL~W). My goal was to ensure that all use of references should be absolutely safe, with checking performed automatically by the compiler. But I couldn't resist the temptation to put in a null reference, simply because it was so easy to implement. This has led to innumerable errors, vulnerabilities, and system crashes, which have probably caused a billion dollars of pain and damage in \emph{the last forty years}.}{Tony Hoare, 2009}}
+
 \pptToc
 
-...
+\plush{\pptChapter[FailFast]{Fail Fast vs Fail Safe}}
+
+\plush{\pptQuote{james-shore.jpg}{Over time, more and more errors will fail fast, and you'll see the cost of debugging decrease and the quality of your system improve}{James Shore, IEEE Software, 2002}}
+
+\pptSection[Size]{Calculating file size}
+\begin{pptWide}{2}
+Fail Safe:\par
+{\small\begin{ffcode}
+int size(File file) {
+  if (!file.exists()) {
+    return 0;
+  }
+  return file.length();
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+Fail Fast:\par
+{\small\begin{ffcode}
+int size(File file) {
+  if (!file.exists()) {
+    throw new IllegalArgumentException(
+      "The file is absent :("
+    );
+  }
+  return file.length();
+}
+\end{ffcode}
+}
+\end{pptWide}
+\par
+The right snippet is more \emph{fragile}, leading to more errors in runtime, but eventually ... leading to less bugs.
+\plush{}
+
+\plush{\pptChapter[Returning]{Alternatives to Returning NULL}}
+
+\pptSection[Return]{Returning NULL or raising an error?}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+String nameOfEmployee(int id) {
+  if (em.existsInDb(id)) {
+    return null;
+  }
+  return em.readFromDb(id);
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+String nameOfEmployee(int id) {
+  if (em.existsInDb(id)) {
+    throw new EmployeeNotFound(id);
+  }
+  return em.readFromDb(id);
+}
+\end{ffcode}
+}
+\end{pptWide}
+\par
+The right snippet is ``Fail Fast,'' that's why more preferrable.
+\plush{}
+
+\pptSection[List]{Returning a List or a NULL?}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+String nameOfEmployee(int id) {
+  if (em.existsInDb(id)) {
+    return null;
+  }
+  return em.readFromDb(id);
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+List<String> nameOfEmployee(int id) {
+  List<String> names =
+    new ArrayList<>(0);
+  if (em.existsInDb(id)) {
+    return names;
+  }
+  names.add(em.readFromDb(id));
+  return names;
+}
+\end{ffcode}
+}
+\end{pptWide}
+\par
+There are mo elegant alternatives in most languages, like |Optional| in Java~8+.
+\plush{}
+
+\plush{\pptChapter[Checking]{Alternatives to Checking for NULL}}
+
+\pptSection[??-operator]{null-coalescing operator in C\#}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+int? sizeOf(File f) {
+  if (f.exists()) {
+    return null;
+  }
+  return f.size();
+}
+int? s = sizeOf(f);
+if (s == null) {
+  s = 0;
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+int? sizeOf(File f) {
+  if (f.exists()) {
+    return null;
+  }
+  return f.size();
+}
+int s = sizeOf(f) ?? 0;
+\end{ffcode}
+}
+\end{pptWide}
+\par
+Both snippets are bad design, though. They are workarounds.
+\plush{}
+
+\pptSection[Ruby]{\texttt{\&.} operator in Ruby}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+def employee(id)
+  unless db.exists?(id)
+    return nil
+  end
+  return db.get(id)
+end
+e = employee(42)
+puts e.name unless e.nil?
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+def employee(id)
+  unless db.exists?(id)
+    return nil
+  end
+  return db.get(id)
+end
+puts employee(42)&.name
+\end{ffcode}
+}
+\end{pptWide}
+\par
+Actually, the snippets produce different output when the employee is not found. How are they different?
+\plush{}
+
+\pptSection[Kotlin]{NULL-awareness in Kotlin}
+\pptPin{\pptPic{1}{elvis-operator.jpg}}
+{\small\begin{ffcode}
+var a: String = "abc"
+a = null // compilation error
+
+var b: String? = "abc"
+b = null // no error here
+
+println(b?.length) // prints what?
+println(b?.length ?: -1) // Elvis operator
+\end{ffcode}
+}
+\plush{}
+
+\plush{\pptChapter[R\&W]{Read and Watch}}
+
+\href{https://www.yegor256.com/2014/05/13/why-null-is-bad.html}{Why NULL is Bad?} by me
+
+\href{https://www.yegor256.com/2018/05/22/default-arguments-against-null.html}{One More Recipe Against NULL} by me
+
+\href{https://www.yegor256.com/2015/08/25/fail-fast.html}{Need Robust Software? Make It Fragile}
+
+\href{https://www.youtube.com/watch?v=o3aNJX7AP3M}{What is Wrong About NULL in OOP? (Webinar \#3)} by me on YouTube
+
 
 \end{document}
