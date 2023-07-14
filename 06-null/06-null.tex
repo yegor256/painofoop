@@ -294,6 +294,41 @@ println(b?.length ?: -1) // Elvis operator
 }
 \plush{}
 
+\plush{\pptChapter[Checking]{Alternatives to Storing NULL}}
+
+\pptSection[Immutability]{Immutable objects}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+class Employee {
+  private String name = null;
+  void setName(String n) {
+    this.name = n;
+  }
+}
+
+e = new Employee();
+e.setName("Jeff");
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+class Employee {
+  private final String name;
+  Employee(String n) {
+    this.name = n;
+  }
+  Employee withName(String n) {
+    return new Employee(n);
+  }
+}
+
+e1 = new Employee();
+e2 = e1.withName("Jeff");
+\end{ffcode}
+}
+\end{pptWide}
+\plush{}
+
 \plush{\pptChapter[OT]{Object Thinking}}
 
 \pptBanner{Pay respect to your objects!}
