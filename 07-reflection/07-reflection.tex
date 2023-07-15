@@ -30,14 +30,190 @@
 
 \pptToc
 
-instanceof
+\plush{\pptChapter[Casting]{Type Casting}}
 
-class.cast()
+\pptSection{Iterable \(\to\) Collection}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+import java.lang.Collection;
+import java.lang.Iterable;
+
+int sizeOf(Iterable items) {
+  int size = 0;
+  if (items instanceof Collection) {
+    size = ((Collection) items).size();
+  } else {
+    for (Object item : items) {
+      ++size;
+    }
+  }
+  return size;
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+int sizeOf(Iterable items) {
+  int size = 0;
+  for (Object item : items) {
+    ++size;
+  }
+  return size;
+}
+int sizeOf(Collection items) {
+  return items.size();
+}
+\end{ffcode}
+}
+\end{pptWide}
+\par
+\plush{}
+
+\plush{\pptChapter{Annotations}}
+
+\pptSection[Class]{Locating a class}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+...
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+...
+\end{ffcode}
+}
+\end{pptWide}
+\par
+\plush{}
+
+\pptSection[Method]{Locating a method}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.SOURCE)
+public @interface Path
+  String url;
+
+class BookController
+  @Path("/book-title")
+  String title()
+    // Build HTML page and return it
+\end{ffcode}
+}
+\par\columnbreak\par
+{\scriptsize\begin{ffcode}
+String dispatch(String url) {
+  c = new BooksController();
+  b = BooksController.class;
+  for (Method m : b.getDeclaredMethods()) {
+    if (m.isAnnotationPresent(Path.class)) {
+      Annotation a = m.getAnnotation(Path.class);
+      if (a.url().equals(url)) {
+        return m.invoke(c);
+      }
+    }
+  }
+  return "404 Page not found";
+}
+\end{ffcode}
+}
+\end{pptWide}
+\par
+\plush{}
+
+\pptSection[DIC]{Dependency Injection Container}
+\begin{pptWide}{2}
+{\scriptsize\begin{ffcode}
+interface Shipment
+  int cost();
+
+class Cart
+  @Inject private Shipment shmt;
+  private Book book;
+  void setBook(Book b)
+    this.book = b;
+  int cost()
+    return this.book.price() + this.shmt.cost();
+
+container = new Container();
+c = container.make(Cart.class);
+c.setBook(new Book("1984"));
+x = c.cost();
+\end{ffcode}
+}
+\par\columnbreak\par
+{\scriptsize\begin{ffcode}
+class Container {
+  private HashMap<Class, Object> cache =
+    new ConcurrentHashMap<>();
+  T make(Class<T> type) {
+    // 1. Find @Inject-annotated "shmt" field;
+    // 2. Make an instance of "Shipment";
+    // 3. Store it in the "cache";
+    // 4. Make an instance of "Cart";
+    // 5. Store "cart" in the "cache";
+    // 6. Assign "shipment" to "cart.shmt";
+    // 7. Return "cart".
+  }
+}
+\end{ffcode}
+}
+How do you think, at the step no.2,
+what class will be instantiated?
+\end{pptWide}
+\par
+\plush{}
+
+\pptSection[DI]{Dependency Injection \textit{without} a Container}
+\begin{pptWide}{2}
+{\scriptsize\begin{ffcode}
+interface Shipment
+  int cost();
+
+class Cart
+  @Inject private Shipment shmt;
+  private Book book;
+  void setBook(Book b)
+    this.book = b;
+  int cost()
+    return this.book.price() + this.shmt.cost();
+
+container = new Container();
+c = container.make(Cart.class);
+c.setBook(new Book("1984"));
+x = c.cost();
+\end{ffcode}
+}
+\par\columnbreak\par
+{\scriptsize\begin{ffcode}
+interface Shipment
+  int cost();
+
+class Cart
+  private final Shipment shmt;
+  private final Book book;
+  Cart(Shipment s, Book b)
+    this.shmt = s;
+    this.book = b;
+  int cost()
+    return this.book.price() + this.shmt.cost();
+
+c = new Cart(new MyShipment(), new Book("1984"));
+x = c.cost();
+\end{ffcode}
+}
+\end{pptWide}
+\par
+\plush{}
 
 \plush{\pptChapter[R\&W]{Read and Watch}}
 
 \href{https://www.yegor256.com/2015/04/02/class-casting-is-anti-pattern.html}{Class Casting Is a Discriminating Anti-Pattern} by me (2015)
 
+\href{https://www.yegor256.com/2016/04/12/java-annotations-are-evil.html}{Java Annotations Are a Big Mistake} by me (2016)
+
 \href{https://www.yegor256.com/2022/06/05/reflection-means-hidden-coupling.html}{Reflection Means Hidden Coupling} by me (2022)
+
+\href{https://www.youtube.com/watch?v=cv23Z6xpwDw}{Java Annotations Are a Bad Idea}, at JDK.io conference (2017)
 
 \end{document}

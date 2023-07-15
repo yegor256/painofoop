@@ -166,3 +166,5 @@ Hoare
 FailFast
 runtime
 InfoQ
+instanceof
+Iterable
