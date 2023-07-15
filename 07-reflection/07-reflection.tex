@@ -23,7 +23,7 @@
 \documentclass{article}
 \usepackage{../painofoop}
 \newcommand*\thetitle{Reflection}
-\newcommand*\thesubtitle{...}
+\newcommand*\thesubtitle{Classpath, Casting, Annotations}
 \begin{document}
 
 \plush{\poopTitlePage{7}}
@@ -32,7 +32,7 @@
 
 \plush{\pptChapter[Casting]{Type Casting}}
 
-\pptSection{Iterable \(\to\) Collection}
+\pptSection[Iterable]{Iterable \(\to\) Collection}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 import java.lang.Collection;
@@ -69,24 +69,90 @@ int sizeOf(Collection items) {
 \par
 \plush{}
 
-\plush{\pptChapter{Annotations}}
+\plush{\pptChapter[Classpath]{Classpath Scanning}}
 
-\pptSection[Class]{Locating a class}
+\pptSection[Class]{Finding Java classes}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
-...
+interface Foo {}
+
+class Bar implements Foo {}
+
+Reflections rts =
+  new Reflections("");
+Set<Class<?>> types = rts.get(
+  SubTypes.of(Foo.class).asClass()
+);
 \end{ffcode}
 }
 \par\columnbreak\par
 {\small\begin{ffcode}
-...
+public @interface Foo {}
+
+@Foo
+class Bar {}
+
+Reflections rts =
+  new Reflections("");
+Set<Class<?>> types = rts.get(
+  SubTypes.of(
+    TypesAnnotated.with(Foo.class)
+  ).asClass()
+);
+\end{ffcode}
+}
+\end{pptWide}
+\par
+The library is called \href{https://github.com/ronmamo/reflections}{Reflections}.
+\plush{}
+
+\plush{\pptChapter{Annotations}}
+
+\pptSection[Class]{I lieu of static methods}
+\begin{pptWide}{2}
+{\scriptsize\begin{ffcode}
+interface Pub
+  String isbn();
+
+class Book implements Pub
+  @Override public String isbn()
+    /* ... */
+  public static String category()
+    return "book";
+
+class Journal implements Pub
+  @Override public String isbn()
+    /* ... */
+  public static String category()
+    return "journal";
+\end{ffcode}
+}
+\par\columnbreak\par
+{\scriptsize\begin{ffcode}
+interface Pub
+  String isbn();
+
+@Target(ElementType.CLASS)
+@Retention(RetentionPolicy.SOURCE)
+public @interface Category
+  String value();
+
+@Category("book")
+class Book implements Pub
+  @Override public String isbn()
+    /* ... */
+
+@Category("journal")
+class Journal implements Pub
+  @Override public String isbn()
+    /* ... */
 \end{ffcode}
 }
 \end{pptWide}
 \par
 \plush{}
 
-\pptSection[Method]{Locating a method}
+\pptSection[Method]{Locating methods}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 @Target(ElementType.METHOD)
@@ -207,6 +273,8 @@ x = c.cost();
 \plush{}
 
 \plush{\pptChapter[R\&W]{Read and Watch}}
+
+\href{https://www.yegor256.com/2014/10/03/di-containers-are-evil.html}{Dependency Injection Containers are Code Polluters} by me (2014)
 
 \href{https://www.yegor256.com/2015/04/02/class-casting-is-anti-pattern.html}{Class Casting Is a Discriminating Anti-Pattern} by me (2015)
 
