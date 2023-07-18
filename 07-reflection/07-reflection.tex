@@ -52,6 +52,7 @@ int sizeOf(Iterable items) {
 \end{ffcode}
 }
 \par\columnbreak\par
+Method overloading:\par
 {\small\begin{ffcode}
 int sizeOf(Iterable items) {
   int size = 0;
@@ -60,8 +61,48 @@ int sizeOf(Iterable items) {
   }
   return size;
 }
+
 int sizeOf(Collection items) {
   return items.size();
+}
+\end{ffcode}
+}
+\end{pptWide}
+\par
+\plush{}
+
+\pptSection[JEP-394]{Pattern Matching in Java 16}
+\begin{pptWide}{2}
+Java 11:
+\par
+{\small\begin{ffcode}
+int sizeOf(Iterable items) {
+  int size = 0;
+  if (items instanceof Collection) {
+    size = ((Collection) items).size();
+  } else {
+    for (Object item : items) {
+      ++size;
+    }
+  }
+  return size;
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+Java 16:
+\par
+{\small\begin{ffcode}
+int sizeOf(Iterable items) {
+  int size = 0;
+  if (items instanceof Collection c) {
+    size = c.size();
+  } else {
+    for (Object item : items) {
+      ++size;
+    }
+  }
+  return size;
 }
 \end{ffcode}
 }
@@ -272,6 +313,46 @@ x = c.cost();
 \par
 \plush{}
 
+\plush{\pptChapter[Types]{Discrimination by Type}}
+
+\pptSection{Polymorphism vs. Casting}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+interface Figure
+  void rotate(int d);
+
+class Circle implements Figure
+  void rotate(int d) //...
+  int radius() //...
+
+class Square implements Figure
+  void rotate(int d) //...
+  int side() //...
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+// This is polymorphism:
+int surface(Figure f)
+  return f.surface()
+
+// This is type casting:
+int surface(Figure f)
+  if (f instanceof Circle c) {
+    return c.radius()
+  } else if (f instanceof Square s) {
+    return s.side() * s.side();
+  } else {
+    throw new Exception("oops");
+  }
+\end{ffcode}
+}
+\end{pptWide}
+\par
+\plush{}
+
+
+
 \plush{\pptChapter[R\&W]{Read and Watch}}
 
 \href{https://www.yegor256.com/2014/10/03/di-containers-are-evil.html}{Dependency Injection Containers are Code Polluters} by me (2014)
@@ -283,5 +364,7 @@ x = c.cost();
 \href{https://www.yegor256.com/2022/06/05/reflection-means-hidden-coupling.html}{Reflection Means Hidden Coupling} by me (2022)
 
 \href{https://www.youtube.com/watch?v=cv23Z6xpwDw}{Java Annotations Are a Bad Idea}, at JDK.io conference (2017)
+
+\href{https://www.yegor256.com/2020/11/10/typing-without-types.html}{Strong Typing without Types} by me (2020)
 
 \end{document}
