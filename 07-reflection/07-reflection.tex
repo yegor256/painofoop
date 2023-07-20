@@ -34,7 +34,7 @@
 
 \pptSection[Iterable]{Iterable \(\to\) Collection}
 \begin{pptWide}{2}
-Downcasting:\par
+Downcasting (wrong!):\par
 {\small\begin{ffcode}
 int sizeOf(Iterable items) {
   int size = 0;
@@ -50,7 +50,7 @@ int sizeOf(Iterable items) {
 \end{ffcode}
 }
 \par\columnbreak\par
-Method overloading:\par
+Method overloading (right!):\par
 {\small\begin{ffcode}
 int sizeOf(Iterable items) {
   int size = 0;
@@ -71,7 +71,7 @@ int sizeOf(Collection items) {
 
 \pptSection[JEP-394]{Pattern Matching in Java 16}
 \begin{pptWide}{2}
-Java 11:
+Java 11 (wrong!):
 \par
 {\small\begin{ffcode}
 int sizeOf(Iterable items) {
@@ -88,7 +88,7 @@ int sizeOf(Iterable items) {
 \end{ffcode}
 }
 \par\columnbreak\par
-Java 16:
+Java 16 (even worse!):
 \par
 {\small\begin{ffcode}
 int sizeOf(Iterable items) {
@@ -143,6 +143,7 @@ Set<Class<?>> types = rts.get(
 \end{pptWide}
 \par
 The library is called \href{https://github.com/ronmamo/reflections}{Reflections}.
+Instead, use explicit object instantiation.
 \plush{}
 
 \plush{\pptChapter{Annotations}}
