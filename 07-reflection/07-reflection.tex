@@ -34,7 +34,7 @@
 
 \pptSection[Iterable]{Iterable \(\to\) Collection}
 \begin{pptWide}{2}
-Downcasting (wrong!):\par
+Downcasting (\textcolor{red}{wrong!}):\par
 {\small\begin{ffcode}
 int sizeOf(Iterable items) {
   int size = 0;
@@ -50,7 +50,7 @@ int sizeOf(Iterable items) {
 \end{ffcode}
 }
 \par\columnbreak\par
-Method overloading (right!):\par
+Method overloading (\textcolor{green}{right!}):\par
 {\small\begin{ffcode}
 int sizeOf(Iterable items) {
   int size = 0;
@@ -69,9 +69,41 @@ int sizeOf(Collection items) {
 \par
 \plush{}
 
+\pptSection[Coupling]{Implicit Coupling}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+int sizeOf(Iterable items) {
+  int size = 0;
+  if (items instanceof Collection) {
+    size = ((Collection) items).size();
+  } else {
+    for (Object item : items) {
+      ++size;
+    }
+  }
+  return size;
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+Iterable<Book> books1 =
+  new PgBooks1("localhost:5432");
+int s1 = sizeOf(books1);
+
+Collection<Book> books2 =
+  new PgBooks2("localhost:5432");
+int s2 = sizeOf(books2);
+\end{ffcode}
+}
+\end{pptWide}
+\par
+It may be hard to understand why |s2| is evaluated much faster than |s1|, since the signature of |sizeOf()| is the same in both cases.
+\plush{}
+
 \pptSection[JEP-394]{Pattern Matching in Java 16}
 \begin{pptWide}{2}
-Java 11 (wrong!):
+Java 11 (\textcolor{red}{wrong!}):
 \par
 {\small\begin{ffcode}
 int sizeOf(Iterable items) {
@@ -88,7 +120,7 @@ int sizeOf(Iterable items) {
 \end{ffcode}
 }
 \par\columnbreak\par
-Java 16 (even worse!):
+Java 16 (\textcolor{red}{\textbf{even worse!}}):
 \par
 {\small\begin{ffcode}
 int sizeOf(Iterable items) {
