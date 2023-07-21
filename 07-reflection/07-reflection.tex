@@ -140,6 +140,48 @@ int sizeOf(Iterable items) {
 \par
 \plush{}
 
+\pptSection[CSharp]{C\#, Rust, and others}
+\begin{pptWide}{2}
+C\#:\par
+{\scriptsize\begin{ffcode}
+public int sizeOf<T>(IEnumerable<T> items) {
+  if (items is IList<T> list) {
+    return list.Count;
+  } else {
+    return // count them one by one
+  }
+}
+\end{ffcode}
+}
+\par
+Some other languages have \emph{pattern matching} feature,
+including Kotlin, Scala, Haskell, Elixir, Swift, F\#, and Erlang.
+\par\columnbreak\par
+Rust:
+\par
+{\scriptsize\begin{ffcode}
+enum Color {
+  RGB(u8, u8, u8),
+  Transparent
+}
+fn paint(c: Color) {
+  match c {
+    Color::RGB(r, g, b) =>
+      println!("#{r}{g}{b}"),
+    Color::Transparent =>
+      println!("none")
+  }
+}
+fn main() {
+  let c = Color::RGB(64, 16, 0);
+  paint(c);
+}
+\end{ffcode}
+}
+\end{pptWide}
+\par
+\plush{}
+
 \plush{\pptChapter[Classpath]{Classpath Scanning}}
 
 \pptSection[Class]{Finding Java classes}
