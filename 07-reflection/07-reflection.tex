@@ -183,6 +183,94 @@ fn main() {
 \par
 \plush{}
 
+\plush{\pptChapter[Factory]{Factory Method}}
+
+\pptSection[IF]{Conditional object construction}
+\begin{pptWide}{2}
+This is \textcolor{red}{wrong}:
+\par
+{\scriptsize\begin{ffcode}
+interface Figure
+  int surface();
+class Square implements Figure
+class Triangle implements Figure
+class Polygon implements Figure
+
+class FactoryOfFigures
+  Figure make(int sides) {
+    if (sides == 3) {
+      return new Triangle();
+    } else if (sides == 4) {
+      return new Square();
+    } else {
+      return new Polygon(sides);
+    }
+  }
+\end{ffcode}
+}
+\par\columnbreak\par
+This is \textcolor{green}{better}:
+\par
+{\scriptsize\begin{ffcode}
+class PolymorphicFigure
+  PolymorphicFigure(int sides)
+  int surface() {
+    if (sides == 3) {
+      return new Triangle().surface();
+    } else if (sides == 4) {
+      return new Square().surface();
+    } else {
+      return new Polygon(sides).surface();
+    }
+  }
+\end{ffcode}
+}
+\par
+Here, the semantic of object construction is not visible to the client --- coupling is loose.
+\end{pptWide}
+\plush{}
+
+\pptSection[forName]{Generating class name from a string}
+\begin{pptWide}{2}
+This is \textcolor{red}{wrong}:
+\par
+{\scriptsize\begin{ffcode}
+interface Figure
+  int surface();
+
+class Square implements Figure
+class Triangle implements Figure
+class Polygon implements Figure
+
+class FactoryOfFigures
+  Figure make(String name) throws Exception {
+    Class<?> c = Class.forName(name);
+    return c.getConstructor().newInstance();
+  }
+\end{ffcode}
+}
+\par\columnbreak\par
+This is \textcolor{green}{better}:
+\par
+{\scriptsize\begin{ffcode}
+class PolymorphicFigure
+  PolymorphicFigure(String name)
+  int surface() {
+    if (name.equals("Triangle")) {
+      return new Triangle().surface();
+    } else if (name.equals("Square")) {
+      return new Square().surface();
+    } else {
+      return new Polygon(?).surface();
+    }
+  }
+\end{ffcode}
+}
+\end{pptWide}
+\plush{}
+
+
+
 \plush{\pptChapter[Classpath]{Classpath Scanning}}
 
 \pptSection[Class]{Finding Java classes}
@@ -438,6 +526,8 @@ int surface(Figure f)
 \href{https://www.yegor256.com/2022/06/05/reflection-means-hidden-coupling.html}{Reflection Means Hidden Coupling} by me (2022)
 
 \href{https://www.youtube.com/watch?v=cv23Z6xpwDw}{Java Annotations Are a Bad Idea}, at JDK.io conference (2017)
+
+\href{https://www.yegor256.com/2017/11/14/static-factory-methods.html}{Constructors or Static Factory Methods?} by me (2017)
 
 \href{https://www.yegor256.com/2020/11/10/typing-without-types.html}{Strong Typing without Types} by me (2020)
 
