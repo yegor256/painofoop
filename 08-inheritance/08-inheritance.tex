@@ -175,6 +175,43 @@ It merely reuses the code that was negligently left open in the |Square|.
 \end{pptWide}
 \plush{}
 
+\pptSection[Composition]{Composition over inheritance}
+\begin{pptWide}{2}
+Implementation Inheritance:
+\par
+{\small\begin{ffcode}
+class Square
+  private float width;
+  float surface()
+    return width * width;
+
+class Circle extends Square
+  Circle(float radius)
+    super(radius);
+  @Override float surface()
+    return 3.14 * super.surface();
+\end{ffcode}
+}
+\par\columnbreak\par
+Composition:
+\par
+{\small\begin{ffcode}
+final class Square
+  private float width;
+  float surface()
+    return width * width;
+
+final class Circle
+  private Square s;
+  Circle(float radius)
+    this.s = new Square(radius);
+  float surface()
+    return 3.14 * s.surface();
+\end{ffcode}
+}
+\end{pptWide}
+\plush{}
+
 
 final classes -- not welcome to extend
 
