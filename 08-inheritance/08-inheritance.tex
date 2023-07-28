@@ -31,11 +31,15 @@
 
 \pptToc
 
-\plush{\pptChapter[Subtyping]{Subtyping}}
+\plush{\pptChapter{Polymorphism}}
 
+\pptSection[LSP]{Liskov Substitution Principle}
 \plush{\begin{pptMiddle}\pptQuote{barbara-liskov.jpg}{If for each object $o_1$ of type $S$ there is an object $o_2$ of type $T$ such that for all programs $P$ defined in terms of $T$, the behavior of $P$ is unchanged when $o_1$ is substituted for $o_2$, then $S$ is a subtype of $T$}{Barbara Liskov, \emph{Keynote Address: Data Abstraction and Hierarchy}, Addendum to the Proceedings on Object-oriented Programming Systems, Languages and Applications, 1987}\end{pptMiddle}}
 
-\pptSection{Subtyping (Polymorphism)}
+\pptSection[SOLID]{SOLID (the ``L'' part)}
+\plush{\begin{pptMiddle}\pptQuote{robert-martin.jpg}{Functions that use pointers or references to base classes must be able to use objects of derived classes without knowing it}{Robert C. Martin, \emph{Design Principles and Design Patterns discussing}, 2000}\end{pptMiddle}}
+
+\pptSection[Subtyping]{Subtyping}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 interface Figure
@@ -69,7 +73,7 @@ $ \texttt{Circle} \sqsubseteq \texttt{Figure} $
 \end{pptWide}
 \plush{}
 
-\pptSection{Parametric Polymorphism (Generics)}
+\pptSection[Generics]{Parametric Polymorphism (Generics)}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 class StackOfStrings {
@@ -104,17 +108,88 @@ s2.push(42);
 \end{pptWide}
 \plush{}
 
-implementation inheritance vs subtyping
+\pptSection[Overloading]{Ad Hoc Polymorphism (Method Overloading)}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+class Cart {
+  void add(int pid) // ...
+  void addString(String pid) {
+    this.add(Integer.parseInt(pid));
+  }
+}
+
+var c = new Cart();
+c.add(42);
+c.addString("17");
+c.addString("Hello, world!");
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+class Cart {
+  void add(int pid) // ...
+  void add(String pid) {
+    this.add(Integer.parseInt(pid));
+  }
+}
+
+var c = new Cart();
+c.add(42);
+c.add("17");
+c.add("Hello, world!");
+\end{ffcode}
+}
+\end{pptWide}
+\plush{}
+
+\plush{\pptChapter[Inheritance]{Implementation Inheritance}}
+
+\plush{\pptThought{Inheriting means ``receive (money, property, or a title) as an heir at the death of the previous holder.'' Who is dead, you ask? An object is dead if it allows other objects to inherit its encapsulated code and data.}}
+
+\pptSection[Reuse]{Code reuse}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+class Square
+  private float width;
+  float surface()
+    return width * width;
+
+class Circle extends Square
+  Circle(float radius)
+    super(radius);
+  @Override float surface()
+    return 3.14 * super.surface();
+\end{ffcode}
+}
+\par\columnbreak\par
+\begin{tikzpicture}[
+  every path/.style={line width=3pt,-{Stealth[inset=0pt,width=10mm,length=10mm,open]}},
+  every node/.style={font={\ttfamily}}]
+\node[draw] (square) {Square};
+\node[draw, below right=4cm and 2cm of square] (circle) {Circle};
+\draw[draw=red] (circle) -- (square);
+\end{tikzpicture}
+\par
+Here, the |Circle| is \emph{not} a |Square|.
+It merely reuses the code that was negligently left open in the |Square|.
+\end{pptWide}
+\plush{}
+
 
 final classes -- not welcome to extend
 
 code reuse via composition vs reuse via inheritance
 
-liskov substitution principle
-
 two meanings of the word "inherit", per the dictionary
 
-\plush{\pptThought{Inheriting means ``receive (money, property, or a title) as an heir at the death of the previous holder.'' Who is dead, you ask? An object is dead if it allows other objects to inherit its encapsulated code and data.}}
+\plush{\pptChapter[Quiz]{Quiz}}
+
+\plush{\begin{pptMiddle}
+I show this code to job interview candidates, asking them to find as many defects
+in it as they can: \href{https://github.com/yegor256/quiz/blob/master/Parser.java}{yegor256/quiz}~(Java).
+\par
+How many problems you can find in this code?
+\end{pptMiddle}}
 
 \plush{\pptChapter[R\&W]{Read and Watch}}
 
