@@ -266,10 +266,10 @@ class PolymorphicFigure
   }
 \end{ffcode}
 }
+\par
+This is better since the mechanics of class finding is explicit --- no surprises expected.
 \end{pptWide}
 \plush{}
-
-
 
 \plush{\pptChapter[Classpath]{Classpath Scanning}}
 
@@ -477,7 +477,7 @@ x = c.cost();
 
 \plush{\pptChapter[Types]{Discrimination by Type}}
 
-\pptSection{Polymorphism vs. Casting}
+\pptSection[Polymorphism]{Polymorphism vs. Casting}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 interface Figure
@@ -512,8 +512,6 @@ int surface(Figure f)
 \end{pptWide}
 \par
 \plush{}
-
-
 
 \plush{\pptChapter[R\&W]{Read and Watch}}
 
