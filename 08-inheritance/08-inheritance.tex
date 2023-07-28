@@ -148,8 +148,6 @@ c.add("Hello, world!");
 
 \plush{\begin{pptMiddle}\pptQuote{james-gosling.jpg}{Someone asked him: ``If you could do Java over again, what would you change?'' ``I'd leave out classes,'' he replied}{James Gosling}\end{pptMiddle}}
 
-\plush{\pptThought{Inheriting means ``receive (money, property, or a title) as an heir at the death of the previous holder.'' Who is dead, you ask? An object is dead if it allows other objects to inherit its encapsulated code and data.}}
-
 \pptSection[Reuse]{Code reuse}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
@@ -178,6 +176,8 @@ Here, the |Circle| is \emph{not} a |Square|.
 It merely reuses the code that was negligently left open in the |Square|.
 \end{pptWide}
 \plush{}
+
+\plush{\pptThought{Inheriting means ``receive (money, property, or a title) as an heir at the death of the previous holder.'' Who is dead, you ask? An object is dead if it allows other objects to inherit its encapsulated code and data.}}
 
 \pptSection[Composition]{Composition over inheritance}
 \begin{pptWide}{2}
@@ -215,6 +215,8 @@ final class Circle
 }
 \end{pptWide}
 \plush{}
+
+\plush{\pptThought{All classes, without exceptions, should be either \ff{final} or \ff{abstract}}}
 
 \pptSection[Multiple]{Multiple inheritance}
 \begin{pptWide}{2}
