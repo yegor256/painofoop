@@ -144,7 +144,7 @@ c.add("Hello, world!");
 
 \plush{\pptChapter[Inheritance]{Implementation Inheritance}}
 
-\plush{\begin{pptMiddle}\pptQuote{allen-holub.jpg}{The extends keyword is evil; maybe not at the Charles Manson level, but bad enough that it should be shunned whenever possible.}{Allen Holub, \emph{Why extends is evil}, \href{https://www.infoworld.com/article/2073649/why-extends-is-evil.html}{InfoWorld}, 2003}\end{pptMiddle}}
+\plush{\begin{pptMiddle}\pptQuote{allen-holub.jpg}{The |extends| keyword is evil; maybe not at the Charles Manson level, but bad enough that it should be shunned whenever possible.}{Allen Holub, \emph{Why extends is evil}, \href{https://www.infoworld.com/article/2073649/why-extends-is-evil.html}{InfoWorld}, 2003}\end{pptMiddle}}
 
 \plush{\begin{pptMiddle}\pptQuote{james-gosling.jpg}{Someone asked him: ``If you could do Java over again, what would you change?'' ``I'd leave out classes,'' he replied}{James Gosling}\end{pptMiddle}}
 
@@ -273,8 +273,8 @@ class Circle implements Figure, Actor
 \node[draw] (figure) {Figure};
 \node[draw, below right=0.5cm and 6cm of figure] (actor) {Actor};
 \node[draw, below right=4cm and 2cm of figure] (circle) {Circle};
-\draw (circle) -- (figure);
-\draw (circle) -- (actor);
+\draw[draw=green] (circle) -- (figure);
+\draw[draw=green] (circle) -- (actor);
 \end{tikzpicture}
 \end{pptWide}
 \plush{}
