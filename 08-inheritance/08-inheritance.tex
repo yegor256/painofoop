@@ -212,12 +212,68 @@ final class Circle
 \end{pptWide}
 \plush{}
 
+\pptSection[Multiple]{Multiple inheritance}
+\begin{pptWide}{2}
+\par
+{\small\begin{ffcode}
+class Pi
+  float value()
+    return 3.1415926;
 
-final classes -- not welcome to extend
+class Square
+  private float width;
+  float surface()
+    return width * width;
 
-code reuse via composition vs reuse via inheritance
+class Circle extends Square, Pi
+  Circle(float r): Square(r), Pi() {}
+  virtual float surface()
+    return Pi.value() * Square.surface();
+\end{ffcode}
+}
+\par\columnbreak\par
+\begin{tikzpicture}[
+  every path/.style={line width=3pt,-{Stealth[inset=0pt,width=10mm,length=10mm,open]}},
+  every node/.style={font={\ttfamily}}]
+\node[draw] (square) {Square};
+\node[draw, below right=0.5cm and 6cm of square] (pi) {Pi};
+\node[draw, below right=4cm and 2cm of square] (circle) {Circle};
+\draw[draw=red] (circle) -- (square);
+\draw[draw=red] (circle) -- (pi);
+\end{tikzpicture}
+\end{pptWide}
+\plush{}
 
-two meanings of the word "inherit", per the dictionary
+\pptSection[Parents]{Multiple super types}
+\begin{pptWide}{2}
+\par
+{\small\begin{ffcode}
+interface Actor
+  void move(int dx, int dy);
+
+interface Figure
+  float surface();
+
+class Circle implements Figure, Actor
+  Circle(float r)
+  @Override float surface()
+    // ...
+  @Override void move(int dx, int dy)
+    // ...
+\end{ffcode}
+}
+\par\columnbreak\par
+\begin{tikzpicture}[
+  every path/.style={line width=3pt,-{Stealth[inset=0pt,width=10mm,length=10mm,open]}},
+  every node/.style={font={\ttfamily}}]
+\node[draw] (figure) {Figure};
+\node[draw, below right=0.5cm and 6cm of figure] (actor) {Actor};
+\node[draw, below right=4cm and 2cm of figure] (circle) {Circle};
+\draw (circle) -- (figure);
+\draw (circle) -- (actor);
+\end{tikzpicture}
+\end{pptWide}
+\plush{}
 
 \plush{\pptChapter[Quiz]{Quiz}}
 
