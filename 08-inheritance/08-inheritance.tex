@@ -290,6 +290,53 @@ in it as they can: \href{https://github.com/yegor256/quiz/blob/master/Parser.jav
 How many problems you can find in this code?
 \end{pptMiddle}}
 
+\begin{pptWide}{2}
+{\scriptsize\begin{ffcode}
+public class Parser {
+  private File file;
+  public synchronized void setFile(File f) {
+    file = f;
+  }
+  public synchronized File getFile() {
+    return file;
+  }
+  public String getContent() throws IOException {
+    FileInputStream i = new FileInputStream(file);
+    String output = "";
+    int data;
+    while ((data = i.read()) > 0) {
+      output += (char) data;
+    }
+    return output;
+  }
+  public String getContentWithoutUnicode()
+    throws IOException {
+    FileInputStream i = new FileInputStream(file);
+    String output = "";
+    int data;
+    while ((data = i.read()) > 0) {
+      if (data < 0x80) {
+        output += (char) data;
+      }
+    }
+    return output;
+  }
+  public void saveContent(String content) {
+    FileOutputStream o = new FileOutputStream(file);
+    try {
+      for (int i = 0; i < content.length(); i += 1) {
+        o.write(content.charAt(i));
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+}
+\end{ffcode}
+}
+\end{pptWide}
+\plush{}
+
 \plush{\pptChapter[R\&W]{Read and Watch}}
 
 \href{https://www.infoworld.com/article/2073649/why-extends-is-evil.html}{Why extends is evil} by Allen Holub (2003)
