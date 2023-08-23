@@ -4,7 +4,7 @@
 
 [![latexmk](https://github.com/yegor256/painofoop/actions/workflows/latexmk.yml/badge.svg?branch=master)](https://github.com/yegor256/painofoop/actions/workflows/latexmk.yml)
 
-There are slides for my series of lectures for Innopolis University (Kazan, Russia).
+There are slides for my series of lectures for [Innopolis University](https://innopolis.university/) (Kazan, Russia).
 
 All recorded videos (so far) are in [this YouTube playlist](https://www.youtube.com/playlist?list=PLaIsQH4uc08ytf8POIIAkkR4ZsRq8DFiV).
 
