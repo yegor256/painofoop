@@ -76,6 +76,7 @@ String read(File file) {
     );
   } catch (IOException e) {
     e.printStackTrace();
+    return ""; // default
   }
 }
 \end{ffcode}
@@ -124,7 +125,7 @@ Watch this video from DEVit'2016 conference: \\
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 String nameOfEmployee(int id) {
-  if (em.existsInDb(id)) {
+  if (!em.existsInDb(id)) {
     return null;
   }
   return em.readFromDb(id);
@@ -150,7 +151,7 @@ The right snippet is ``Fail Fast,'' that's why more preferrable.
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 String nameOfEmployee(int id) {
-  if (em.existsInDb(id)) {
+  if (!em.existsInDb(id)) {
     return null;
   }
   return em.readFromDb(id);
@@ -163,9 +164,8 @@ List<String> nameOfEmployee(int id) {
   List<String> names =
     new ArrayList<>(0);
   if (em.existsInDb(id)) {
-    return names;
+    names.add(em.readFromDb(id));
   }
-  names.add(em.readFromDb(id));
   return names;
 }
 \end{ffcode}
@@ -183,7 +183,7 @@ There are mo elegant alternatives in most languages, like |Optional| in Java~8+.
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 Employee employee(int id) {
-  if (em.existsInDb(id)) {
+  if (!em.existsInDb(id)) {
     return null;
   }
   return new PgEmployee(id);
@@ -197,7 +197,7 @@ print(e.salary());
 \par\columnbreak\par
 {\small\begin{ffcode}
 Employee employee(int id) {
-  if (em.existsInDb(id)) {
+  if (!em.existsInDb(id)) {
     return FakeEmployee(id);
   }
   return new PgEmployee(id);
@@ -219,7 +219,7 @@ print(e.salary());
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 int? sizeOf(File f) {
-  if (f.exists()) {
+  if (!f.exists()) {
     return null;
   }
   return f.size();
@@ -234,7 +234,7 @@ if (s == null) {
 \par\columnbreak\par
 {\small\begin{ffcode}
 int? sizeOf(File f) {
-  if (f.exists()) {
+  if (!f.exists()) {
     return null;
   }
   return f.size();
