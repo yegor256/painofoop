@@ -212,9 +212,9 @@ class FactoryOfFigures
 This is \textcolor{green}{better}:
 \par
 {\scriptsize\begin{ffcode}
-class PolymorphicFigure
+class PolymorphicFigure implements Figure
   PolymorphicFigure(int sides)
-  int surface() {
+  @Override int surface() {
     if (sides == 3) {
       return new Triangle().surface();
     } else if (sides == 4) {
@@ -253,9 +253,9 @@ class FactoryOfFigures
 This is \textcolor{green}{better}:
 \par
 {\scriptsize\begin{ffcode}
-class PolymorphicFigure
+class PolymorphicFigure implements Figure
   PolymorphicFigure(String name)
-  int surface() {
+  @Override int surface() {
     if (name.equals("Triangle")) {
       return new Triangle().surface();
     } else if (name.equals("Square")) {
