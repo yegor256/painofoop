@@ -1,6 +1,4 @@
-<img alt="logo" src="https://www.objectionary.com/cactus.svg" height="64px" />
-
-<img src="innopolis-logo.svg" height="48px"/>
+<img alt="logo" src="https://www.objectionary.com/cactus.svg" height="64px" />&nbsp;<img src="innopolis-logo.svg" height="64px"/>
 
 [![latexmk](https://github.com/yegor256/painofoop/actions/workflows/latexmk.yml/badge.svg?branch=master)](https://github.com/yegor256/painofoop/actions/workflows/latexmk.yml)
 
