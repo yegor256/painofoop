@@ -8,6 +8,8 @@ All recorded videos (so far) are in [this YouTube playlist](https://www.youtube.
 
 All compiled slide decks in PDF are [here](https://yegor256.github.io/painofoop/).
 
+Research questions [are here](https://gist.github.com/yegor256/9c7ac9fbd45469a08eb68cfe09d451c3).
+
 To compile everything just run:
 
 ```bash
