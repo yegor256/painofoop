@@ -23,9 +23,14 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{ssd}[00.00.0000 0.0.0 This Course Specials]
 
+\usepackage{silence}
+  \WarningFilter{bibentry}{You have used \nobibliography*}
+  \WarningFilter{breakurl}{You are using breakurl while processing via pdflatex.}
+
 \RequirePackage[T1]{fontenc}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{paralist}
+\RequirePackage{doi}
 \RequirePackage[dry,increment]{crumbs}
 \RequirePackage[static]{clicks}
 \RequirePackage[template,scheme=light]{ppt-slides}
@@ -33,19 +38,22 @@
 \RequirePackage{bussproofs}
   \def\extraVskip{12pt}
   \def\ruleScoreFiller{\hrule height 1pt}
-  % \def\proofSkipAmount{\vskip 6pt plus.8ex minus.4ex}
 \RequirePackage{bm}
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 \RequirePackage{graphicx}
   \graphicspath{{../images/}}
 
+% see https://tex.stackexchange.com/a/256190/1449
+\RequirePackage{url}
+\def\UrlBreaks{\do\/\do-}
+\RequirePackage{breakurl}
+
 \RequirePackage{mathtools}
 \RequirePackage{to-be-determined}
 \RequirePackage{tikz}
   \usetikzlibrary{positioning,calc,arrows.meta}
 \RequirePackage{soul}
-\renewcommand\emph[1]{\ul{#1}}
 \tikzstyle{graph} = [
   node distance=0,
   every node/.style={draw=black,circle,minimum width=2.2em,thick},
@@ -55,9 +63,20 @@
 \tikzstyle{terminal} = [rectangle,minimum height=1.5em]
 \tikzstyle{note} = [draw=none,rectangle,midway,font={\small\color{orange}}]
 
+\newcommand\qte[4][]{
+  \pitch{
+    \pptQuote
+      [\scriptsize\scshape\color{gray}{#1}]
+      {../faces/#2.jpg}
+      {#3}
+      {\color{gray}\rmfamily\scriptsize\bibentry{#4}}
+  }
+}
+\newcommand\source[1]{\par{\scriptsize Source: \bibentry{#1}\par}}
+
 \newcommand\br{\newline}
 
-\newcommand\innoDisclaimer{{%
+\newcommand\poopDisclaimer{{%
   \color{grey}\ttfamily\footnotesize
   All visual and text materials presented in this slidedeck are
   either originally made by the author or taken from public Internet
@@ -70,7 +89,7 @@
   {\scshape Yegor Bugayenko}\par
   Lecture \##1 out of 8 \br
   90 minutes\par
-  \innoDisclaimer{}
+  \poopDisclaimer{}
 }
 
 % 1: cover file
@@ -85,6 +104,18 @@
 \AtBeginDocument{%
   \pptLeft{\thetitle{}: \thesubtitle}%
   \pptRight{@yegor256}%
+  \nobibliography*
+  \bibliographystyle{plainnat}
+}
+
+\RequirePackage{bibentry}
+\RequirePackage{natbib}
+\AtEndDocument{%
+  \begin{multicols}{2}
+  \setlength{\bibsep}{.2em}
+  \renewcommand{\bibfont}{\scriptsize}
+  \bibliography{../main}
+  \end{multicols}
 }
 
 \endinput
