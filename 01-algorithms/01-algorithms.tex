@@ -77,9 +77,9 @@ End;
 \pptSection[Smalltalk]{Smalltalk: Sample Code}
 {\small\begin{ffcode}
 Object subclass: Account [
-    |$\vert$| balance |$\vert$|
+    (*@\(\vert\)@*) balance (*@\(\vert\)@*)
     Account class >> new [
-        |$\vert$| r |$\vert$|
+        (*@\(\vert\)@*) r (*@\(\vert\)@*)
         r := super new. r init. ^r
     ]
     init [ balance := 0 ]
@@ -555,7 +555,7 @@ end
 }
 \par\columnbreak\par
 {\small\begin{ffcode}
-$ echo 'Hello, world!' |$\vert$| ruby a.rb
+$ echo 'Hello, world!' (*@\(\vert\)@*) ruby a.rb
 Hell
 o, w
 orld
