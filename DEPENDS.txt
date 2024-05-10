@@ -1,6 +1,7 @@
 hard acmart
 hard huawei
 hard cjk
+hard silence
 hard ffcode
 hard href-ul
 hard datetime
