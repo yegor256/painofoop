@@ -251,7 +251,7 @@ Immutability
   {khanam2018}
 
 \plush{
-    \pptThought{Thus, we don't know anymore what exactly is object-oriented programming, and whether it helps us write better code :(}
+    \pptThought{Thus, we don't know anymore what exactly is object-oriented programming, and whether it helps us write better code.}
     \par
     {\small You can find more quotes in this blog post of mine: \href{https://www.yegor256.com/2016/08/15/what-is-wrong-object-oriented-programming.html}{What's Wrong With Object-Oriented Programming?}~\citep{bugayenko2016blog0815}}\par
 }
@@ -263,7 +263,7 @@ Immutability
   {The contemporary mainstream understanding of objects (which is not behavioral) is but a pale shadow of the original idea and anti-ethical to the original intent.}
   {west2004object}
 
-\pitch{You may enjoy watching our conversation with Dr. David West:
+\pitch{You may enjoy watching our conversation with Dr. David West, video-recorded and published on YouTube:
   \href{https://www.youtube.com/watch?v=s-hdZZzMCac}{part I}
   and
   \href{https://www.youtube.com/watch?v=bW5K5cJ-AVs}{part II}.}
@@ -295,7 +295,7 @@ var file = {
 \end{pptWide}
 We deal with an abstraction as if it was a real thing, but eliminating unnecessary details.
 We do \ff{file.read()} instead of ``open file handler for data.txt, read byte by byte, store in
-byte buffer, wait for the end of file, return the result.''
+byte buffer, wait for the end of file, and return the result.''
 \plush{}
 
 \plush{\begin{multicols}{2}
@@ -324,6 +324,7 @@ int distance(left, right) {
   if (d < 0) { d = d * -1; }
   return d;
 }
+
 int square(x1, y1, x2, y2) {
   return distance(x2, x1)
     * distance(y2, y1);
@@ -342,6 +343,7 @@ int distance(left, right) {
   if (d < 0) { d = d * -1; }
   return d;
 }
+
 int square(x1, y1, x2, y2) {
   return distance(x2, x1)
     * distance(y2, y1);
@@ -469,12 +471,10 @@ class Circle {
 c1 = new Circle(42.0);
 c2 = new Circle(42.0);
 c1 != c2;
-
 // State:
 c1 = new Circle(42.0);
 c2 = new Circle(42.0);
 c1.getRadius() == c2.getRadius();
-
 // Behavior:
 c1 = new Circle(42.0);
 c2 = new Circle(-42.0);
