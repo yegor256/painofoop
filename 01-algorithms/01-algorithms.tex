@@ -36,6 +36,34 @@
     \textcolor{gray}{\small Written by me, edited by ChatGPT}
 }
 
+\plush{\pptChapter{Pre-Test}}
+
+\pptSection[quiz]{https://github.com/yegor256/quiz}
+{\scriptsize\begin{ffcode}
+public class Parser {
+  private File file;
+  public synchronized void setFile(File f) {
+    file = f;
+  }
+  public synchronized File getFile() {
+    return file;
+  }
+  public String getContent() throws IOException {
+    // Read the content of the file
+    // and return it.
+  }
+  public String getContentWithoutUnicode() throws IOException {
+    // Read the file and filter out symbols
+    // that are not UTF-8 compliant.
+  }
+  public void saveContent(String content) {
+    // Save the "content" to the file.
+  }
+}
+\end{ffcode}
+}
+\plush{}
+
 \plush{\pptChapter{History}}
 
 \plush{
@@ -244,11 +272,6 @@ Immutability
   {asaf-shelly}
   {Reading an OO code you can't see the big picture and it is often impossible to review all the small functions that call the one function that you modified.}
   {shelly2015flaws}
-
-\qte
-  {zeba-khanam}
-  {Object oriented programming promotes ease in designing reusable software but the long coded methods makes it unreadable and enhances the complexity of the methods.}
-  {khanam2018}
 
 \plush{
     \pptThought{Thus, we don't know anymore what exactly is object-oriented programming, and whether it helps us write better code.}
@@ -731,24 +754,17 @@ Pulls.new(
 \plush{\pptChapter[Enemies]{Enemies of Object Thinking}}
 
 \print{\pptSection[List]{What makes us think as algorithms}}
-\print{Global scope (static methods)}
-\print{Anemic objects (getters)}
-\print{Mutability (setters)}
-\print{Workers (``-er'' suffix)}
-\print{NULL references}
-\print{Type casting (reflection)}
-\plush{Inheritance}
+\print{Static Methods}
+\print{Anemic Objects (Getters)}
+\print{Mutability (Setters)}
+\print{Workers (``-er'' Suffix)}
+\print{NULL References}
+\print{Type Casting (Reflection)}
+\print{Inheritance}
+\plush{Global Variables and DI Containers}
 
-\plush{\pptChapter[Exam]{How to Pass the Exam?}}
+\plush{\pptChapter{Post-Test}}
 
-\print{\pptSection[Project]{Make a software project, which...}}
-\print{... is larger than 5,000 lines of functional code,}
-\print{... compiles and works,}
-\print{... doesn't have static methods,}
-\print{... has no getters or public attributes,}
-\print{... doesn't use NULL references,}
-\print{... has only immutable objects,}
-\print{... doesn't use inheritance.}
-\plush{Otherwise, just attend 75\% of all lectures and you will get your ``C''.}
+\plush{\pptThought{\href{https://github.com/yegor256/hangman}{\ff{https://github.com/yegor256/hangman}}}}
 
 \end{document}
