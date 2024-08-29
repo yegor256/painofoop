@@ -81,15 +81,15 @@ public class Parser {
 \pptSection[Simula-67]{Simula-67: Sample Code}
 \begin{ffcode}
 Class Figure;
-  Virtual: Real Procedure square Is Procedure square;;
+  Virtual: Real Procedure area Is Procedure area;;
 Begin
 End;
 Figure Class Circle (c, r);
   Real c, r;
 Begin
-  Real Procedure square;
+  Real Procedure area;
   Begin
-    square := 3.1415 * r * r;
+    area := 3.1415 * r * r;
   End;
 End;
 \end{ffcode}
@@ -136,11 +136,11 @@ a deposit: 42
 \pptSection[C++]{C++: Sample Code}
 \begin{ffcode}
 class Figure {
-  virtual float square() = 0;
+  virtual float area() = 0;
 };
 class Circle : public Figure {
   Circle(float c, float r) : c(c), r(r) {};
-  float square() { return 3.1415 * r * r; };
+  float area() { return 3.1415 * r * r; };
 private:
   float c, r;
 };
@@ -251,7 +251,7 @@ Immutability
 }
 
 \plush{\begin{pptMiddle}
-    \pptQuote{../faces/edsger-dijkstra.jpg}{Object oriented programs are offered as alternatives to correct ones... Object-oriented programming is an exceptionally bad idea which could only have originated in California.}{Edsger W. Dijkstra, 1989}
+    \pptQuote{../faces/edsger-dijkstra.jpg}{Object oriented programs are offered as alternatives to correct ones... Object-oriented programming is an \ul{exceptionally bad idea} which could only have originated in California.}{Edsger W. Dijkstra, 1989}
 \end{pptMiddle}}
 
 \plush{\begin{pptMiddle}
@@ -331,7 +331,7 @@ byte buffer, wait for the end of file, and return the result.''
 \pptSection[Rectangle]{How many abstractions are needed?}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
-int square(x1, y1, x2, y2) {
+int area(x1, y1, x2, y2) {
   int w = x2 - x1;
   if (w < 0) { w = w * -1; }
   int h = y2 - y1;
@@ -348,14 +348,14 @@ int distance(left, right) {
   return d;
 }
 
-int square(x1, y1, x2, y2) {
+int area(x1, y1, x2, y2) {
   return distance(x2, x1)
     * distance(y2, y1);
 }
 \end{ffcode}
 }
 \end{pptWide}\par
-There are two abstractions at the right snippet (``square'' and ``distance''), while only one abstraction at the left one (just ``square'').
+There are two abstractions at the right snippet (``area'' and ``distance''), while only one abstraction at the left one (just ``area'').
 \plush{}
 
 \pptSection[Levels]{Levels of abstraction}
@@ -367,7 +367,7 @@ int distance(left, right) {
   return d;
 }
 
-int square(x1, y1, x2, y2) {
+int area(x1, y1, x2, y2) {
   return distance(x2, x1)
     * distance(y2, y1);
 }
@@ -375,11 +375,11 @@ int square(x1, y1, x2, y2) {
 }
 \par\columnbreak\par
 \begin{tikzpicture}[line width=2pt]
-\node[draw,rectangle,anchor=center] (square) {\texttt{square(3, 9, 13, 2)}};
-\node[draw,rectangle,below left=3cm and 0cm of square,anchor=center] (d1) {\texttt{distance(13, 3)}};
-\node[draw,rectangle,below right=3cm and 0cm of square,anchor=center] (d2) {\texttt{distance(2, 9)}};
-\draw[->] (square) -- (d1);
-\draw[->] (square) -- (d2);
+\node[draw,rectangle,anchor=center] (area) {\texttt{area(3, 9, 13, 2)}};
+\node[draw,rectangle,below left=3cm and 0cm of area,anchor=center] (d1) {\texttt{distance(13, 3)}};
+\node[draw,rectangle,below right=3cm and 0cm of area,anchor=center] (d2) {\texttt{distance(2, 9)}};
+\draw[->] (area) -- (d1);
+\draw[->] (area) -- (d2);
 \end{tikzpicture}
 \end{pptWide}\par
 Higher level abstractions must not know and/or rely on semantics of lower level abstractions.
@@ -449,7 +449,7 @@ int distance(left, right) {
   int d = right - left;
   if (d < 0) { d = d * -1; }
   return d; }
-int square(x1, y1, x2, y2) {
+int area(x1, y1, x2, y2) {
   return distance(x2, x1)
     * distance(y2, y1); }
 \end{ffcode}
@@ -463,7 +463,7 @@ class Distance {
     int d = right - left;
     if (d < 0) { d = d * -1; }
     return d; } }
-int square(x1, y1, x2, y2) {
+int area(x1, y1, x2, y2) {
   return new Distance(x2, x1).value()
     * new Distance(y2, y1).value(); } }
 \end{ffcode}
@@ -483,7 +483,7 @@ class Circle {
     return radius; }
   void setRadius(float r) {
     radius = r; }
-  float square() {
+  float area() {
     return 3.14 * radius * radius; }
 }
 \end{ffcode}
@@ -501,7 +501,7 @@ c1.getRadius() == c2.getRadius();
 // Behavior:
 c1 = new Circle(42.0);
 c2 = new Circle(-42.0);
-c1.square() == c2.square();
+c1.area() == c2.area();
 \end{ffcode}
 }
 \end{pptWide}\par
@@ -516,13 +516,13 @@ class Circle {
   float getR() { return this.r; }
 }
 class FigureUtils {
-  static float square(Circle c) {
+  static float area(Circle c) {
     return 3.14 * c.getR() * c.getR();
   }
 }
 Circle c = new Circle();
 c.setR(42.0);
-float s = FigureUtils.square(c);
+float s = FigureUtils.area(c);
 \end{ffcode}
 }
 \par\columnbreak\par
@@ -530,12 +530,12 @@ float s = FigureUtils.square(c);
 class Circle {
   private float r;
   Circle(float r) { this.r = r; }
-  float square() {
+  float area() {
     return 3.14 * this.r * this.r;
   }
 }
 Circle c = new Circle(42.0);
-float s = c.square();
+float s = c.area();
 \end{ffcode}
 }\par
 How to decide what is \ul{state} and what is \ul{behavior}?
