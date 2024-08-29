@@ -24,26 +24,30 @@
 \usepackage{enumerate}
 \usepackage{multicol}
 \usepackage{href-ul}
-\usepackage{ffcode}
+\usepackage[noframes]{ffcode}
 \usepackage{soul}
+\usepackage{svg}
 \begin{document}
 
-{\sffamily{\bfseries\Large Pain of OOP}\\
-Series of lectures by \href{https://www.yegor256.com}{Yegor Bugayenko} presented
-to students of \href{https://innopolis.university/en/}{Innopolis University} in 2023.
-% and \href{https://www.youtube.com/playlist?list=PLaIsQH4uc08woJKRAA7mmjs9fU0jeKjjM}{video recorded}}
+\includesvg[height=5em]{cactus.svg}
 
-% The entire set of slide decks is in \href{https://github.com/yegor256/ssd16}{yegor256/ssd16} GitHub repository.
+\section*{Pain of OOP}
+
+This series of lectures by \href{https://www.yegor256.com}{Yegor Bugayenko}
+was first presented to students at
+\href{https://innopolis.university/en/}{Innopolis University} in 2023
+and \href{https://www.youtube.com/playlist?list=PLaIsQH4uc08ytf8POIIAkkR4ZsRq8DFiV}{video recorded}.
+The complete set of slide decks is hosted and maintained in the
+\href{https://github.com/yegor256/painofoop}{yegor256/painofoop}
+GitHub repository.
 
 \begin{abstract}
 The course is a critical review of the current situation in object-oriented programming,
-especially in Java, C++, Ruby, and JavaScript worlds. At the course, certain programming
-idioms, which sometimes are called ``best practices,'' are criticized for their
-negative impact on code quality, including static methods, NULL references, getters
+especially in the Java, C++, Ruby, and JavaScript worlds. In this course, certain programming
+idioms, which are sometimes called ``best practices,'' are criticized for their
+negative impact on code quality. These include static methods, NULL references, getters
 and setters, ORM and DTO, annotations, traits and mixins, inheritance, and many others.
-Much ``cleaner'' object-oriented programming practices will be proposed instead. Most
-lectures are organized as reviews of existing code snippets from well-known
-open source libraries.
+Instead, much ``cleaner'' object-oriented programming practices will be proposed.
 \end{abstract}
 
 % \section*{Introduction}
@@ -58,7 +62,7 @@ severly impact the quality of code in a negative way.
 Yegor is developing software for more than 30 years, being a hands-on programmer
 (see his GitHub account: \href{https://github.com/yegor256}{@yegor256})
 and a manager of other programmers. At the moment Yegor is a director
-of an R\&D laboratory in Huawei. His primary research focus is
+of an R\&D laboratory in Huawei (Moscow, Russia). His primary research focus is
 software quality problems. Some of the lectures he has recently presented
 at some software conferences could be found at
 \href{https://www.youtube.com/channel/UCr9qCdqXLm2SU0BIs6d_68Q}{his YouTube channel}.
@@ -69,22 +73,20 @@ Yegor previously tought a few courses in
 Innopolis University (Kazan, Russia)
 and HSE University (Moscow, Russia),
 for example,
-\href{https://github.com/yegor256/ssd16}{Software Systems Design (2021)},
-\href{https://github.com/yegor256/eqsp}{Ensuring Quality in Software Projects (2022)},
-and
 \href{https://github.com/yegor256/ppa}{Practical Program Analysis (2023)}
+and
+\href{https://github.com/yegor256/sqm}{Software Quality Metrics (2024)}
 (all videos are available).
 
 \textbf{Why this course?}\\
 Maintainability of object-oriented software that most of us programmers write these days is
-way below our expectations. Two main reasons for that is our misunderstanding
+way below our expectations. One of the main reasons for that is our misunderstanding
 of what objects are. This course may help clear things up.
 
 \textbf{What's the methodology?}\\
-Each lecture is an overview of existing source code from well-known open source
-libraries and frameworks, mostly from Apache. In an interactive discussion mode
-we will go through their code and find out whether their programming practices
-are in line with ``object thinking'' .
+Each lecture is a critical review of one of the existing ``best practices,'' such as
+static methods or getters, with an intent to highlight its negative impact
+on the quality of software.
 
 \newpage
 \section*{Course Structure}
@@ -100,25 +102,25 @@ After the course a student \ul{hopefully} will understand:
 
 \begin{itemize}
 \item What is the difference between objects and data?
-\item Why static methods are bad?
-\item What is immutability and why it's good?
-\item How to design a constructor?
-\item How to handle exceptions right?
-\item What data hiding is for?
+\item Why are static methods bad?
+\item What is immutability and why is it good?
+\item How should one design a constructor?
+\item How can exceptions be handled correctly?
+\item What is data hiding for?
 \item What's wrong with Printers, Writers, Scanners, and Readers?
-\item Why NULL references are a billion-dollar mistake?
+\item Why are NULL references considered a billion-dollar mistake?
 \item What's wrong with mixins and traits?
-\item How to avoid getters and setters?
-\item How declarative programming is better than imperative?
-\item Why composition is better than inheritance?
-\item Where to store the data if DTO is a bad practice?
-\item How to avoid ORM design pattern?
-\item Why long names of variables is bad design?
-\item Why type casting and type checking are against OOP?
-\item What is cohesion and why it matters?
-\item How to apply SOLID and SRP principles?
-\item What Inversion of Control is for and why DI Containers are evil?
-\item Why MVC is a bad design idea?
+\item How can getters and setters be avoided?
+\item How is declarative programming better than imperative programming?
+\item Why is composition better than inheritance?
+\item Where should data be stored if DTOs are considered bad practice?
+\item How can the ORM design pattern be avoided?
+\item Why are long variable names considered bad design?
+\item Why are type casting and type checking against OOP principles?
+\item What is cohesion and why does it matter?
+\item How can SOLID and SRP principles be applied?
+\item What is Inversion of Control for, and why are DI Containers considered harmful?
+\item Why is MVC considered a bad design idea?
 \end{itemize}
 
 \newpage
@@ -132,32 +134,47 @@ The following topics are discussed:
 \item Algorithms
 \item Static Methods
 \item Getters
-\item Setters
+\item Setters and Mutability
 \item ``-ER'' suffix
 \item NULL references
 \item Type casting and reflection
 \item Inheritance
+\item Annotations
+\item Globals and DI Containers
 \end{lectures}
 
 \newpage
 \section*{Grading}
 
-Students form groups of 1--3 people. Each group presents
-its own public GitHub repository with a software module inside.
-It may be any piece of object-oriented software as long as it has more than 5,000 lines
-of code written personally by the students.
-Higher grades will be given
-for better object-oriented practices used in the code. Lower grades will be
-given for the presence of static methods, NULLs, getters, setters, mutability,
-ORM, DTO, factories, type casting, and other anti-OOP practices (as suggested during the course).
+In order to pass the course, students must attend lectures, labs, and
+contribute to one of the following GitHub repositories, which are written
+in more or less ``pure'' object-oriented style:
 
-At the laboratory classes each group will have to present
-their projects three times with at least 14 calendar days interval between presentations.
-The presence of all three presentations guarantees ``B''.
-The absence of two or more guarantees not ``A''.
+\begin{itemize}
+    \item \href{https://github.com/yegor256/cactoos}{\ff{yegor256/cactoos}} (Java + Maven)
+    \item \href{https://github.com/yegor256/takes}{\ff{yegor256/takes}} (Java + XSLT)
+    \item \href{https://github.com/objectionary/eo2js}{\ff{objectionary/eo2js}} (JavaScript)
+    \item \href{https://github.com/zerocracy/baza}{\ff{zerocracy/baza}} (Ruby + Sinatra + PostgreSQL)
+    \item \href{https://github.com/yegor256/cam}{\ff{yegor256/cam}} (Bash + Python + Make)
+\end{itemize}
 
-The attendance is tracked at the lectures. If 75\% of all lectures were attended,
-it guarantees ``C'' (otherwise ignored).
+There is no exam at the end of the course. Instead,
+each student earns points for the following results:\\
+\renewcommand{\arraystretch}{1}
+\begin{tabular}{lrr}
+Result & Points & Limit \\
+\hline
+Attended a lecture & +1 & 6 \\
+Attended a lab & +1 & 8 \\
+Submitted a ticket (that was accepted) & +2 & 8 \\
+Submitted a pull request (that was merged) & +4 & 32 \\
+\end{tabular}
+
+Then, 25+ points mean ``A,'' 17+ mean ``B,'' and 9+ mean ``C.''
+
+An online lecture is counted as ``attended'' only if a student was personally
+presented in Zoom for more than 75\% of the lecture's time. Watching the
+lecture from the computer of a friend \ul{doesn't} count.
 
 \newpage
 \section*{Learning Material}

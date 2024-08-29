@@ -22,3 +22,5 @@ _minted-wp/
 *.crumbs
 package/
 *-bbl-SAVE-ERROR
+svg-inkscape/
+*.bbl-SAVE-ERROR
