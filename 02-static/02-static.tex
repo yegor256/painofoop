@@ -30,6 +30,36 @@
 
 \pptToc
 
+\plush{\pptChapter{Pre-Test}}
+
+\pptSection[Entities]{How many static ``entities'' do you see here?}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+class FigureUtils {
+  static final float PI = 3.1415926;
+  static final FigureUtils INSTANCE;
+  static {
+    INSTANCE = new FigureUtils();
+  }
+  private FigureUtils() { /* empty */ }
+  static float perimeter(Circle c) {
+    return 2 * c.radius * PI;
+  }
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+How many?
+\begin{itemize}
+\item three
+\item four
+\item five
+\item six
+\item maybe seven
+\end{itemize}
+\end{pptWide}
+\plush{}
+
 \plush{\pptChapter{Methods}}
 
 \pptSection[Purpose]{What static methods are for?}
@@ -39,7 +69,7 @@ class Circle {
   public float radius;
 }
 class GeometryUtils {
-  static float calcSquare(Circle c) {
+  static float calcArea(Circle c) {
     return c.radius * c.radius * 3.14;
   }
 }
@@ -49,7 +79,7 @@ class GeometryUtils {
 {\small\begin{ffcode}
 class Circle {
   public float radius;
-  float square() {
+  float area() {
     return radius * radius * 3.14;
   }
 }
@@ -57,11 +87,11 @@ class Circle {
 }
 \end{pptWide}
 \par
-Most notable Java examples:
-FileUtils, IOUtils, and StringUtils from Apache Commons;
-Files from JDK7;
-Iterators from Google Guava.
-Read \href{https://www.yegor256.com/2015/02/20/utility-classes-vs-functional-programming.html}{this}.
+Most notable Java examples~\citep{bugayenko2015blog0220}:
+FileUtils, IOUtils, and StringUtils from
+\href{https://commons.apache.org/}{Apache Commons};
+Files from \href{https://openjdk.org/projects/jdk7/}{JDK~7};
+Iterators from \href{https://github.com/google/guava}{Google Guava}.
 \plush{}
 
 \print{\pptSection[Problems]{What's wrong with ``Utils''?}}
@@ -69,11 +99,11 @@ Read \href{https://www.yegor256.com/2015/02/20/utility-classes-vs-functional-pro
 \print{2) They are \ul{eager}, not lazy}
 \plush{3) They are \ul{not cohesive}}
 
-\pptSection[Coupling]{Tight Coupling}
+\pptSection[Coupling]{1) Tight Coupling}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 void paintIt(Circle c) {
-  float s = GeometryUtils.calcSquare(c);
+  float s = GeometryUtils.calcArea(c);
   float p = s * 5.55;
   // paint it using the "p"
 }
@@ -82,7 +112,7 @@ void paintIt(Circle c) {
 \par\columnbreak\par
 {\small\begin{ffcode}
 void paintIt(Circle c) {
-  float s = c.square();
+  float s = c.area();
   float p = s * 5.55;
   // paint it using the "p"
 }
@@ -90,15 +120,15 @@ void paintIt(Circle c) {
 }
 \end{pptWide}
 \par
-Which snippet is easier to test? Try to write a test for the first one, expecting \ff{s} to be equal to \ff{42.0}.
-Read \href{https://www.yegor256.com/2014/05/05/oop-alternative-to-utility-classes.html}{this}.
+Which snippet is easier to test? Try to write a test for the first one,
+expecting \ff{s} to be equal to \ff{42.0}~\citep{bugayenko2014blog0505}.
 \plush{}
 
-\pptSection[Eagerness]{Imperative, not Declarative}
+\pptSection[Eagerness]{2) Imperative, not Declarative}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 void paintIt(Circle c) {
-  float s = GeometryUtils.calcSquare(c);
+  float s = GeometryUtils.calcArea(c);
   if (t) { return; }
   float p = s * 5.55;
   // paint it using the "p"
@@ -108,7 +138,7 @@ void paintIt(Circle c) {
 \par\columnbreak\par
 {\small\begin{ffcode}
 void paintIt(Circle c) {
-  float s = new SquareOf(c);
+  float s = new AreaOf(c);
   if (t) { return; }
   float p = s * 5.55;
   // paint it using the "p"
@@ -117,15 +147,15 @@ void paintIt(Circle c) {
 }
 \end{pptWide}
 \par
-Which snippet is more eager to calculate the square of the circle? Which one does it when it's \ul{really} necessary?
-Read \href{https://www.yegor256.com/2015/02/26/composable-decorators.html}{this}.
+Which snippet is more eager to calculate the area of the circle?
+Which one does it when it's \ul{really} necessary?~\citep{bugayenko2015blog0226}
 \plush{}
 
-\pptSection[Cohesion]{Low Cohesion}
+\pptSection[Cohesion]{3) Low Cohesion}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 class GeometryUtils {
-  static float calcSquare(Circle c);
+  static float calcArea(Circle c);
   static float calcPerimeter(Circle c);
   static float calcSinus(Angle a);
   static float calcCosinus(float s);
@@ -136,7 +166,7 @@ class GeometryUtils {
 \par\columnbreak\par
 {\small\begin{ffcode}
 class Circle {
-  float square();
+  float area();
   float perimeter();
 }
 class Angle {
@@ -183,8 +213,7 @@ new Print(
 }
 \end{pptWide}
 \par
-We must solve the problem of functionality duplication, not just data duplication.
-Read \href{https://www.yegor256.com/2015/07/06/public-static-literals.html}{this}.
+We must solve the problem of functionality duplication, not just data duplication~\citep{bugayenko2015blog0706}.
 \plush{}
 
 \pptSection[Singletons]{Singletons}
@@ -210,19 +239,10 @@ c.addCircle(c2);
 }
 \end{pptWide}
 \par
-Read \href{https://www.yegor256.com/2016/06/27/singletons-must-die.html}{this}.
+Forget about singletons; never use them. Turn them into dependencies and pass
+them from object to object through the operator \ff{new}~\citep{bugayenko2016blog0627}.
 \plush{}
 
-\plush{\pptChapter{FastJson as Example}}
-
-\plush{\pptChapter{Read and Watch}}
-
-\href{https://www.yegor256.com/2015/02/20/utility-classes-vs-functional-programming.html}{Utility Classes Have Nothing to Do With Functional Programming} by me (2015)
-
-\href{https://www.yegor256.com/2014/05/05/oop-alternative-to-utility-classes.html}{OOP Alternative to Utility Classes} by me (2014)
-
-\href{https://www.yegor256.com/2015/02/26/composable-decorators.html}{Composable Decorators} by me (2015)
-
-\href{https://www.yegor256.com/2015/07/06/public-static-literals.html}{Public Static Literals ... Are Not a Solution for Data Duplication} by me (2015)
+\plush{\pptChapter[FastJson]{FastJson as Example}}
 
 \end{document}
