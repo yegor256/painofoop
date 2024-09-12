@@ -2,3 +2,4 @@
 --ignore=href,ffcode
 --ignore=ff,nospell,citet,citep
 --ignore=poopTitlePage:pp
+--ignore=source:p

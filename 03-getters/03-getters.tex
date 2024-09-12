@@ -32,13 +32,30 @@
 
 \plush{\pptChapter[Definition]{What is a Getter?}}
 
+\qte
+  {../faces/joshua-bloch}
+  {If a class is accessible outside the confines of its package, the prudent programmer will provide \ul{accessor methods} to preserve the flexibility to change the class's internal representation.}
+  {bloch2008effective}
+
+\plush{
+  \begin{multicols}{2}
+  \includegraphics[width=.9\linewidth]{bloch-struct.png}
+  \par
+  \includegraphics[width=.9\linewidth]{bloch-class.png}
+  \par\columnbreak\par
+  ``Because such classes are accessed by their data fields, they do not offer the benefits of \ul{encapsulation}. You cannot change the representation of such a class without changing its API, enforce any invariants, and take any auxiliary action when a field is modified. [...] such classes are \ul{anathema} and should always be replaced by classes with private fields and public accessor methods.''
+  \source{bloch2008effective}
+  \end{multicols}}
+
+
 \pptSection[What?]{Which one is a getter?}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 class MiddleSquare {
   private short seed;
   MiddleSquare(short s) { seed = s; }
-  short getNextNumber() {
+
+  (*@\textcolor{orange}{short getNextNumber()}@*) {
     int s = (int) seed * seed;
     seed = (short) (s >> 8);
     return seed;
@@ -51,7 +68,8 @@ class MiddleSquare {
 class MiddleSquare {
   private short seed;
   MiddleSquare(short s) { seed = s; }
-  short getSeed() {
+
+  (*@\textcolor{orange}{short getSeed()@*) {
     return this.seed;
   }
 }
@@ -85,13 +103,14 @@ class Document
     @name = n
   end
 end
+
 d = Document.new("/tmp/test.txt")
 puts d.name
 \end{ffcode}
 }
 \end{pptWide}
 \par
-Modern programming languages often offer the ability to generate the \ul{boilerplate} for mutators and accessors in a single line.
+Some modern programming languages (e.g. Ruby) offer an ability to generate the \ul{boilerplate} for mutators and accessors in a single line.
 \plush{}
 
 \pptSection[Purpose]{What getters are for?}
@@ -124,13 +143,16 @@ class BookDTO {
 class JsonApi {
   BookDTO getById(int id) { /* ... */ }
 }
+
 BookDTO dto = api.getById(42);
+
 print(dto.getTitle());
 print(dto.getAuthor());
 \end{ffcode}
 }
 \end{pptWide}
 \par
+There is no excuse for the use of DTO~\citep{bugayenko2016blog0706}. Almost...
 \plush{}
 
 \plush{\pptChapter{Encapsulation}}
@@ -279,7 +301,9 @@ class Book {
 class JsonApi {
   Book getById(int id) { /* ... */ }
 }
+
 Book book = api.getById(42);
+
 print(book.author());
 print(book.title());
 \end{ffcode}
@@ -305,7 +329,9 @@ class Book {
 class JsonApi {
   Book getById(int id) { /* ... */ }
 }
+
 Book book = api.getById(42);
+
 print(book.author);
 print(book.title);
 \end{ffcode}

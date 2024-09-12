@@ -172,3 +172,5 @@ Classpath
 Downcasting
 liskov
 JSONPath
+accessor
+bloch
