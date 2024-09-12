@@ -69,7 +69,7 @@ class MiddleSquare {
   private short seed;
   MiddleSquare(short s) { seed = s; }
 
-  (*@\textcolor{orange}{short getSeed()@*) {
+  (*@\textcolor{orange}{short getSeed()}@*) {
     return this.seed;
   }
 }
@@ -77,7 +77,6 @@ class MiddleSquare {
 }
 \end{pptWide}
 \par
-A getter method may also be known as an ``\ul{accessor}.''
 \plush{}
 
 \pptSection[Boilerplate]{Boilerplate getters}
@@ -87,9 +86,9 @@ class Document
   def initialize(n)
     @name = n
   end
-  def name
-    @name
-  end
+  (*@\textcolor{orange}{def name}@*)
+    (*@\textcolor{orange}{@name}@*)
+  (*@\textcolor{orange}{end}@*)
 end
 d = Document.new("/tmp/test.txt")
 puts d.name
@@ -98,7 +97,7 @@ puts d.name
 \par\columnbreak\par
 {\small\begin{ffcode}
 class Document
-  attr_reader :name
+  (*@\textcolor{orange}{attr\_reader}@*) :name
   def initialize(n)
     @name = n
   end
@@ -146,8 +145,8 @@ class JsonApi {
 
 BookDTO dto = api.getById(42);
 
-print(dto.getTitle());
-print(dto.getAuthor());
+print(dto(*@\textcolor{orange}{.getTitle()}@*));
+print(dto(*@\textcolor{orange}{.getAuthor()}@*));
 \end{ffcode}
 }
 \end{pptWide}
@@ -177,7 +176,7 @@ class User {
     return this.name;
   }
 }
-if (employees.contains(user.getName())) {
+if (employees.contains(user(*@\textcolor{orange}{.getName()}@*))) {
   /* pay a salary */
 }
 \end{ffcode}
@@ -191,14 +190,14 @@ class User {
     return employees.contains(this.name);
   }
 }
-if (user.isEmployee()) {
+if (user(*@\textcolor{orange}{.isEmployee()}@*)) {
   /* pay a salary */
 }
 \end{ffcode}
 }
 \end{pptWide}
 \par
-Which class hides data better?
+Which class \ul{hides} its data better?
 \plush{}
 
 \pptSection[Semantic]{Who knows about data semantic?}
@@ -211,7 +210,7 @@ class Box {
     return this.weight;
   }
 }
-int w = box.getWeight();
+int w = box(*@\textcolor{orange}{.getWeight()}@*);
 int lbs = w / 0.454;
 printf("The weight is \%d lbs\n");
 \end{ffcode}
@@ -225,7 +224,7 @@ class Box {
     return this.weight / 0.454;
   }
 }
-int lbs = box.getLbs();
+int lbs = box(*@\textcolor{orange}{.getLbs()}@*);
 printf("The weight is \%d lbs\n");
 \end{ffcode}
 }
@@ -249,7 +248,7 @@ What happens if the \ff{Box} decides to store the \ff{weight} in pounds instead 
   \source{fowler2013tell}
   \end{multicols}}
 
-\pptSection[TellDontAsk]{Tell Don't Ask, an Example}
+\pptSection[TellDontAsk]{1) Tell Don't Ask, an Example}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 class BookDTO {
@@ -281,7 +280,7 @@ dto.print();
   {Though getter/setter methods are commonplace in Java, they are not particularly object-oriented. In fact, they can \ul{damage} your code's maintainability. Moreover, the presence of numerous getter and setter methods is a red flag that the program isn't necessarily well designed from an OO perspective.}
   {holub2003why}
 
-\pptSection[NoPrefix]{Get rid of the ``get'' prefix}
+\pptSection[NoPrefix]{2) Get rid of the ``get'' prefix}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 class Book {
@@ -312,7 +311,7 @@ print(book.title());
 \par
 \plush{}
 
-\pptSection[NoPrefix]{Make fields public}
+\pptSection[Public]{3) Make fields public}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 class Book {
