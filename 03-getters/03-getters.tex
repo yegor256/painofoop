@@ -26,7 +26,7 @@
 \newcommand*\thesubtitle{Accessors, Encapsulation, Printers}
 \begin{document}
 
-\plush{\poopTitlePage{3}}
+\plush{\poopTitlePage{3}{2YyVmIQQ23w}}
 
 \pptToc
 
@@ -144,7 +144,7 @@ the structure of an object is hidden, as well as the implementation of its metho
 Encapsulation provides \ul{explicit barriers} among different abstractions and thus leads to a clear separation of concerns.
 }{Grady Booch et al. (2007) \newline Object-Oriented Analysis and Design with Applications}\end{pptMiddle}}
 
-\plush{\begin{pptMiddle}\pptQuote{../01-algorithms/david-west.jpg}{In most ways, encapsulation is a \ul{discipline} more than a real barrier; seldom is the \ul{integrity} of an object protected in any absolute sense, and this is especially true of software objects, so it is up to the user of an object to \ul{respect} that object’s encapsulation}{David West et al. (2006) \newline Object Thinking}\end{pptMiddle}}
+\plush{\begin{pptMiddle}\pptQuote{../faces/david-west.jpg}{In most ways, encapsulation is a \ul{discipline} more than a real barrier; seldom is the \ul{integrity} of an object protected in any absolute sense, and this is especially true of software objects, so it is up to the user of an object to \ul{respect} that object’s encapsulation}{David West et al. (2006) \newline Object Thinking}\end{pptMiddle}}
 
 \pptSection[Integrity]{Who is protecting the integrity better?}
 \begin{pptWide}{2}
@@ -210,10 +210,15 @@ printf("The weight is \%d lbs\n");
 }
 \end{pptWide}
 \par
-What happens if the \ff{Box} decides to store the \ff{weight} in pounds instead of kilograms? How will it know how many of its clients still assume that the \ff{weight} is in kilograms?
+What happens if the \ff{Box} decides to store the \ff{weight} in pounds instead of kilograms? How will it know how many of its clients still assume that the \ff{weight} is in kilograms?~\citep{bugayenko2014blog0916}
 \plush{}
 
 \plush{\pptChapter{The Alternative}}
+
+\qte
+  {../faces/martin-fowler}
+  {Rather than asking an object for data and acting on that data, we should instead \ul{tell} an object what to do. This encourages to move behavior into an object to go with the data.}
+  {fowler2013tell}
 
 \pptSection[TellDontAsk]{Tell Don't Ask}
 \begin{pptWide}{2}
@@ -301,9 +306,5 @@ print(book.title);
 \href{https://www.infoworld.com/article/2073723/why-getter-and-setter-methods-are-evil.html}{Why getter and setter methods are evil} by Allen Holub (2003)
 
 \href{https://martinfowler.com/bliki/GetterEradicator.html}{GetterEradicator} by Martin Fowler (2006)
-
-\href{TellDontAsk}{https://martinfowler.com/bliki/TellDontAsk.html} by Martin Fowler (2013)
-
-\href{https://www.yegor256.com/2014/09/16/getters-and-setters-are-evil.html}{Getters/Setters. Evil. Period.} by me (2014)
 
 \end{document}

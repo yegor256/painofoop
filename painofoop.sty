@@ -86,11 +86,16 @@
   respected authors.\par
 }}
 
-\newcommand\poopTitlePage[1]{%
+\newcommand\poopTitlePage[2]{%
   \pptTitle{\thetitle}{\thesubtitle}\par
   {\scshape Yegor Bugayenko}\par
-  Lecture \##1 out of 8 \br
+  Lecture \##1 out of 10 \br
   90 minutes\par
+  \def\param{#2}%
+  \ifx\param\empty\else%
+    The slidedeck was presented by the author in this
+    \textcolor{red}{\href{https://www.youtube.com/watch?v=#2}{YouTube Video}}\par
+  \fi%
   \poopDisclaimer{}
 }
 
