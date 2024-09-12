@@ -135,16 +135,15 @@ print(dto.getAuthor());
 
 \plush{\pptChapter{Encapsulation}}
 
-\plush{\begin{pptMiddle}\pptQuote{grady-booch.jpg}{Encapsulation is most often achieved through \ul{information hiding}, which
-is the process of hiding all the \ul{secrets} of an object that
-do not contribute to its essential characteristics; typically,
-the structure of an object is hidden, as well as the implementation of its methods.
+\qte
+  {../faces/grady-booch}
+  {Encapsulation is most often achieved through \ul{information hiding}, which is the process of hiding all the \ul{secrets} of an object that do not contribute to its essential characteristics; typically, the structure of an object is hidden, as well as the implementation of its methods... Encapsulation provides \ul{explicit barriers} among different abstractions and thus leads to a clear separation of concerns.}
+  {booch1994object}
 
-\vspace{12pt}
-Encapsulation provides \ul{explicit barriers} among different abstractions and thus leads to a clear separation of concerns.
-}{Grady Booch et al. (2007) \newline Object-Oriented Analysis and Design with Applications}\end{pptMiddle}}
-
-\plush{\begin{pptMiddle}\pptQuote{../faces/david-west.jpg}{In most ways, encapsulation is a \ul{discipline} more than a real barrier; seldom is the \ul{integrity} of an object protected in any absolute sense, and this is especially true of software objects, so it is up to the user of an object to \ul{respect} that object’s encapsulation}{David West et al. (2006) \newline Object Thinking}\end{pptMiddle}}
+\qte
+  {../faces/david-west}
+  {In most ways, encapsulation is a \ul{discipline} more than a real barrier; seldom is the \ul{integrity} of an object protected in any absolute sense, and this is especially true of software objects, so it is up to the user of an object to \ul{respect} that object's encapsulation.}
+  {west2004object}
 
 \pptSection[Integrity]{Who is protecting the integrity better?}
 \begin{pptWide}{2}
@@ -217,10 +216,18 @@ What happens if the \ff{Box} decides to store the \ff{weight} in pounds instead 
 
 \qte
   {../faces/martin-fowler}
-  {Rather than asking an object for data and acting on that data, we should instead \ul{tell} an object what to do. This encourages to move behavior into an object to go with the data.}
+  {\textbf{Tell-Don't-Ask} principle: Rather than asking an object for data and acting on that data, we should instead \ul{tell} an object what to do. This encourages to move behavior into an object to go with the data.}
   {fowler2013tell}
 
-\pptSection[TellDontAsk]{Tell Don't Ask}
+\plush{
+  \begin{multicols}{2}
+  \includegraphics[width=.9\linewidth]{fowler-dontask.png}
+  \par\columnbreak\par
+  ``One of the fundamental principles of object-oriented design is to combine data and behavior, so that the basic elements of our system (objects) combine both together. This is often a good thing because this data and the behavior that manipulates them are \ul{tightly coupled}.''
+  \source{fowler2013tell}
+  \end{multicols}}
+
+\pptSection[TellDontAsk]{Tell Don't Ask, an Example}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 class BookDTO {
@@ -238,6 +245,7 @@ class BookDTO {
 class JsonApi {
   BookDTO getById(int id) { /* ... */ }
 }
+
 BookDTO dto = api.getById(42);
 dto.print();
 \end{ffcode}
@@ -245,6 +253,11 @@ dto.print();
 \end{pptWide}
 \par
 \plush{}
+
+\qte
+  {../faces/allen-holub}
+  {Though getter/setter methods are commonplace in Java, they are not particularly object-oriented. In fact, they can \ul{damage} your code's maintainability. Moreover, the presence of numerous getter and setter methods is a red flag that the program isn't necessarily well designed from an OO perspective.}
+  {holub2003why}
 
 \pptSection[NoPrefix]{Get rid of the ``get'' prefix}
 \begin{pptWide}{2}
@@ -300,11 +313,5 @@ print(book.title);
 \end{pptWide}
 \par
 \plush{}
-
-\plush{\pptChapter{Read and Watch}}
-
-\href{https://www.infoworld.com/article/2073723/why-getter-and-setter-methods-are-evil.html}{Why getter and setter methods are evil} by Allen Holub (2003)
-
-\href{https://martinfowler.com/bliki/GetterEradicator.html}{GetterEradicator} by Martin Fowler (2006)
 
 \end{document}
