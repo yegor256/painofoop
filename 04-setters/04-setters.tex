@@ -73,7 +73,8 @@ Book b2 = b1.withTitle("It");
 \print{I. Constant}
 \print{II. Not a Constant}
 \print{III. Represented Mutability}
-\plush{IV. Encapsulated Mutability}
+\print{IV. Encapsulated Mutability}
+\plush{{\small You may read my blog about this~\citep{bugayenko2016blog0907}.\par}}
 
 \pptSection[Constant]{Gradient I: Constant}
 \begin{pptWide}{2}
@@ -187,7 +188,10 @@ String t2 = b.title()
 
 \plush{\pptChapter{Problems}}
 
-\plush{\pptThought{Only gradients III and IV cause problems, while ``Constant'' and `Not a Constant'' objects are harmless}}
+\plush{
+\pptThought{Only gradients III and IV cause problems, while ``Constant'' and ``Not a Constant'' objects are harmless.}
+\par
+{\small You may want to read my blog about immutability~\citep{bugayenko2014blog0609,bugayenko2014blog1222,bugayenko2014blog1209,bugayenko2014blog1107}.\par}}
 
 \pptSection[Side-effects]{Side effects}
 \begin{pptWide}{2}
@@ -306,7 +310,10 @@ assert map.containsKey(date); // false
 
 \plush{\pptChapter{ORM}}
 
-\plush{\pptThought{ORM stands for ``Object Relational Mapping,'' which is an attempt to represent a relational data model in objects and relations between them, such as attributes, methods, and inheritance}}
+\plush{
+\pptThought{ORM stands for ``Object Relational Mapping,'' which is an attempt to represent a relational data model in objects and relations between them, such as attributes, methods, and inheritance}
+\par
+{\small You may want to read my blog about ORM~\citep{bugayenko2014blog1201}.\par}}
 
 \pptSection[JPA]{Java Persistence API}
 \begin{pptWide}{2}
@@ -414,21 +421,5 @@ final class PgMovie implements Movie
 \plush{}
 
 \plush{\pptChapter[Apache]{Apache Commons Email}}
-
-\plush{\pptChapter[R-and-W]{Read and Watch}}
-
-\href{https://stackoverflow.com/questions/1568091/why-use-getters-and-setters-accessors}{Why use getters and setters/accessors?} in Stack Overflow
-
-\href{https://www.yegor256.com/2014/06/09/objects-should-be-immutable.html}{Objects Should Be Immutable} by me (2014)
-
-\href{https://www.yegor256.com/2014/12/22/immutable-objects-not-dumb.html}{Immutable Objects Are Not Dumb} by me (2014)
-
-\href{https://www.yegor256.com/2014/12/09/immutable-object-state-and-behavior.html}{How an Immutable Object Can Have State and Behavior?} by me (2014)
-
-\href{https://www.yegor256.com/2014/11/07/how-immutability-helps.html}{How Immutability Helps} by me (2014)
-
-\href{https://www.yegor256.com/2014/12/01/orm-offensive-anti-pattern.html}{ORM Is an Offensive Anti-Pattern} by me (2014)
-
-\href{https://www.yegor256.com/2016/09/07/gradients-of-immutability.html}{Gradients of Immutability} by me (2016)
 
 \end{document}
