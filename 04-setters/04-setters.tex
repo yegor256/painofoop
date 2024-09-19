@@ -252,6 +252,7 @@ public String post(Request request) {
 r = new Request("x.com");
 r.setMethod("GET");
 String first = this.post(r);
+
 String second = r.fetch();
 \end{ffcode}
 }
@@ -266,6 +267,7 @@ public String post(Request request) {
 
 r = new Request("x.com").withMtd("GET");
 String first = this.post(r);
+
 String second = r.fetch();
 \end{ffcode}
 }
