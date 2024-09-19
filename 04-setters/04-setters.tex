@@ -233,14 +233,19 @@ Does it make the object mutable or not?
 \par
 \plush{}
 
-\plush{\pptChapter{Problems}}
-
 \plush{
 \pptThought{Only gradients III and IV cause problems, while ``Constant'' and ``Not a Constant'' objects are harmless.}
 \par
 {\small You may want to read my blog about immutability~\citep{bugayenko2014blog0609,bugayenko2014blog1222,bugayenko2014blog1209,bugayenko2014blog1107}.\par}}
 
-\pptSection[Side-effects]{Side effects}
+\plush{\pptChapter[Problems]{Drawbacks of Mutability}}
+
+\qte
+  {joshua-bloch}
+  {Immutable classes are \ul{easier to design}, implement, and use than mutable classes. They are \ul{less prone to error} and are \ul{more secure}.}
+  {bloch2008effective}
+
+\pptSection[Side-effects]{1) Side effects}
 \begin{pptWide}{2}
 With a side effect:\par
 {\small\begin{ffcode}
@@ -275,7 +280,7 @@ String second = r.fetch();
 \par
 \plush{}
 
-\pptSection[Concurrency]{Thread (un-)safety}
+\pptSection[Concurrency]{2) Thread (un-)safety}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 class Books {
@@ -311,7 +316,7 @@ for (int i = 0; i < 1000; i++) {
 \par
 \plush{}
 
-\pptSection[Coupling]{Temporal Coupling}
+\pptSection[Coupling]{3) Temporal Coupling}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 r = new Request("x.com");
@@ -335,9 +340,25 @@ String second = r.fetch();
 }
 \end{pptWide}
 \par
+``\ul{Sequential} coupling (also known as \ul{temporal} coupling) is a form of coupling where a class requires its methods to be called in a particular sequence.'' --- \href{https://en.wikipedia.org/wiki/Sequential_coupling}{Wikipedia}.
 \plush{}
 
-\pptSection[Identity]{Identity Mutability}
+\qte
+  {robert-martin}
+  {Side effects are \ul{lies}. Your function promises to do one thing, but it also does other hidden things. They are devious and damaging mistruths that often result in strange \ul{temporal couplings} and order dependencies.}
+  {martin2008clean}
+
+\qte
+  {steve-mcconnell}
+  {Sequential cohesion (considered to be less than ideal) exists when a routine contains operations that must be performed in a \ul{specific order}, that share data from step to step, and that don't make up a complete function when done together.}
+  {mcconnell1998}
+
+\qte
+  {michael-feathers}
+  {Back in the early days of programming, this was named temporal coupling, and it is a pretty \ul{nasty thing} when you do it excessively. When you group things together just because they have to happen at the same time, the relationship between them isn’t very strong. Later you might find that you have to do one of those things without the other, but at that point they might have grown together. Without a seam, separating them can be hard work.}
+  {feathers2004working}
+
+\pptSection[Identity]{4) Identity Mutability}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 Date first = new Date(1L);
