@@ -36,25 +36,25 @@
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 Message m = new Message();
-m.setName("Sarah");
+m.(*@\textcolor{orange}{setName}@*)("Sarah");
 m.print(); // Hello, Sarah!
 
-m.setName("Victor");
+m.(*@\textcolor{orange}{setName}@*)("Victor");
 m.print(); // Hello, Victor!
 
-m.setName("Leyla");
+m.(*@\textcolor{orange}{setName}@*)("Leyla");
 m.print(); // Hello, Leyla!
 \end{ffcode}
 }
 \par\columnbreak\par
 {\small\begin{ffcode}
-Message m1 = new Message("Sarah");
+Message m1 = (*@\textcolor{orange}{new}@*) Message("Sarah");
 m1.print(); // Hello, Sarah!
 
-Message m2 = new Message("Victor");
+Message m2 = (*@\textcolor{orange}{new}@*) Message("Victor");
 m2.print(); // Hello, Victor!
 
-Message m3 = new Message("Leyla");
+Message m3 = (*@\textcolor{orange}{new}@*) Message("Leyla");
 m3.print(); // Hello, Leyla!
 \end{ffcode}
 }
@@ -78,7 +78,7 @@ class Book {
   }
 }
 b = new Book();
-b.setTitle("Object Thinking");
+b.(*@\textcolor{orange}{setTitle}@*)("Object Thinking");
 \end{ffcode}
 }
 \par\columnbreak\par
@@ -94,7 +94,7 @@ class Book {
   }
 }
 b1 = new Book();
-b2 = b1.withTitle("Object Thinking");
+b2 = b1.(*@\textcolor{orange}{withTitle}@*)("Object Thinking");
 \end{ffcode}
 }
 \end{pptWide}
@@ -115,7 +115,7 @@ class Book {
   private final String t;
   Book(String t) { this.t = t; }
   String title() {
-    return this.t;
+    (*@\textcolor{orange}{return this.t}@*);
   }
 }
 \end{ffcode}
@@ -142,7 +142,7 @@ class Book {
   Book(String t) { this.t = t; }
   String title() {
     return String.format(
-      "%s / %s", title, new Date()
+      "%s / %s", title, (*@\textcolor{orange}{return new Date()}@*)
     );
   }
 }
@@ -179,7 +179,7 @@ class Book {
   }
   String title() {
     return new String(
-      Files.readAllBytes(this.path)
+      Files.(*@\textcolor{orange}{readAllBytes}@*)(this.path)
     );
   }
 }
@@ -205,7 +205,7 @@ Does it make the object mutable or not?
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 class Book {
-  private final StringBuffer buffer;
+  private final (*@\textcolor{orange}{StringBuffer}@*) buffer;
   Book rename(String t) {
     this.buffer.setLength(0);
     this.buffer.append(t);
@@ -256,7 +256,7 @@ Does it make the object mutable or not?
 With a side effect:\par
 {\small\begin{ffcode}
 public String post(Request request) {
-  request.setMethod("POST");
+  request.(*@\textcolor{orange}{setMethod}@*)("POST");
   return request.fetch();
 }
 
@@ -272,7 +272,7 @@ Without a side effect:\par
 {\small\begin{ffcode}
 public String post(Request request) {
   return request
-    .withMtd("POST")
+    .(*@\textcolor{orange}{withMtd}@*)("POST")
     .fetch();
 }
 
@@ -290,7 +290,7 @@ String second = r.fetch();
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 class Books {
-  private int c = 0;
+  private (*@\textcolor{orange}{int}@*) c = 0;
   void add() {
     this.c = this.c + 1;
   }
@@ -370,11 +370,12 @@ String second = r.fetch();
 Map<Date, String> map = new HashMap<>();
 Date date = new Date();
 map.put(date, "hello, world!");
-// This is TRUE:
+
+// This is (*@\textcolor{green}{TRUE}@*):
 assert map.containsKey(date);
 
 date.setTime(12345L);
-// Why this is FALSE??:
+// (*@\textcolor{red}{Why this is FALSE??}@*):
 assert map.containsKey(date);
 \end{ffcode}
 }
@@ -421,9 +422,9 @@ public class Movie {
 {\small\begin{ffcode}
 EntityManager em = getEntityManager();
 em.getTransaction().begin();
-Movie movie = em.findById(1L);
+Movie movie = em.(*@\textcolor{orange}{findById}@*)(1L);
 movie.setName("The Godfather");
-em.persist(movie);
+em.(*@\textcolor{orange}{persist}@*)(movie);
 em.getTransaction().commit();
 \end{ffcode}
 }
@@ -440,7 +441,7 @@ interface Movie {
   String author();
 }
 Movie m = new PgMovie(ds, 1L);
-m.update("The Godfather");
+m.(*@\textcolor{orange}{rename}@*)("The Godfather");
 \end{ffcode}
 }
 \par
@@ -459,7 +460,7 @@ final class PgMovie implements Movie
       .sql("SELECT title FROM movie WHERE id = ?")
       .set(this.number)
       .select(new SingleOutcome<String>(String.class));
-  public void rename(String n)
+  public void (*@\textcolor{orange}{rename}@*)(String n)
     new JdbcSession(this.dbase)
       .sql("UPDATE movie SET name = ? WHERE id = ?")
       .set(n)
@@ -497,7 +498,7 @@ final class PgMovie implements Movie
       .select(new SingleOutcome<String>(String.class));
   public String author()
     return new JdbcSession(this.dbase)
-      .sql("SELECT name FROM movie JOIN author ON author.id = movie.author WHERE movie.id = ?")
+      .sql("(*@\textcolor{orange}{SELECT name FROM movie JOIN author ON author.id = movie.author WHERE movie.id = ?}@*)")
       .set(this.number)
       .select(new SingleOutcome<String>(String.class));
 \end{ffcode}
@@ -507,6 +508,51 @@ final class PgMovie implements Movie
 \plush{}
 
 \plush{\pptChapter[Apache]{Apache Commons Email}}
+
+\pptSection[Email]{\texttt{org.apache.commons.mail.Email}}
+\begin{pptWide}{2}
+{\scriptsize\begin{ffcode}
+public abstract class Email {
+  protected MimeMessage message;
+  protected String charset;
+  protected InternetAddress fromAddress;
+  protected String subject;
+  protected MimeMultipart emailBody;
+  protected Object content;
+  protected String contentType;
+  protected boolean debug;
+  protected Date sentDate;
+  protected Authenticator authenticator;
+  protected String hostName;
+  protected String smtpPort;
+  protected String sslSmtpPort;
+  protected List<InternetAddress> toList;
+  protected List<InternetAddress> ccList;
+  protected List<InternetAddress> bccList;
+  protected List<InternetAddress> replyList;
+  protected String bounceAddress;
+  protected Map<String, String> headers;
+  protected boolean popBeforeSmtp;
+  protected String popHost;
+  protected String popUsername;
+  protected String popPassword;
+  protected boolean tls;
+  protected boolean ssl;
+  protected int socketTimeout;
+  protected int socketConnectionTimeout;
+  private boolean startTlsEnabled;
+  private boolean startTlsRequired;
+  private boolean sslOnConnect;
+  private boolean sslCheckServerIdentity;
+  private boolean sendPartial;
+  private Session session;
+}
+\end{ffcode}
+}
+\end{pptWide}
+\par
+{\tiny\url{https://github.com/apache/commons-email/blob/EMAIL_1_5/src/main/java/org/apache/commons/mail/Email.java}\par}
+\plush{}
 
 \plush{\pptChapter[Performance]{What About Performance?}}
 
