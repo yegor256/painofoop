@@ -30,9 +30,41 @@
 
 \pptToc
 
+\plush{\pptChapter{Pre-Test}}
+
+\pptSection[How?]{How would you do this?}
+\begin{pptWide}{2}
+{\small\begin{ffcode}
+Message m = new Message();
+m.setName("Sarah");
+m.print(); // Hello, Sarah!
+
+m.setName("Victor");
+m.print(); // Hello, Victor!
+
+m.setName("Leyla");
+m.print(); // Hello, Leyla!
+\end{ffcode}
+}
+\par\columnbreak\par
+{\small\begin{ffcode}
+Message m1 = new Message("Sarah");
+m1.print(); // Hello, Sarah!
+
+Message m2 = new Message("Victor");
+m2.print(); // Hello, Victor!
+
+Message m3 = new Message("Leyla");
+m3.print(); // Hello, Leyla!
+\end{ffcode}
+}
+\end{pptWide}
+\par
+\plush{}
+
 \plush{\pptChapter{Mutability}}
 
-\pptSection[Definition]{Which object is immutable?}
+\pptSection[Definition]{Which object is \ul{im}mutable?}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 class Book {
@@ -45,8 +77,8 @@ class Book {
     return this.title;
   }
 }
-Book b = new Book("Object Thinking");
-b.setTitle("It");
+b = new Book();
+b.setTitle("Object Thinking");
 \end{ffcode}
 }
 \par\columnbreak\par
@@ -61,8 +93,8 @@ class Book {
     return this.title;
   }
 }
-Book b1 = new Book("Object Thinking");
-Book b2 = b1.withTitle("It");
+b1 = new Book();
+b2 = b1.withTitle("Object Thinking");
 \end{ffcode}
 }
 \end{pptWide}
@@ -95,6 +127,9 @@ String t1 = b.title();
 String t2 = b.title()
 \end{ffcode}
 }
+\par
+The \ff{title()} method returns exactly the same data on each call.
+This object is definitely \ul{immutable}.
 \end{pptWide}
 \par
 \plush{}
@@ -120,6 +155,10 @@ String t1 = b.title();
 String t2 = b.title()
 \end{ffcode}
 }
+\par
+The \ff{title()} method returns different data on each new call,
+depending on \ul{system timer}.
+Does it make the object mutable or not?
 \end{pptWide}
 \par
 \plush{}
@@ -154,6 +193,10 @@ b.rename("Elegant Objects");
 String t2 = b.title()
 \end{ffcode}
 }
+\par
+The \ff{title()} method returns different data on each new call,
+depending on the content of the \ul{file} in the \ul{file system}.
+Does it make the object mutable or not?
 \end{pptWide}
 \par
 \plush{}
@@ -182,6 +225,10 @@ b.rename("Elegant Objects");
 String t2 = b.title()
 \end{ffcode}
 }
+\par
+The \ff{title()} method returns different data on each new call,
+depending on the content of the \ul{memory block}.
+Does it make the object mutable or not?
 \end{pptWide}
 \par
 \plush{}
@@ -202,7 +249,7 @@ public String post(Request request) {
   return request.fetch();
 }
 
-Request r = new Request("http://...");
+r = new Request("x.com");
 r.setMethod("GET");
 String first = this.post(r);
 String second = r.fetch();
@@ -213,12 +260,11 @@ Without a side effect:\par
 {\small\begin{ffcode}
 public String post(Request request) {
   return request
-    .withMethod("POST")
+    .withMtd("POST")
     .fetch();
 }
 
-Request r = new Request("http://...")
-  .withMethod("GET");
+r = new Request("x.com").withMtd("GET");
 String first = this.post(r);
 String second = r.fetch();
 \end{ffcode}
@@ -266,7 +312,7 @@ for (int i = 0; i < 1000; i++) {
 \pptSection[Coupling]{Temporal Coupling}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
-Request r = new Request("http://...");
+r = new Request("x.com");
 r.setMethod("POST");
 String first = r.fetch();
 r.setBody("text=hello");
@@ -275,9 +321,12 @@ String second = r.fetch();
 }
 \par\columnbreak\par
 {\small\begin{ffcode}
-Request r = new Request("http://...");
+r = new Request("x.com");
+
+// 100 lines later:
 // r.setMethod("POST");
 // String first = r.fetch();
+
 r.setBody("text=hello");
 String second = r.fetch();
 \end{ffcode}
