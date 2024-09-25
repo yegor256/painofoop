@@ -30,7 +30,10 @@
 
 \pptToc
 
-\plush{\pptQuote{carlo-pescio.jpg}{When you need a \ul{manager}, it’s often a sign that the \ul{managed} are just plain old data structures and that the manager is the smart procedure doing the real work}{Carlo Pescio \newline \href{http://www.carlopescio.com/2011/04/your-coding-conventions-are-hurting-you.html}{Your Coding Conventions Are Hurting You}, 2011}}
+\qte
+  {carlo-pescio}
+  {When you need a \ul{manager}, it’s often a sign that the \ul{managed} are just plain old data structures and that the manager is the smart procedure doing the real work.}
+  {pescio2011your}
 
 \plush{\pptChapter[Alternatives]{Examples and Alternatives}}
 
@@ -66,7 +69,6 @@ int x = n.intValue();
 \end{ffcode}
 }
 \end{pptWide}
-\par
 \plush{}
 
 \pptSection{Reader}
@@ -96,14 +98,12 @@ class Chars
     // if !exists()
   bool exists()
     // Return TRUE if not EOF
-
 InputStream i = new FileInputStream(..);
 Chars chars = new Chars(i);
 char c = chars.next();
 \end{ffcode}
 }
 \end{pptWide}
-\par
 \plush{}
 
 \pptSection{Controller}
@@ -135,7 +135,6 @@ class UpdatePage implements HttpPage
     // Save new user information
     // and return HTTP 303
   }
-
 new AllPages(
   new IndexPage(),
   new UpdatePage()
@@ -143,7 +142,6 @@ new AllPages(
 \end{ffcode}
 }
 \end{pptWide}
-\par
 \plush{}
 
 \pptSection{Validator}
@@ -182,12 +180,10 @@ class ValidAge implements Age {
     if (v < 18)
       throw new Exception("Age is not valid");
     return v;
-
 Age a = new ValidAge(new DefaultAge(23));
 \end{ffcode}
 }
 \end{pptWide}
-\par
 \plush{}
 
 \pptSection{Encoder}
@@ -202,11 +198,12 @@ class URLEncoder {
     // the encoded string
   }
 }
-
 String e = URLEncoder.encode("@foo");
 e.equals("%40foo");
 \end{ffcode}
 }
+You may want to read more about this in
+my blog~\citep{bugayenko2015blog0309,bugayenko2017blog0912}.
 \par\columnbreak\par
 {\scriptsize\begin{ffcode}
 class Encoded implements String {
@@ -222,14 +219,13 @@ class Encoded implements String {
     // the encoded string
   }
 }
-
 String e = new Encoded("@foo");
 e.value().equals("%40foo");
 \end{ffcode}
 }
 \end{pptWide}
 \par
-The right snippet won't work in Java, since |String| is a final class, not an interface, unfortunately.
+The right snippet won't work in Java, since \ff{String} is a final class, not an interface, unfortunately.
 \plush{}
 
 \plush{\pptChapter[-Client]{-Client Suffix}}
@@ -303,9 +299,7 @@ class StickyInt implements Number {
       cache = origin.intValue();
       cached = true;
     }
-    return cache;
-  }
-}
+    return cache; } }
 \end{ffcode}
 }
 \end{pptWide}
@@ -373,7 +367,8 @@ class Controller {
 \end{ffcode}
 }
 \par\columnbreak\par
-\pptPic{0.7}{mvc.png}
+\pptPic{0.7}{mvc.png}\par
+This is bad OOP~\citep{bugayenko2016blog1213}.
 \end{pptWide}
 \par
 \plush{}
@@ -423,13 +418,5 @@ Check \href{https://github.com/yegor256/jpages}{yegor256/jpages} and \href{https
   \par
   \pptChapter[Takes]{Rultor + Takes}
 \end{pptMiddle}}
-
-\plush{\pptChapter[R-and-W]{Read and Watch}}
-
-\href{https://www.yegor256.com/2015/03/09/objects-end-with-er.html}{Don't Create Objects That End With -ER} by me (2015)
-
-\href{https://www.yegor256.com/2016/12/13/mvc-vs-oop.html}{MVC vs. OOP} by me (2016)
-
-\href{https://www.yegor256.com/2017/09/12/evil-object-name-suffix-client.html}{Yet Another Evil Suffix For Object Names: Client} by me (2017)
 
 \end{document}
