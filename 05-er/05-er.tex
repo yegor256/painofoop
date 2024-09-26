@@ -22,6 +22,7 @@
 
 \documentclass{article}
 \usepackage{../painofoop}
+\usepackage{setspace}
 \newcommand*\thetitle{-ER}
 \newcommand*\thesubtitle{Alternatives, Clients, MVC}
 \begin{document}
@@ -227,6 +228,17 @@ e.value().equals("%40foo");
 \par
 The right snippet won't work in Java, since \ff{String} is a final class, not an interface, unfortunately.
 \plush{}
+
+\plush{\pptSection[Proof]{Proof: Classes with -ER Suffixes Are More Complex}
+  \begin{multicols}{2}
+  \includegraphics[width=\linewidth]{er.png}
+  \par\columnbreak\par
+  \begin{spacing}{0.9}
+  ``We took 13,861 Java classes from 212 open source repositories, divided them into three groups (`-Er' classes, `-Utils', and others), and evaluated their complexity. Because average CC and CoCO in the first two groups were almost 3x larger than in the third group, we concluded that functor classes may be considered \ul{bad design}.''
+  \end{spacing}
+  \par
+  \source{sukhova2024java}
+  \end{multicols}}
 
 \plush{\pptChapter[-Client]{-Client Suffix}}
 
