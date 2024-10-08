@@ -102,9 +102,8 @@ It may be hard to understand why |s2| is evaluated much faster than |s1|,
 while the signature of |sizeOf()| is the same~\citep{bugayenko2015blog0402}.
 \plush{}
 
-\pptSection[JEP-394]{Pattern Matching in Java 16}
-\pptPin{\raggedleft\includegraphics[width=.3\linewidth]{java-logo.pdf}}
-\begin{pptWide}{2}
+\pptSection[JEP-394]{Pattern Matching in Java 16}%
+\begin{pptWide}{2}%
 Java 11 (\textcolor{red}{wrong!}):
 \par
 {\small\begin{ffcode}
@@ -122,6 +121,7 @@ int sizeOf(Iterable items) {
 \end{ffcode}
 }
 \par\columnbreak\par
+\pptPin{\raggedleft\includegraphics[width=.3\linewidth]{java-logo.pdf}}%
 Java 16 (\textcolor{red}{\textbf{even worse!}}):
 \par
 {\small\begin{ffcode}
@@ -392,7 +392,8 @@ String dispatch(String url) {
 }
 \end{pptWide}
 \par
-\tbd{quote!}~\citep{bugayenko2016blog0412}.
+The |BookContoller| doesn't know how exactly the data
+in its annotation is being used and by whom~\citep{bugayenko2016blog0412}.
 \plush{}
 
 \pptSection[DIC]{Dependency Injection Container}
@@ -487,30 +488,28 @@ x = c.cost();
 {\small\begin{ffcode}
 interface Figure
   void rotate(int d);
-
 class Circle implements Figure
   void rotate(int d) //...
   int radius() //...
-
 class Square implements Figure
   void rotate(int d) //...
   int side() //...
 \end{ffcode}
 }
 \par
-\tbd{quote}~\citep{bugayenko2020blog1110}.
+Philosophically speaking, type casting is discrimination~\citep{bugayenko2020blog1110}.
 \par\columnbreak\par
 {\small\begin{ffcode}
 // This is polymorphism:
 int surface(Figure f)
-  return f.surface()
+  return f(*@\textcolor{orange}{.surface()}@*);
 
 // This is type casting:
 int surface(Figure f)
   if (f instanceof Circle c) {
-    return c.radius()
+    return c(*@\textcolor{orange}{.radius()}@*)
   } else if (f instanceof Square s) {
-    return s.side() * s.side();
+    return s(*@\textcolor{orange}{.side()}@*) * s.side();
   } else {
     throw new Exception("oops");
   }
