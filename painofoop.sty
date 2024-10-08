@@ -50,6 +50,12 @@
 \def\UrlBreaks{\do\/\do-}
 \RequirePackage{breakurl}
 
+% see https://tex.stackexchange.com/questions/550123
+\makeatletter
+\AtBeginDocument{%
+  \def\doi#1{\url{https://doi.org/#1}}}
+\makeatother
+
 \RequirePackage{mathtools}
 \RequirePackage{to-be-determined}
 \RequirePackage{tikz}
@@ -74,7 +80,8 @@
       {\color{gray}\rmfamily\scriptsize\bibentry{#4}}
   }
 }
-\newcommand\source[1]{\par{\scriptsize Source: \bibentry{#1}\par}}
+
+\newcommand\source[1]{\par{\scriptsize\color{gray} Source: \bibentry{#1}\par}}
 
 \newcommand\br{\newline}
 

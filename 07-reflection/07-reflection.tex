@@ -30,6 +30,34 @@
 
 \pptToc
 
+\plush{\pptChapter[What?]{What Is Reflection?}}
+
+\pptSection[Example]{Simple Example of Reflection in Java}
+\begin{multicols}{2}
+{\small\begin{ffcode}
+void print(Object x) {
+  if (x instance of File) {
+    System.out.println("Yes!");
+  }
+}
+\end{ffcode}
+}
+\par\columnbreak\par
+``Reflective computational systems allow computations to observe and
+modify properties of their own behavior. It would be desirable for computations to avail themselves of these
+reflective capabilities, examining themselves in order to make use of
+\ul{meta-level information} in decisions about what to do next.''
+\source{sobel1996introduction}
+\end{multicols}
+\par
+\plush{}
+
+\qte
+  [Yue Li]
+  {yue-li}
+  {As reflection is increasingly used in Java programs, the cost of imprecise reflection handling has increased dramatically... Almost all the analyses reported are \ul{unsound} in the presence of reflection since it is either \ul{ignored} or handled \ul{partially}.}
+  {li2014self}
+
 \plush{\pptChapter[Casting]{Type Casting and Subsumption}}
 
 \pptSection[Iterable]{Iterable \(\to\) Collection}
