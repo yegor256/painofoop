@@ -38,8 +38,8 @@ Downcasting (\textcolor{red}{wrong!}):\par
 {\small\begin{ffcode}
 int sizeOf(Iterable items) {
   int size = 0;
-  if (items instanceof Collection) {
-    size = ((Collection) items).size();
+  if (items (*@\textcolor{orange}{instanceof}@*) Collection) {
+    size = (*@\textcolor{orange}{((Collection)}@*) items).size();
   } else {
     for (Object item : items) {
       ++size;
@@ -60,7 +60,7 @@ int sizeOf(Iterable items) {
   return size;
 }
 
-int sizeOf(Collection items) {
+int sizeOf((*@\textcolor{orange}{Collection}@*) items) {
   return items.size();
 }
 \end{ffcode}
@@ -74,9 +74,9 @@ int sizeOf(Collection items) {
 {\small\begin{ffcode}
 int sizeOf(Iterable items) {
   int size = 0;
-  if (items instanceof Collection) {
+  (*@\textcolor{orange}{if}@*) (items instanceof Collection) {
     size = ((Collection) items).size();
-  } else {
+  } (*@\textcolor{orange}{else}@*) {
     for (Object item : items) {
       ++size;
     }
@@ -89,11 +89,11 @@ int sizeOf(Iterable items) {
 {\small\begin{ffcode}
 Iterable<Book> books1 =
   new PgBooks1("localhost:5432");
-int s1 = sizeOf(books1);
+int s1 = (*@\textcolor{orange}{sizeOf}@*)(books1);
 
 Collection<Book> books2 =
   new PgBooks2("localhost:5432");
-int s2 = sizeOf(books2);
+int s2 = (*@\textcolor{orange}{sizeOf}@*)(books2);
 \end{ffcode}
 }
 \end{pptWide}
@@ -108,8 +108,8 @@ Java 11 (\textcolor{red}{wrong!}):
 {\small\begin{ffcode}
 int sizeOf(Iterable items) {
   int size = 0;
-  if (items instanceof Collection) {
-    size = ((Collection) items).size();
+  if (items (*@\textcolor{orange}{instanceof}@*) Collection) {
+    size = ((*@\textcolor{orange}{(Collection)}@*) items).size();
   } else {
     for (Object item : items) {
       ++size;
@@ -125,7 +125,7 @@ Java 16 (\textcolor{red}{\textbf{even worse!}}):
 {\small\begin{ffcode}
 int sizeOf(Iterable items) {
   int size = 0;
-  if (items instanceof Collection c) {
+  if ((*@\textcolor{orange}{items instanceof Collection c}@*)) {
     size = c.size();
   } else {
     for (Object item : items) {
@@ -145,7 +145,7 @@ int sizeOf(Iterable items) {
 C\#:\par
 {\scriptsize\begin{ffcode}
 public int sizeOf<T>(IEnumerable<T> items) {
-  if (items is IList<T> list) {
+  if (items (*@\textcolor{orange}{is}@*) IList<T> list) {
     return list.Count;
   } else {
     return // count them one by one
@@ -166,7 +166,7 @@ enum Color {
   Transparent
 }
 fn paint(c: Color) {
-  match c {
+  (*@\textcolor{orange}{match}@*) c {
     Color::RGB(r, g, b) =>
       println!("#{r}{g}{b}"),
     Color::Transparent =>
@@ -199,11 +199,11 @@ class Polygon implements Figure
 class FactoryOfFigures
   Figure make(int sides) {
     if (sides == 3) {
-      return new Triangle();
+      return (*@\textcolor{orange}{new Triangle}@*)();
     } else if (sides == 4) {
-      return new Square();
+      return (*@\textcolor{orange}{new Square}@*)();
     } else {
-      return new Polygon(sides);
+      return (*@\textcolor{orange}{new Polygon}@*)(sides);
     }
   }
 \end{ffcode}
@@ -216,17 +216,17 @@ class PolymorphicFigure implements Figure
   PolymorphicFigure(int sides)
   @Override int surface() {
     if (sides == 3) {
-      return new Triangle().surface();
+      return (*@\textcolor{orange}{new Triangle().surface()}@*);
     } else if (sides == 4) {
-      return new Square().surface();
+      return (*@\textcolor{orange}{new Square().surface()}@*);
     } else {
-      return new Polygon(sides).surface();
+      return (*@\textcolor{orange}{new Polygon(sides).surface()}@*);
     }
   }
 \end{ffcode}
 }
 \par
-Here, the semantic of object construction is not visible to the client --- coupling is loose.
+Here, the semantic of object construction is not visible to the client --- the \ul{coupling} is ``loose.''
 \end{pptWide}
 \plush{}
 

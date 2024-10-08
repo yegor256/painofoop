@@ -28,13 +28,19 @@
 
 \plush{\poopTitlePage{6}{cTyIF20Kmz4}}
 
-\plush{\pptQuote{tony-hoare.jpg}{I call it my \ul{billion-dollar mistake}. It was the invention of the null reference in 1965. At that time, I was designing the first comprehensive type system for references in an object oriented language (ALGOL~W). My goal was to ensure that all use of references should be absolutely safe, with checking performed automatically by the compiler. But I couldn't resist the temptation to put in a null reference, simply because it was so easy to implement. This has led to innumerable errors, vulnerabilities, and system crashes, which have probably caused a billion dollars of pain and damage in \ul{the last forty years}.}{Tony Hoare, \href{https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/}{InfoQ}, 2009}}
+\qte
+  {tony-hoare}
+  {I was designing the first comprehensive type system for references in an OO language (ALGOL~W). My goal was to ensure that all use of references should be absolutely safe. But I couldn't resist the temptation to put in a null reference, simply because it was so easy to implement. This has led to innumerable errors, vulnerabilities, and system crashes, which have probably caused a billion dollars of \ul{pain} and \ul{damage} in the last forty years.}
+  {hoare2009null}
 
 \pptToc
 
 \plush{\pptChapter[FailFast]{Fail Fast vs Fail Safe}}
 
-\plush{\pptQuote{james-shore.jpg}{Over time, more and more errors will fail fast, and you'll see the cost of debugging decrease and the quality of your system improve}{James Shore, IEEE Software, 2002}}
+\qte
+  {james-shore}
+  {Over time, more and more errors will \ul{fail fast}, and you'll see the cost of debugging decrease and the \ul{quality} of your system improve.}
+  {shore2004fail}
 
 \pptSection{Defaults}
 \begin{pptWide}{2}
@@ -63,7 +69,7 @@ int size(File file) {
 }
 \end{pptWide}
 \par
-The right snippet is more \ul{fragile}, leading to more errors in runtime, but eventually ... leading to less bugs.
+The right snippet is more \ul{fragile}, leading to more errors in runtime, but eventually ... leading to less bugs~\citep{bugayenko2015blog0825}.
 \plush{}
 
 \pptSection[Swallowing]{Exception swallowing}
@@ -101,23 +107,33 @@ String read(File file) {
 The right snippet is \ul{escalating}, while the left one is \ul{swallowing}.
 \plush{}
 
-\pptSection[SDLC]{Software development lifecycle}
-\par
-\begin{tikzpicture}[every path/.style={->, draw, color=gray, line width=5pt}, every node/.style={font=\large, color=black}]
-\node[] (fix) {Fix};
-\node[above right=4cm of fix] (deploy) {Deploy};
-\node[right=9cm of fix] (use) {Use};
-\node[below right=4cm of fix] (report) {Report};
-\path (fix) -- (deploy);
-\path (deploy) -- (use);
-\path (use) -- (report);
-\path (report) -- (fix);
-\path[dashed] (use) -- (fix);
-\end{tikzpicture}
-\par
-Watch this video from DEVit'2016 conference: \\
-\href{https://www.youtube.com/watch?v=nCGBgI1MNwE}{Need It Robust?Make It Fragile!}
-\plush{}
+\plush{
+  \pptSection[SDLC]{Software Development Lifecycle}
+  \par
+  \begin{tikzpicture}[every path/.style={->, draw, color=gray, line width=5pt}, every node/.style={font=\large, color=black}]
+  \node[] (fix) {Fix};
+  \node[above right=4cm of fix] (deploy) {Deploy};
+  \node[right=9cm of fix] (use) {Use};
+  \node[below right=4cm of fix] (report) {Report};
+  \path (fix) -- (deploy);
+  \path (deploy) -- (use);
+  \path (use) -- (report);
+  \path (report) -- (fix);
+  \path[dashed] (use) -- (fix);
+  \end{tikzpicture}
+  \par
+  Watch this video from DEVit'2016 conference: \\
+  \href{https://www.youtube.com/watch?v=nCGBgI1MNwE}{Need It Robust?Make It Fragile!}}
+
+\plush{
+  \pptSection[Complexity]{Is There a Correlaction Between NULL and CC?}
+  \begin{multicols}{2}
+  \includegraphics[width=\linewidth]{null-vs-cc.png}
+  \par\columnbreak\par
+  \tbd{...}
+  \par
+  \source{garmash2021exploring}
+  \end{multicols}}
 
 \plush{\pptChapter[Returning]{Alternatives to Returning NULL}}
 
@@ -144,7 +160,7 @@ String nameOfEmployee(int id) {
 }
 \end{pptWide}
 \par
-The right snippet is ``Fail Fast,'' that's why more preferrable.
+The right snippet is ``Fail Fast,'' that's why more preferrable~\citep{bugayenko2014blog0513, bugayenko2015blog1201}.
 \plush{}
 
 \pptSection[List]{Returning a List or a NULL?}
@@ -172,12 +188,13 @@ List<String> nameOfEmployee(int id) {
 }
 \end{pptWide}
 \par
-There are mo elegant alternatives in most languages, like |Optional| in Java~8+.
+There are mo elegant alternatives in most languages, like |Optional| in Java~8+~\citep{bugayenko2018blog0522}.
 \plush{}
 
-\plush{\begin{pptMiddle}
+\plush{
+  \begin{pptMiddle}
   \pptPic{0.8}{tweet-vote.png}
-\end{pptMiddle}}
+  \end{pptMiddle}}
 
 \pptSection[Fake]{Returning a Fake Entity}
 \begin{pptWide}{2}
@@ -363,20 +380,6 @@ if (e != null) {
   \par
   You can do you own analysis of existing Java open source GitHub repositories to see how often their developers use |null| keyword.
   \par
-  The Takes framework is here: \href{https://github.com/yegor256/takes}{yegor256/takes}.
-}
-
-
-\plush{\pptChapter[R-and-W]{Read and Watch}}
-
-\href{https://www.yegor256.com/2014/05/13/why-null-is-bad.html}{Why NULL is Bad?} by me (2014)
-
-\href{https://www.yegor256.com/2015/12/01/rethrow-exceptions.html}{Throwing an Exception Without Proper Context Is a Bad Habit} by me (2015)
-
-\href{https://www.yegor256.com/2018/05/22/default-arguments-against-null.html}{One More Recipe Against NULL} by me (2018)
-
-\href{https://www.yegor256.com/2015/08/25/fail-fast.html}{Need Robust Software? Make It Fragile} by me (2015)
-
-\href{https://www.youtube.com/watch?v=o3aNJX7AP3M}{What is Wrong About NULL in OOP? (Webinar \#3)} by me on YouTube (2015)
+  The Takes framework is here: \href{https://github.com/yegor256/takes}{yegor256/takes}.}
 
 \end{document}
