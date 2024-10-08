@@ -405,7 +405,7 @@ class Cart
     return this.book.price() + this.shmt.cost();
 
 container = new Container();
-c = container.make(Cart.class);
+c = container(*@\textcolor{orange}{.make(Cart.class)}@*);
 c.setBook(new Book("1984"));
 x = c.cost();
 \end{ffcode}
@@ -440,7 +440,7 @@ interface Shipment
   int cost();
 
 class Cart
-  @Inject private Shipment shmt;
+  (*@\textcolor{orange}{@Inject}@*) private Shipment shmt;
   private Book book;
   void setBook(Book b)
     this.book = b;
@@ -459,15 +459,15 @@ interface Shipment
   int cost();
 
 class Cart
-  private final Shipment shmt;
-  private final Book book;
+  private (*@\textcolor{orange}{final}@*) Shipment shmt;
+  private (*@\textcolor{orange}{final}@*) Book book;
   Cart(Shipment s, Book b)
     this.shmt = s;
     this.book = b;
   int cost()
     return this.book.price() + this.shmt.cost();
 
-c = new Cart(new MyShipment(), new Book("1984"));
+c = (*@\textcolor{orange}{new Cart(new MyShipment(), new Book("1984"))}@*);
 x = c.cost();
 \end{ffcode}
 }
