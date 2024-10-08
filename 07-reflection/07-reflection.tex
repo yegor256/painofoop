@@ -98,7 +98,8 @@ int s2 = (*@\textcolor{orange}{sizeOf}@*)(books2);
 }
 \end{pptWide}
 \par
-It may be hard to understand why |s2| is evaluated much faster than |s1|, since the signature of |sizeOf()| is the same in both cases.
+It may be hard to understand why |s2| is evaluated much faster than |s1|,
+since the signature of |sizeOf()| is the same in both cases~\citep{bugayenko2015blog0402}.
 \plush{}
 
 \pptSection[JEP-394]{Pattern Matching in Java 16}
@@ -226,7 +227,8 @@ class PolymorphicFigure implements Figure
 \end{ffcode}
 }
 \par
-Here, the semantic of object construction is not visible to the client --- the \ul{coupling} is ``loose.''
+Here, the semantic of object construction is not visible to
+the client---the \ul{coupling} is ``loose''~\citep{bugayenko2022blog0605}.
 \end{pptWide}
 \plush{}
 
@@ -267,7 +269,8 @@ class PolymorphicFigure implements Figure
 \end{ffcode}
 }
 \par
-This is better since the mechanics of class finding is explicit --- no surprises expected.
+This is better since the mechanics of class finding
+is explicit---no surprises expected~\citep{bugayenko2017blog1114}.
 \end{pptWide}
 \plush{}
 
@@ -388,6 +391,7 @@ String dispatch(String url) {
 }
 \end{pptWide}
 \par
+\tbd{quote!}~\citep{bugayenko2016blog0412}.
 \plush{}
 
 \pptSection[DIC]{Dependency Injection Container}
@@ -428,7 +432,7 @@ class Container {
 \end{ffcode}
 }
 How do you think, at the step no.2,
-what class will be instantiated?
+what class will be instantiated?~\citep{bugayenko2014blog1003}
 \end{pptWide}
 \par
 \plush{}
@@ -492,6 +496,8 @@ class Square implements Figure
   int side() //...
 \end{ffcode}
 }
+\par
+\tbd{quote}~\citep{bugayenko2020blog1110}.
 \par\columnbreak\par
 {\small\begin{ffcode}
 // This is polymorphism:
@@ -512,21 +518,5 @@ int surface(Figure f)
 \end{pptWide}
 \par
 \plush{}
-
-\plush{\pptChapter[R-and-W]{Read and Watch}}
-
-\href{https://www.yegor256.com/2014/10/03/di-containers-are-evil.html}{Dependency Injection Containers are Code Polluters} by me (2014)
-
-\href{https://www.yegor256.com/2015/04/02/class-casting-is-anti-pattern.html}{Class Casting Is a Discriminating Anti-Pattern} by me (2015)
-
-\href{https://www.yegor256.com/2016/04/12/java-annotations-are-evil.html}{Java Annotations Are a Big Mistake} by me (2016)
-
-\href{https://www.yegor256.com/2022/06/05/reflection-means-hidden-coupling.html}{Reflection Means Hidden Coupling} by me (2022)
-
-\href{https://www.youtube.com/watch?v=cv23Z6xpwDw}{Java Annotations Are a Bad Idea}, at JDK.io conference (2017)
-
-\href{https://www.yegor256.com/2017/11/14/static-factory-methods.html}{Constructors or Static Factory Methods?} by me (2017)
-
-\href{https://www.yegor256.com/2020/11/10/typing-without-types.html}{Strong Typing without Types} by me (2020)
 
 \end{document}
