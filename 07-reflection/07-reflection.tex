@@ -199,11 +199,11 @@ class Polygon implements Figure
 class FactoryOfFigures
   Figure make(int sides) {
     if (sides == 3) {
-      return (*@\textcolor{orange}{new Triangle}@*)();
+      return (*@\textcolor{orange}{new Triangle()}@*);
     } else if (sides == 4) {
-      return (*@\textcolor{orange}{new Square}@*)();
+      return (*@\textcolor{orange}{new Square()}@*);
     } else {
-      return (*@\textcolor{orange}{new Polygon}@*)(sides);
+      return (*@\textcolor{orange}{new Polygon(sides)}@*);
     }
   }
 \end{ffcode}
@@ -244,8 +244,8 @@ class Polygon implements Figure
 
 class FactoryOfFigures
   Figure make(String name) throws Exception {
-    Class<?> c = Class.forName(name);
-    return c.getConstructor().newInstance();
+    Class<?> c = (*@\textcolor{orange}{Class.forName}@*)(name);
+    return c.getConstructor()(*@\textcolor{orange}{.newInstance()}@*);
   }
 \end{ffcode}
 }
@@ -256,9 +256,9 @@ This is \textcolor{green}{better}:
 class PolymorphicFigure implements Figure
   PolymorphicFigure(String name)
   @Override int surface() {
-    if (name.equals("Triangle")) {
+    if ((*@\textcolor{orange}{name.equals}@*)("Triangle")) {
       return new Triangle().surface();
-    } else if (name.equals("Square")) {
+    } else if ((*@\textcolor{orange}{name.equals}@*)("Square")) {
       return new Square().surface();
     } else {
       return new Polygon(?).surface();
@@ -281,7 +281,7 @@ interface Foo {}
 class Bar implements Foo {}
 
 Reflections rts =
-  new Reflections("");
+  (*@\textcolor{orange}{new Reflections}@*)("");
 Set<Class<?>> types = rts.get(
   SubTypes.of(Foo.class).asClass()
 );
@@ -298,7 +298,7 @@ Reflections rts =
   new Reflections("");
 Set<Class<?>> types = rts.get(
   SubTypes.of(
-    TypesAnnotated.with(Foo.class)
+    (*@\textcolor{orange}{TypesAnnotated.with}@*)(Foo.class)
   ).asClass()
 );
 \end{ffcode}
@@ -320,13 +320,13 @@ interface Pub
 class Book implements Pub
   @Override public String isbn()
     /* ... */
-  public static String category()
+  public (*@\textcolor{orange}{static}@*) String category()
     return "book";
 
 class Journal implements Pub
   @Override public String isbn()
     /* ... */
-  public static String category()
+  public (*@\textcolor{orange}{static}@*) String category()
     return "journal";
 \end{ffcode}
 }
@@ -340,12 +340,12 @@ interface Pub
 public @interface Category
   String value();
 
-@Category("book")
+(*@\textcolor{orange}{@Category("book")}@*)
 class Book implements Pub
   @Override public String isbn()
     /* ... */
 
-@Category("journal")
+(*@\textcolor{orange}{@Category("journal")}@*)
 class Journal implements Pub
   @Override public String isbn()
     /* ... */
@@ -364,7 +364,7 @@ public @interface Path
   String url;
 
 class BookController
-  @Path("/book-title")
+  (*@\textcolor{orange}{@Path("/book-title")}@*)
   String title()
     // Build HTML page and return it
 \end{ffcode}
@@ -374,10 +374,10 @@ class BookController
 String dispatch(String url) {
   c = new BooksController();
   b = BooksController.class;
-  for (Method m : b.getDeclaredMethods()) {
+  for (Method m : b(*@\textcolor{orange}{.getDeclaredMethods()}@*)) {
     if (m.isAnnotationPresent(Path.class)) {
-      Annotation a = m.getAnnotation(Path.class);
-      if (a.url().equals(url)) {
+      Annotation a = m(*@\textcolor{orange}{.getAnnotation}@*)(Path.class);
+      if (a(*@\textcolor{orange}{.url()}@*).equals(url)) {
         return m.invoke(c);
       }
     }
