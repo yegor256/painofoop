@@ -34,10 +34,16 @@
 \plush{\pptChapter{Polymorphism}}
 
 \pptSection[LSP]{Liskov Substitution Principle}
-\plush{\begin{pptMiddle}\pptQuote{barbara-liskov.jpg}{If for each object $o_1$ of type $S$ there is an object $o_2$ of type $T$ such that for all programs $P$ defined in terms of $T$, the behavior of $P$ is unchanged when $o_1$ is substituted for $o_2$, then $S$ is a subtype of $T$}{Barbara Liskov, \ul{Keynote Address: Data Abstraction and Hierarchy}, Addendum to the Proceedings on Object-oriented Programming Systems, Languages and Applications, 1987}\end{pptMiddle}}
+\qte
+  {barbara-liskov}
+  {If for each object $o_1$ of type $S$ there is an object $o_2$ of type $T$ such that for all programs $P$ defined in terms of $T$, the behavior of $P$ is unchanged when $o_1$ is substituted for $o_2$, then $S$ is a subtype of $T$.}
+  {liskov1987keynote}
 
 \pptSection[SOLID]{SOLID (the ``L'' part)}
-\plush{\begin{pptMiddle}\pptQuote{robert-martin.jpg}{Functions that use pointers or references to base classes must be able to use objects of derived classes without knowing it}{Robert C. Martin, \ul{Design Principles and Design Patterns discussing}, 2000}\end{pptMiddle}}
+\qte
+  {robert-martin}
+  {Functions that use pointers or references to base classes must be able to use objects of derived classes without knowing it.}
+  {martin2008clean}
 
 \pptSection[Subtyping]{Subtyping}
 \begin{pptWide}{2}
@@ -144,9 +150,15 @@ c.add("Hello, world!");
 
 \plush{\pptChapter[Inheritance]{Implementation Inheritance}}
 
-\plush{\begin{pptMiddle}\pptQuote{allen-holub.jpg}{The |extends| keyword is evil; maybe not at the Charles Manson level, but bad enough that it should be shunned whenever possible.}{Allen Holub, \ul{Why extends is evil}, \href{https://www.infoworld.com/article/2073649/why-extends-is-evil.html}{InfoWorld}, 2003}\end{pptMiddle}}
+\qte
+  {allen-holub}
+  {The |extends| keyword is evil; maybe not at the Charles Manson level, but bad enough that it should be shunned whenever possible.}
+  {holub2003extends}
 
-\plush{\begin{pptMiddle}\pptQuote{james-gosling.jpg}{Someone asked him: ``If you could do Java over again, what would you change?'' ``I'd leave out classes,'' he replied}{James Gosling}\end{pptMiddle}}
+\qte
+  {james-gosling}
+  {Someone asked him: ``If you could do Java over again, what would you change?'' ``I'd leave out classes,'' he replied.}
+  {holub2003extends}
 
 \pptSection[Reuse]{Code reuse}
 \begin{pptWide}{2}
@@ -281,67 +293,4 @@ class Circle implements Figure, Actor
 \end{pptWide}
 \plush{}
 
-\plush{\pptChapter[Quiz]{Quiz}}
-
-\plush{\begin{pptMiddle}
-I show this code to job interview candidates, asking them to find as many defects
-in it as they can: \href{https://github.com/yegor256/quiz/blob/master/Parser.java}{yegor256/quiz}~(Java).
-\par
-How many problems you can find in this code?
-\end{pptMiddle}}
-
-\begin{pptWide}{2}
-{\scriptsize\begin{ffcode}
-public class Parser {
-  private File file;
-  public synchronized void setFile(File f) {
-    file = f;
-  }
-  public synchronized File getFile() {
-    return file;
-  }
-  public String getContent() throws IOException {
-    FileInputStream i = new FileInputStream(file);
-    String output = "";
-    int data;
-    while ((data = i.read()) > 0) {
-      output += (char) data;
-    }
-    return output;
-  }
-  public String getContentWithoutUnicode()
-    throws IOException {
-    FileInputStream i = new FileInputStream(file);
-    String output = "";
-    int data;
-    while ((data = i.read()) > 0) {
-      if (data < 0x80) {
-        output += (char) data;
-      }
-    }
-    return output;
-  }
-  public void saveContent(String content) {
-    FileOutputStream o = new FileOutputStream(file);
-    try {
-      for (int i = 0; i < content.length(); i += 1) {
-        o.write(content.charAt(i));
-      }
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-}
-\end{ffcode}
-}
-\end{pptWide}
-\plush{}
-
-\plush{\pptChapter[R-and-W]{Read and Watch}}
-
-\href{https://www.infoworld.com/article/2073649/why-extends-is-evil.html}{Why extends is evil} by Allen Holub (2003)
-
-\href{https://www.yegor256.com/2016/09/13/inheritance-is-procedural.html}{Inheritance Is a Procedural Technique for Code Reuse} by me (2016)
-
-\href{https://www.youtube.com/watch?v=DjrA7_Uymok}{Inheritance vs. Subtyping (Webinar \#24)} by me (2017)
 \end{document}
