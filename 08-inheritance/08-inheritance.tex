@@ -49,7 +49,7 @@
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 interface Figure
-  float surface();
+  float area();
 
 interface Circle extends Figure
   float perimeter();
@@ -58,7 +58,7 @@ interface Polygon extends Figure
   int sides();
 
 void paint(Figure f)
-  float s = f.surface();
+  float s = f.area();
   // ...
 \end{ffcode}
 }
@@ -165,14 +165,14 @@ c.add("Hello, world!");
 {\small\begin{ffcode}
 class Square
   private float width;
-  float surface()
+  float area()
     return width * width;
 
 class Circle extends Square
   Circle(float radius)
     super(radius);
-  @Override float surface()
-    return 3.14 * super.surface();
+  @Override float area()
+    return 3.14 * super.area();
 \end{ffcode}
 }
 \par\columnbreak\par
@@ -198,14 +198,14 @@ Implementation Inheritance:
 {\small\begin{ffcode}
 class Square
   private float width;
-  float surface()
+  float area()
     return width * width;
 
 class Circle extends Square
   Circle(float radius)
     super(radius);
-  @Override float surface()
-    return 3.14 * super.surface();
+  @Override float area()
+    return 3.14 * super.area();
 \end{ffcode}
 }
 \par\columnbreak\par
@@ -214,15 +214,15 @@ Composition:
 {\small\begin{ffcode}
 final class Square
   private float width;
-  float surface()
+  float area()
     return width * width;
 
 final class Circle
   private Square s;
   Circle(float radius)
     this.s = new Square(radius);
-  float surface()
-    return 3.14 * s.surface();
+  float area()
+    return 3.14 * s.area();
 \end{ffcode}
 }
 \end{pptWide}
@@ -240,13 +240,13 @@ class Pi
 
 class Square
   private float width;
-  float surface()
+  float area()
     return width * width;
 
 class Circle extends Square, Pi
   Circle(float r): Square(r), Pi() {}
-  virtual float surface()
-    return Pi.value() * Square.surface();
+  virtual float area()
+    return Pi.value() * Square.area();
 \end{ffcode}
 }
 \par\columnbreak\par
@@ -270,11 +270,11 @@ interface Actor
   void move(int dx, int dy);
 
 interface Figure
-  float surface();
+  float area();
 
 class Circle implements Figure, Actor
   Circle(float r)
-  @Override float surface()
+  @Override float area()
     // ...
   @Override void move(int dx, int dy)
     // ...

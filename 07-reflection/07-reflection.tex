@@ -221,7 +221,7 @@ This is \textcolor{red}{wrong}:
 \par
 {\scriptsize\begin{ffcode}
 interface Figure
-  int surface();
+  int area();
 class Square implements Figure
 class Triangle implements Figure
 class Polygon implements Figure
@@ -244,13 +244,13 @@ This is \textcolor{green}{better}:
 {\scriptsize\begin{ffcode}
 class PolymorphicFigure implements Figure
   PolymorphicFigure(int sides)
-  @Override int surface() {
+  @Override int area() {
     if (sides == 3) {
-      return (*@\textcolor{orange}{new Triangle().surface()}@*);
+      return (*@\textcolor{orange}{new Triangle().area()}@*);
     } else if (sides == 4) {
-      return (*@\textcolor{orange}{new Square().surface()}@*);
+      return (*@\textcolor{orange}{new Square().area()}@*);
     } else {
-      return (*@\textcolor{orange}{new Polygon(sides).surface()}@*);
+      return (*@\textcolor{orange}{new Polygon(sides).area()}@*);
     }
   }
 \end{ffcode}
@@ -267,7 +267,7 @@ This is \textcolor{red}{wrong}:
 \par
 {\scriptsize\begin{ffcode}
 interface Figure
-  int surface();
+  int area();
 
 class Square implements Figure
 class Triangle implements Figure
@@ -286,13 +286,13 @@ This is \textcolor{green}{better}:
 {\scriptsize\begin{ffcode}
 class PolymorphicFigure implements Figure
   PolymorphicFigure(String name)
-  @Override int surface() {
+  @Override int area() {
     if ((*@\textcolor{orange}{name.equals}@*)("Triangle")) {
-      return new Triangle().surface();
+      return new Triangle().area();
     } else if ((*@\textcolor{orange}{name.equals}@*)("Square")) {
-      return new Square().surface();
+      return new Square().area();
     } else {
-      return new Polygon(?).surface();
+      return new Polygon(?).area();
     }
   }
 \end{ffcode}
@@ -529,11 +529,11 @@ Philosophically speaking, type casting is discrimination~\citep{bugayenko2020blo
 \par\columnbreak\par
 {\small\begin{ffcode}
 // This is polymorphism:
-int surface(Figure f)
-  return f(*@\textcolor{orange}{.surface()}@*);
+int area(Figure f)
+  return f(*@\textcolor{orange}{.area()}@*);
 
 // This is type casting:
-int surface(Figure f)
+int area(Figure f)
   if (f instanceof Circle c) {
     return c(*@\textcolor{orange}{.radius()}@*)
   } else if (f instanceof Square s) {
