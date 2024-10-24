@@ -19,9 +19,13 @@
 # SOFTWARE.
 ---
 name: latexmk
-on:
+'on':
   push:
-    branches: master
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: true
