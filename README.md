@@ -1,6 +1,7 @@
 # Pain of OOP, Lecture Notes
 
 [![latexmk](https://github.com/yegor256/painofoop/actions/workflows/latexmk.yml/badge.svg?branch=master)](https://github.com/yegor256/painofoop/actions/workflows/latexmk.yml)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/painofoop/blob/master/LICENSE.txt)
 
 There are slides for my series of lectures for
 [Innopolis University](https://innopolis.university/) (Kazan, Russia).
