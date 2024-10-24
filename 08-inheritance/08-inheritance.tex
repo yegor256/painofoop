@@ -21,26 +21,26 @@
 % SOFTWARE.
 
 \documentclass{article}
-\usepackage{../painofoop}
+\usepackage{../lecture-notes.sty/lecture-notes}
 \usetikzlibrary{arrows.meta}
 \newcommand*\thetitle{Inheritance}
 \newcommand*\thesubtitle{Polymorphism, Subtyping, Reuse}
 \begin{document}
 
-\plush{\poopTitlePage{8}{m0OEOoGgIuM}}
+\plush{\lnTitlePage{8}{8}{m0OEOoGgIuM}}
 
 \pptToc
 
 \plush{\pptChapter{Polymorphism}}
 
 \pptSection[LSP]{Liskov Substitution Principle}
-\qte
+\lnQuote
   {barbara-liskov}
   {If for each object $o_1$ of type $S$ there is an object $o_2$ of type $T$ such that for all programs $P$ defined in terms of $T$, the behavior of $P$ is unchanged when $o_1$ is substituted for $o_2$, then $S$ is a subtype of $T$.}
   {liskov1987keynote}
 
 \pptSection[SOLID]{SOLID (the ``L'' part)}
-\qte
+\lnQuote
   {robert-martin}
   {Functions that use pointers or references to base classes must be able to use objects of derived classes without knowing it.}
   {martin2008clean}
@@ -150,12 +150,12 @@ c.add("Hello, world!");
 
 \plush{\pptChapter[Inheritance]{Implementation Inheritance}}
 
-\qte
+\lnQuote
   {allen-holub}
   {The |extends| keyword is evil; maybe not at the Charles Manson level, but bad enough that it should be shunned whenever possible.}
   {holub2003extends}
 
-\qte
+\lnQuote
   {james-gosling}
   {Someone asked him: ``If you could do Java over again, what would you change?'' ``I'd leave out classes,'' he replied.}
   {holub2003extends}

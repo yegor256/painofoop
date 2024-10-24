@@ -21,12 +21,12 @@
 % SOFTWARE.
 
 \documentclass{article}
-\usepackage{../painofoop}
+\usepackage{../lecture-notes.sty/lecture-notes}
 \newcommand*\thetitle{Algorithms}
 \newcommand*\thesubtitle{History, State, Behavior, Enemies of OOP}
 \begin{document}
 
-\plush{\poopTitlePage{1}{8FPU_N3LxqA}}
+\plush{\lnTitlePage{1}{8}{8FPU_N3LxqA}}
 
 \pptToc
 
@@ -121,7 +121,7 @@ a deposit: 42
 }
 \plush{}
 
-\qte
+\lnQuote
   {professor}
   {Everyone will be in a favor of OOP. Every manufacturer will promote his products as supporting it. Every manager will pay lip service to it. Every programmer will practice it (differently). And no one will know just what it is.}
   {rentsch1982object}
@@ -147,18 +147,18 @@ private:
 \end{ffcode}
 \plush{}
 
-\qte
+\lnQuote
   [Ole Lehrmann Madsen]
   {ole-lehrmann-madsen}
   {There are as many definitions of OOP as there papers and books on the topic.}
   {madsen1988object}
 
-\qte
+\lnQuote
   {alan-kay}
   {I made up the term `object-oriented,' and I can tell you I didn't have C++ in mind.}
   {kay97keynote}
 
-\pitch{There was an interesting debate between Alan Kay and a few readers of my blog, in the comments section under this blog post:
+\lnPitch{There was an interesting debate between Alan Kay and a few readers of my blog, in the comments section under this blog post:
     \href{https://www.yegor256.com/2017/12/12/alan-kay-was-wrong.html}{Alan Kay Was Wrong About Him Being Wrong}~\citep{bugayenko2017blog1212}.}
 
 \plush{
@@ -184,7 +184,7 @@ Swift 2014 \\
 \end{multicols}
 }
 
-\qte
+\lnQuote
   {oscar-nierstrasz}
   {There is no uniformity or an agreement on the set of features and mechanisms that belong in an OO language as the paradigm itself is far too general.}
   {nierstrasz1989survey}
@@ -268,7 +268,7 @@ Immutability
 
 \plush{\pptThought{The \ul{complexity} of object-oriented code remains its primary drawback}}
 
-\qte
+\lnQuote
   {asaf-shelly}
   {Reading an OO code you can't see the big picture and it is often impossible to review all the small functions that call the one function that you modified.}
   {shelly2015flaws}
@@ -281,12 +281,12 @@ Immutability
 
 \plush{\pptChapter[Intent]{Original Intent}}
 
-\qte
+\lnQuote
   {david-west}
   {The contemporary mainstream understanding of objects (which is not behavioral) is but a pale shadow of the original idea and anti-ethical to the original intent.}
   {west2004object}
 
-\pitch{You may enjoy watching our conversation with Dr. David West, video-recorded and published on YouTube:
+\lnPitch{You may enjoy watching our conversation with Dr. David West, video-recorded and published on YouTube:
   \href{https://www.youtube.com/watch?v=s-hdZZzMCac}{part I}
   and
   \href{https://www.youtube.com/watch?v=bW5K5cJ-AVs}{part II}.}
@@ -325,10 +325,10 @@ byte buffer, wait for the end of file, and return the result.''
   \includegraphics[width=.95\linewidth]{abstraction.png}
   \par\columnbreak\par
   ``Object-oriented design is first concerned with entities---things. These things may be tangible objects such as traffic lights, chairs, or airplanes. The entities may be abstract concepts such as roles, interactions, or incidents. From a design perspective, objects model the entities in the application domain.''
-  \source{korson1990understanding}
+  \lnSource{korson1990understanding}
   \end{multicols}}
 
-\qte
+\lnQuote
   {edsger-dijkstra}
   {The effective exploitation of his powers of abstraction must be regarded as one of the most vital activities of a competent programmer... By suitable application of our powers of abstraction, the intellectual effort required to conceive or to understand a program need not grow more than proportional to program length.}
   {dijkstra1972humble}

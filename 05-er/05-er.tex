@@ -21,17 +21,17 @@
 % SOFTWARE.
 
 \documentclass{article}
-\usepackage{../painofoop}
+\usepackage{../lecture-notes.sty/lecture-notes}
 \usepackage{setspace}
 \newcommand*\thetitle{-ER}
 \newcommand*\thesubtitle{Alternatives, Clients, MVC}
 \begin{document}
 
-\plush{\poopTitlePage{5}{6GMiosTLUTc}}
+\plush{\lnTitlePage{5}{8}{6GMiosTLUTc}}
 
 \pptToc
 
-\qte
+\lnQuote
   {carlo-pescio}
   {When you need a \ul{manager}, it’s often a sign that the \ul{managed} are just plain old data structures and that the manager is the smart procedure doing the real work.}
   {pescio2011your}
@@ -237,7 +237,7 @@ The right snippet won't work in Java, since \ff{String} is a final class, not an
   ``We took 13,861 Java classes from 212 open source repositories, divided them into three groups (`-Er' classes, `-Utils', and others), and evaluated their complexity. Because average CC and CoCO in the first two groups were almost 3x larger than in the third group, we concluded that functor classes may be considered \ul{bad design}.''
   \end{spacing}
   \par
-  \source{sukhova2024java}
+  \lnSource{sukhova2024java}
   \end{multicols}}
 
 \plush{\pptChapter[-Client]{-Client Suffix}}

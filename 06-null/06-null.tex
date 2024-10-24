@@ -21,14 +21,14 @@
 % SOFTWARE.
 
 \documentclass{article}
-\usepackage{../painofoop}
+\usepackage{../lecture-notes.sty/lecture-notes}
 \newcommand*\thetitle{NULL}
 \newcommand*\thesubtitle{Fail Fast, Returning, Checking, OT}
 \begin{document}
 
-\plush{\poopTitlePage{6}{cTyIF20Kmz4}}
+\plush{\lnTitlePage{6}{8}{cTyIF20Kmz4}}
 
-\qte
+\lnQuote
   {tony-hoare}
   {I was designing the first comprehensive type system for references in an OO language (ALGOL~W). My goal was to ensure that all use of references should be absolutely safe. But I couldn't resist the temptation to put in a null reference, simply because it was so easy to implement. This has led to innumerable errors, vulnerabilities, and system crashes, which have probably caused a billion dollars of \ul{pain} and \ul{damage} in the last forty years.}
   {hoare2009null}
@@ -37,7 +37,7 @@
 
 \plush{\pptChapter[FailFast]{Fail Fast vs Fail Safe}}
 
-\qte
+\lnQuote
   {james-shore}
   {Over time, more and more errors will \ul{fail fast}, and you'll see the cost of debugging decrease and the \ul{quality} of your system improve.}
   {shore2004fail}
@@ -125,15 +125,15 @@ The right snippet is \ul{escalating}, while the left one is \ul{swallowing}.
   Watch this video from DEVit'2016 conference: \\
   \href{https://www.youtube.com/watch?v=nCGBgI1MNwE}{Need It Robust?Make It Fragile!}}
 
-\plush{
-  \pptSection[Complexity]{Is There a Correlaction Between NULL and CC?}
-  \begin{multicols}{2}
-  \includegraphics[width=\linewidth]{null-vs-cc.png}
-  \par\columnbreak\par
-  \tbd{...}
-  \par
-  \source{garmash2021exploring}
-  \end{multicols}}
+% \plush{
+%   \pptSection[Complexity]{Is There a Correlaction Between NULL and CC?}
+%   \begin{multicols}{2}
+%   \includegraphics[width=\linewidth]{null-vs-cc.png}
+%   \par\columnbreak\par
+%   \tbd{...}
+%   \par
+%   \lnSource{garmash2021exploring}
+%   \end{multicols}}
 
 \plush{\pptChapter[Returning]{Alternatives to Returning NULL}}
 

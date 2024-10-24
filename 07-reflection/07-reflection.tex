@@ -21,12 +21,12 @@
 % SOFTWARE.
 
 \documentclass{article}
-\usepackage{../painofoop}
+\usepackage{../lecture-notes.sty/lecture-notes}
 \newcommand*\thetitle{Reflection}
 \newcommand*\thesubtitle{Classpath, Casting, Annotations}
 \begin{document}
 
-\plush{\poopTitlePage{7}{vYw_GcDkPQA}}
+\plush{\lnTitlePage{7}{8}{vYw_GcDkPQA}}
 
 \pptToc
 
@@ -47,12 +47,12 @@ void print(Object x) {
 modify properties of their own behavior. It would be desirable for computations to avail themselves of these
 reflective capabilities, examining themselves in order to make use of
 \ul{meta-level information} in decisions about what to do next.''
-\source{sobel1996introduction}
+\lnSource{sobel1996introduction}
 \end{multicols}
 \par
 \plush{}
 
-\qte
+\lnQuote
   [Yue Li]
   {yue-li}
   {As reflection is increasingly used in Java programs, the cost of imprecise reflection handling has increased dramatically... Almost all the analyses reported are \ul{unsound} in the presence of reflection since it is either \ul{ignored} or handled \ul{partially}.}

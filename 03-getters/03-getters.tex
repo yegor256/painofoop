@@ -21,18 +21,18 @@
 % SOFTWARE.
 
 \documentclass{article}
-\usepackage{../painofoop}
+\usepackage{../lecture-notes.sty/lecture-notes}
 \newcommand*\thetitle{Getters}
 \newcommand*\thesubtitle{Accessors, Encapsulation, Printers}
 \begin{document}
 
-\plush{\poopTitlePage{3}{2YyVmIQQ23w}}
+\plush{\lnTitlePage{3}{8}{2YyVmIQQ23w}}
 
 \pptToc
 
 \plush{\pptChapter[Definition]{What is a Getter?}}
 
-\qte
+\lnQuote
   {joshua-bloch}
   {If a class is accessible outside the confines of its package, the prudent programmer will provide \ul{accessor methods} to preserve the flexibility to change the class's internal representation.}
   {bloch2008effective}
@@ -44,7 +44,7 @@
   \includegraphics[width=.9\linewidth]{bloch-class.png}
   \par\columnbreak\par
   ``Because such classes are accessed by their data fields, they do not offer the benefits of \ul{encapsulation}. You cannot change the representation of such a class without changing its API, enforce any invariants, and take any auxiliary action when a field is modified. [...] such classes are \ul{anathema} and should always be replaced by classes with private fields and public \textcolor{orange}{accessor methods}.''
-  \source{bloch2008effective}
+  \lnSource{bloch2008effective}
   \end{multicols}}
 
 
@@ -155,12 +155,12 @@ There is no excuse for the use of DTO~\citep{bugayenko2016blog0706}. Almost...
 
 \plush{\pptChapter{Encapsulation}}
 
-\qte
+\lnQuote
   {../faces/grady-booch}
   {Encapsulation is most often achieved through \ul{information hiding}, which is the process of hiding all the \ul{secrets} of an object that do not contribute to its essential characteristics; typically, the structure of an object is hidden, as well as the implementation of its methods... Encapsulation provides \ul{explicit barriers} among different abstractions and thus leads to a clear separation of concerns.}
   {booch1994object}
 
-\qte
+\lnQuote
   {../faces/david-west}
   {In most ways, encapsulation is a \ul{discipline} more than a real barrier; seldom is the \ul{integrity} of an object protected in any absolute sense, and this is especially true of software objects, so it is up to the user of an object to \ul{respect} that object's encapsulation.}
   {west2004object}
@@ -234,7 +234,7 @@ What happens if the \ff{Box} decides to store the \ff{weight} in pounds instead 
 
 \plush{\pptChapter[Alternative]{The Alternative}}
 
-\qte
+\lnQuote
   {../faces/martin-fowler}
   {\textbf{Tell-Don't-Ask} principle: Rather than asking an object for data and acting on that data, we should instead \ul{tell} an object what to do. This encourages to move behavior into an object to go with the data.}
   {fowler2013tell}
@@ -244,7 +244,7 @@ What happens if the \ff{Box} decides to store the \ff{weight} in pounds instead 
   \includegraphics[width=.9\linewidth]{fowler-dontask.png}
   \par\columnbreak\par
   ``One of the fundamental principles of object-oriented design is to combine data and behavior, so that the basic elements of our system (objects) combine both together. This is often a good thing because this data and the behavior that manipulates them are \ul{tightly coupled}.''
-  \source{fowler2013tell}
+  \lnSource{fowler2013tell}
   \end{multicols}}
 
 \pptSection[TellDontAsk]{1) Tell Don't Ask, an Example}
@@ -275,7 +275,7 @@ dto.print();
 The \ff{print()} method may also be called a ``printer''~\citep{bugayenko2016blog0405}.
 \plush{}
 
-\qte
+\lnQuote
   {../faces/allen-holub}
   {Though getter/setter methods are commonplace in Java, they are not particularly object-oriented. In fact, they can \ul{damage} your code's maintainability. Moreover, the presence of numerous getter and setter methods is a red flag that the program isn't necessarily well designed from an OO perspective.}
   {holub2003why}
