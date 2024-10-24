@@ -22,11 +22,14 @@
 
 \documentclass[nobrand,anonymous,nodate,nosecurity]{huawei}
 \usepackage{enumerate}
+\usepackage{bibentry}
 \usepackage{multicol}
 \usepackage{href-ul}
 \usepackage[noframes]{ffcode}
 \usepackage{soul}
 \usepackage{svg}
+\bibliography{../bibliography/main.bib}
+
 \begin{document}
 
 \includesvg[height=5em]{cactus.svg}
@@ -174,19 +177,16 @@ presented in Zoom for more than 75\% of the lecture's time. Watching the
 lecture from the computer of a friend \ul{doesn't} count.
 
 \newpage
-\section*{Learning Material}
+\renewcommand\refname{Learning Materials}
+\bibentry{west2004object}
+\bibentry{martin2008cleancode}
+\bibentry{mcconnell2004codecomplete}
+\bibentry{eo1}
+\bibentry{eo2}
+\printbibliography
 
-The following books are highly recommended to read (in no particular order):
-
-\begin{multicols}{2}\small\raggedright
-{David West}, \ul{Object Thinking}, 2004\\[3pt]
-{David West}, \ul{Design Thinking}, 2017\\[3pt]
-{Robert Martin}, \ul{Clean Code}, 2008\\[3pt]
-{Steve McConnell}, \ul{Code Complete}, 1993\\[3pt]
-{Yegor Bugayenko}, \ul{Elegant Objects}, 2016\\[3pt]
-Blog posts of Yegor Bugayenko, \href{https://www.yegor256.com/tag/oop}{on his blog}\\[3pt]
-Video lectures of Yegor Bugayenko \href{https://www.youtube.com/playlist?list=PLaIsQH4uc08yw2CsNv5OV30GfKE6XVGii}{on YouTube}\\[3pt]
-Object Thinking meetup presentations, \href{https://www.youtube.com/watch?v=yT6oO28wEik&list=PLaIsQH4uc08yetzX86w1pPck1QtGEy_ik}{on YouTube}\\[3pt]
-\end{multicols}
+You may also want to read the blog posts of Yegor Bugayenko, \href{https://www.yegor256.com/tag/oop}{on his blog},
+watch his video lectures \href{https://www.youtube.com/playlist?list=PLaIsQH4uc08yw2CsNv5OV30GfKE6XVGii}{on YouTube},
+and watch Object Thinking meetup presentations, \href{https://www.youtube.com/watch?v=yT6oO28wEik&list=PLaIsQH4uc08yetzX86w1pPck1QtGEy_ik}{on YouTube}.
 
 \end{document}
