@@ -1,6 +1,6 @@
 --pws=../lecture-notes/aspell.en.pws
 --ignore=href,ffcode
 --ignore=ff,nospell,citet,citep
---ignore=poopTitlePage:pp
---ignore=source:p
---ignore=qte:oppp
+--ignore=lnTitlePage:ppp
+--ignore=lnSource:p
+--ignore=lnQuote:oppp
