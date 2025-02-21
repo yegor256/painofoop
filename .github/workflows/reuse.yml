@@ -1,3 +1,5 @@
+# (The MIT License)
+#
 # Copyright (c) 2023-2025 Yegor Bugayenko
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -19,7 +21,7 @@
 # SOFTWARE.
 ---
 # yamllint disable rule:line-length
-name: latexmk
+name: reuse
 'on':
   push:
     branches:
@@ -27,23 +29,10 @@ name: latexmk
   pull_request:
     branches:
       - master
-concurrency:
-  group: ${{ github.ref }}
-  cancel-in-progress: true
 jobs:
-  latexmk:
+  reuse:
     timeout-minutes: 15
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: true
-      - uses: yegor256/latexmk-action@0.15.0
-        with:
-          cmd: make
-          depends: lecture-notes/DEPENDS.txt
-      - uses: JamesIves/github-pages-deploy-action@v4.7.3
-        with:
-          branch: gh-pages
-          folder: package
-          clean: false
+      - uses: fsfe/reuse-action@v5
