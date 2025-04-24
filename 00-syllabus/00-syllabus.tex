@@ -8,6 +8,7 @@
 \usepackage{href-ul}
 \usepackage[noframes]{ffcode}
 \usepackage{soul}
+\usepackage{booktabs}
 \usepackage{svg}
 \bibliography{../bibliography/main.bib}
 
@@ -110,6 +111,7 @@ They must also contribute to one of the following GitHub repositories, which are
     \item \href{https://github.com/objectionary/eo}{\ff{objectionary/eo}} (Java + XSLT)
     \item \href{https://github.com/yegor256/cactoos}{\ff{yegor256/cactoos}} (Java)
     \item \href{https://github.com/yegor256/takes}{\ff{yegor256/takes}} (Java)
+    \item \href{https://github.com/yegor256/factbase}{\ff{yegor256/factbase}} (Ruby)
     \item \href{https://github.com/objectionary/eoc}{\ff{objectionary/eoc}} (JavaScript)
     \item \href{https://github.com/objectionary/eo2js}{\ff{objectionary/eo2js}} (JavaScript)
     \item \href{https://github.com/yegor256/cam}{\ff{yegor256/cam}} (Bash + Python)
@@ -120,12 +122,14 @@ Instead, each student earns points for the following results:
 
 \renewcommand{\arraystretch}{1}
 \begin{tabular}{lrr}
+\toprule
 Result & Points & Limit \\
-\hline
+\midrule
 Attended a lecture & +1 & 6 \\
 Attended a lab & +1 & 8 \\
 Submitted a ticket (that was accepted) & +2 & 8 \\
 Submitted a pull request (that was merged) & +4 & 32 \\
+\bottomrule
 \end{tabular}
 
 Then, 25+ points mean ``A,'' 17+ mean ``B,'' and 9+ mean ``C.''
@@ -137,11 +141,15 @@ Watching the lecture from the computer of a friend \ul{doesn't} count.
 
 \newpage
 \renewcommand\refname{Learning Materials}
-\bibentry{west2004object}
-\bibentry{martin2008cleancode}
-\bibentry{mcconnell2004codecomplete}
+\bibentry{beck1997smalltalk}
+\bibentry{booch1994object}
 \bibentry{eo1}
 \bibentry{eo2}
+\bibentry{martin2008cleancode}
+\bibentry{martin2017clean}
+\bibentry{mcconnell2004codecomplete}
+\bibentry{pawson2002naked}
+\bibentry{west2004object}
 \printbibliography
 
 You may also want to read the blog posts of Yegor Bugayenko, \href{https://www.yegor256.com/tag/oop}{on his blog}, watch his video lectures \href{https://www.youtube.com/playlist?list=PLaIsQH4uc08yw2CsNv5OV30GfKE6XVGii}{on YouTube}, and watch Object Thinking meetup presentations, \href{https://www.youtube.com/watch?v=yT6oO28wEik&list=PLaIsQH4uc08yetzX86w1pPck1QtGEy_ik}{on YouTube}.
