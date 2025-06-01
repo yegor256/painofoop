@@ -442,7 +442,7 @@ int area(x1, y1, x2, y2) {
 \begin{lnSnippet}[dist-2.txt]
 class Distance {
   private int r; private int l;
-  Distance(l, r) { this.l = l; this.r = r; }
+  Distance(a, b) { l = a; r = b; }
   int value() {
     int d = r - l;
     if (d < 0) { d = d * -1; }
@@ -751,7 +751,6 @@ Pulls.new(
 \print{NULL References}
 \print{Type Casting (Reflection)}
 \print{Inheritance}
-\plush{Global Variables and DI Containers}
 
 \lnPitch{\pptChapter{Post-Test}}
 
