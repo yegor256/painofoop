@@ -11,16 +11,13 @@
 
 \pptToc
 
-\plush{
+\lnPitch{
     \pptBanner[red]{WARNING!}
-    In the pursuit of academic enlightenment within this course, it is paramount to caution that the doctrines disseminated may present a potentially \ul{hazardous venture} if employed in real-life software projects. This inherent risk arises from the potential \ul{incongruity} with the broadly accepted \ul{canon} of object-oriented programming and recognized best programming practices. If one remains resolute in their decision to adapt their coding methodologies to align with the principles propagated in this course, it would be prudent to employ a certain degree of \ul{foresight}. A humorous, yet sincere suggestion, would be to secure \ul{alternate employment} prior to a possible premature termination of one's current professional engagement.\par
-    \textcolor{gray}{\small Written by me, edited by ChatGPT}
-}
+    In the pursuit of academic enlightenment within this course, it is paramount to caution that the doctrines disseminated may present a potentially \ul{hazardous venture} if employed in real-life software projects. This inherent risk arises from the potential \ul{incongruity} with the broadly accepted \ul{canon} of object-oriented programming and recognized best programming practices. If one remains resolute in their decision to adapt their coding methodologies to align with the principles propagated in this course, it would be prudent to employ a certain degree of \ul{foresight}. A humorous, yet sincere suggestion, would be to secure \ul{alternate employment} prior to a possible premature termination of one's current professional engagement.}
 
-\plush{\pptChapter{Pre-Test}}
+\lnPitch{\pptChapter{Pre-Test}}
 
-\pptSection[quiz]{https://github.com/yegor256/quiz}
-{\scriptsize\begin{ffcode}
+\begin{lnSnippet}[java-parser.txt]
 public class Parser {
   private File file;
   public synchronized void setFile(File f) {
@@ -41,26 +38,26 @@ public class Parser {
     // Save the "content" to the file.
   }
 }
-\end{ffcode}
-}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[quiz]{https://github.com/yegor256/quiz}
+  {\scriptsize\ffinput{java-parser.txt}}}
 
-\plush{\pptChapter{History}}
+\lnPitch{\pptChapter{History}}
 
-\plush{
+\lnPitch{
     \pptSection[Sketchpad]{Who started it?}
     \pptPic{0.5}{ivan-sutherland-with-computer.jpg}\\
     Ivan Sutherland's seminal \textbf{Sketchpad} \ul{application} was an early inspiration for OOP, created between 1961 and 1962 and published in his Sketchpad Thesis in 1963. Any object could become a ``master,'' and additional instances of the objects were called “occurrences”. Sketchpad's masters share a lot in common with JavaScript's prototypal inheritance. \textcolor{gray}{(c)~Wikipedia}
 }
 
-\plush{
+\lnPitch{
     \pptSection[Objects]{Who invented Objects, Classes, and Inheritance?}
     \pptPic{0.6}{dahl-and-nygaard.jpg}\\
     \textbf{Simula} was developed in the 1965 at the Norwegian Computing Center in Oslo, by Ole-Johan Dahl and Kristen Nygaard. Like Sketchpad, Simula featured objects, and eventually introduced \ul{classes}, class \ul{inheritance}, \ul{subclasses}, and \ul{virtual methods}. \textcolor{gray}{(c)~Wikipedia}
 }
 
-\pptSection[Simula-67]{Simula-67: Sample Code}
-\begin{ffcode}
+\begin{lnSnippet}[simula.txt]
 Class Figure;
   Virtual: Real Procedure area Is Procedure area;;
 Begin
@@ -73,18 +70,18 @@ Begin
     area := 3.1415 * r * r;
   End;
 End;
-\end{ffcode}
-\plush{}
-
+\end{lnSnippet}
 \plush{
+  \pptSection[Simula-67]{Simula-67: Sample Code}
+  \ffinput{simula.txt}}
+
+\lnPitch{
     \pptSection[OOP]{Who coined the ``OOP'' term?}
     \pptPic{0.6}{smalltalk-guys.jpg}\\
     \textbf{Smalltalk} was created in the 1970s at Xerox PARC by Learning Research Group (LRG) scientists, including
-    Alan Kay, Dan Ingalls, Adele Goldberg, Ted Kaehler, Diana Merry, and Scott Wallace. \textcolor{gray}{(c)~Wikipedia}
-}
+    Alan Kay, Dan Ingalls, Adele Goldberg, Ted Kaehler, Diana Merry, and Scott Wallace. \textcolor{gray}{(c)~Wikipedia}}
 
-\pptSection[Smalltalk]{Smalltalk: Sample Code}
-{\small\begin{ffcode}
+\begin{lnSnippet}[smalltalk.txt]
 Object subclass: Account [
     (*@\(\vert\)@*) balance (*@\(\vert\)@*)
     Account class >> new [
@@ -98,24 +95,23 @@ Account extend [
 ]
 a := Account new
 a deposit: 42
-\end{ffcode}
-}
-\plush{}
+\end{lnSnippet}
+\plush{
+  \pptSection[Smalltalk]{Smalltalk: Sample Code}
+  {\small\ffinput{smalltalk.txt}}}
 
 \lnQuote
   {professor}
   {Everyone will be in a favor of OOP. Every manufacturer will promote his products as supporting it. Every manager will pay lip service to it. Every programmer will practice it (differently). And no one will know just what it is.}
   {rentsch1982object}
 
-\plush{
+\lnPitch{
     \pptSection[Stroustrup]{Who made it all popular?}
     \pptPic{0.7}{bjarne-in-1985.jpg}\\
     \textbf{C++} was created by Danish computer scientist Bjarne Stroustrup in 1985, by enhancing C language with Simula-like features. C was chosen because it was general-purpose, fast, portable and widely used.\par
-    {\small You may enjoy watching this \href{https://www.youtube.com/watch?v=ae6nFZn3auQ}{one-hour dialog} of Dr. Stroustrup and me.}
-}
+    {\small You may enjoy watching this \href{https://www.youtube.com/watch?v=ae6nFZn3auQ}{one-hour dialog} of Dr. Stroustrup and me.}}
 
-\pptSection[C++]{C++: Sample Code}
-\begin{ffcode}
+\begin{lnSnippet}[cpp.txt]
 class Figure {
   virtual float area() = 0;
 };
@@ -125,8 +121,10 @@ class Circle : public Figure {
 private:
   float c, r;
 };
-\end{ffcode}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[C++]{C++: Sample Code}
+  \ffinput{cpp.txt}}
 
 \lnQuote
   [Ole Lehrmann Madsen]
@@ -139,128 +137,127 @@ private:
   {I made up the term `object-oriented,' and I can tell you I didn't have C++ in mind.}
   {kay97keynote}
 
-\lnPitch{There was an interesting debate between Alan Kay and a few readers of my blog, in the comments section under this blog post:
-    \href{https://www.yegor256.com/2017/12/12/alan-kay-was-wrong.html}{Alan Kay Was Wrong About Him Being Wrong}~\citep{bugayenko2017blog1212}.}
+\lnPitch{
+  There was an interesting debate between Alan Kay and a few readers of my blog, in the comments section under this blog post:
+  \href{https://www.yegor256.com/2017/12/12/alan-kay-was-wrong.html}{Alan Kay Was Wrong About Him Being Wrong}~\citep{bugayenko2017blog1212}.}
 
-\plush{
-\pptSection[Languages]{What happened later?}
-C++ was released in 1985. And then...\par
-\begin{multicols}{2}
-Erlang 1986 \\
-Eiffel 1986 \\
-Self 1987 \\
-Perl 1988 \\
-Haskell 1990 \\
-Python 1991 \\
-Lua 1993 \\
-JavaScript 1995 \\
-Ruby 1995 \\
-Java 1995 \\
-Go 1995 \\
-PHP3 1998 \\
-C\# 2000 \\
-Rust 2010 \\
-Swift 2014 \\
-\href{https://www.eolang.org}{EO} 2016
-\end{multicols}
-}
+\lnPitch{
+  \pptSection[Languages]{What happened later?}
+  C++ was released in 1985. And then...\par
+  \begin{multicols}{2}
+  Erlang 1986 \\
+  Eiffel 1986 \\
+  Self 1987 \\
+  Perl 1988 \\
+  Haskell 1990 \\
+  Python 1991 \\
+  Lua 1993 \\
+  JavaScript 1995 \\
+  Ruby 1995 \\
+  Java 1995 \\
+  Go 1995 \\
+  PHP3 1998 \\
+  C\# 2000 \\
+  Rust 2010 \\
+  Swift 2014 \\
+  \href{https://www.eolang.org}{EO} 2016
+  \end{multicols}}
 
 \lnQuote
   {oscar-nierstrasz}
   {There is no uniformity or an agreement on the set of features and mechanisms that belong in an OO language as the paradigm itself is far too general.}
   {nierstrasz1989survey}
 
-\plush{
-\pptSection[Features]{Incomplete list of OOP features, ... so far:}
-{\small\begin{pptWide}{4}
-Polymorphism \\
-Nested Objects \\
-Traits \\
-Templates \\
-Generics \\
-Invariants \\
-Classes \\
-NULL \\
-Exceptions \\
-Operators \\
-Methods \\
-Static Blocks \\
-Virtual Tables \\
-Coroutines \\
-Monads \\
-Algebraic Types \\
-Annotations \\
-Interfaces \\
-Constructors \\
-Destructors \\
-Lifetimes \\
-Volatile Variables \\
-Synchronization \\
-Macros \\
-Inheritance \\
-Overloading \\
-Tuple Types \\
-Closures \\
-Access Modifiers \\
-Pattern Matching \\
-Enumerated Types \\
-Namespaces \\
-Modules \\
-Type Aliases \\
-Decorators \\
-Lambda Functions \\
-Type Inference \\
-Properties \\
-Value Types \\
-Multiple Inheritance \\
-Events \\
-Callbacks \\
-NULL Safety \\
-Streams \\
-Buffers \\
-Iterators \\
-Generators \\
-Aspects \\
-Anonymous Objects \\
-Anonymous Functions \\
-Reflection \\
-Type Casting \\
-Lazy Evaluation \\
-Garbage Collection \\
-Immutability
-\end{pptWide}}
-}
+\lnPitch{
+  \pptSection[Features]{Incomplete list of OOP features, ... so far:}
+  {\small\begin{pptWide}{4}
+  Polymorphism \\
+  Nested Objects \\
+  Traits \\
+  Templates \\
+  Generics \\
+  Invariants \\
+  Classes \\
+  NULL \\
+  Exceptions \\
+  Operators \\
+  Methods \\
+  Static Blocks \\
+  Virtual Tables \\
+  Coroutines \\
+  Monads \\
+  Algebraic Types \\
+  Annotations \\
+  Interfaces \\
+  Constructors \\
+  Destructors \\
+  Lifetimes \\
+  Volatile Variables \\
+  Synchronization \\
+  Macros \\
+  Inheritance \\
+  Overloading \\
+  Tuple Types \\
+  Closures \\
+  Access Modifiers \\
+  Pattern Matching \\
+  Enumerated Types \\
+  Namespaces \\
+  Modules \\
+  Type Aliases \\
+  Decorators \\
+  Lambda Functions \\
+  Type Inference \\
+  Properties \\
+  Value Types \\
+  Multiple Inheritance \\
+  Events \\
+  Callbacks \\
+  NULL Safety \\
+  Streams \\
+  Buffers \\
+  Iterators \\
+  Generators \\
+  Aspects \\
+  Anonymous Objects \\
+  Anonymous Functions \\
+  Reflection \\
+  Type Casting \\
+  Lazy Evaluation \\
+  Garbage Collection \\
+  Immutability
+  \end{pptWide}}}
 
-\plush{\begin{pptMiddle}
-    \pptQuote{../faces/edsger-dijkstra.jpg}{Object oriented programs are offered as alternatives to correct ones... Object-oriented programming is an \ul{exceptionally bad idea} which could only have originated in California.}{Edsger W. Dijkstra, 1989}
-\end{pptMiddle}}
+\lnPitch{
+  \begin{pptMiddle}
+  \pptQuote{../faces/edsger-dijkstra.jpg}{Object oriented programs are offered as alternatives to correct ones... Object-oriented programming is  an \ul{exceptionally bad idea} which could only have originated in California.}{Edsger W. Dijkstra, 1989}
+  \end{pptMiddle}}
 
-\plush{\begin{pptMiddle}
-    \pptQuote{../faces/linus-torvalds.jpg}{C++ is a horrible language$\dots$ C++ leads to really, really bad design choices$\dots$ In other words, the only way to do good, efficient, and system-level and portable C++ ends up to limit yourself to all the things that are basically available in C.}{Linus Torvalds, 2007 \newline Creator of Linux}
-\end{pptMiddle}}
+\lnPitch{\begin{pptMiddle}
+  \pptQuote{../faces/linus-torvalds.jpg}{C++ is a horrible language$\dots$ C++ leads to really, really bad design choices$\dots$ In other words, the only way to do good, efficient, and system-level and portable C++ ends up to limit yourself to all the things that are basically available in C.}{Linus Torvalds, 2007 \newline Creator of Linux}
+  \end{pptMiddle}}
 
-\plush{\begin{pptMiddle}
-    \pptQuote{../faces/jeff-atwood.jpg}{OO seems to bring at least as many problems to the table as it solves}{Jeff Atwood, 2007 \newline Co-founder of Stack Overflow}
-\end{pptMiddle}}
+\lnPitch{\begin{pptMiddle}
+  \pptQuote{../faces/jeff-atwood.jpg}{OO seems to bring at least as many problems to the table as it solves}{Jeff Atwood, 2007 \newline Co-founder of Stack Overflow}
+  \end{pptMiddle}}
 
-\plush{\begin{pptMiddle}
-    \pptQuote{../faces/rich-hickey.jpg}{I think that large objected-oriented programs struggle with increasing complexity as you build this large object graph of mutable objects. You know, trying to understand and keep in your mind what will happen when you call a method and what will the side effects be.}{Rich Hickey, 2010 \newline Creator of Clojure}
-\end{pptMiddle}}
+\lnPitch{\begin{pptMiddle}
+  \pptQuote{../faces/rich-hickey.jpg}{I think that large objected-oriented programs struggle with increasing complexity as you build this large object graph of mutable objects. You know, trying to understand and keep in your mind what will happen when you call a method and what will the side effects be.}{Rich Hickey, 2010 \newline Creator of Clojure}
+  \end{pptMiddle}}
 
-\plush{\pptThought{The \ul{complexity} of object-oriented code remains its primary drawback}}
+\lnPitch{\pptThought{The \ul{complexity} of object-oriented code remains its primary drawback}}
 
 \lnQuote
   {asaf-shelly}
   {Reading an OO code you can't see the big picture and it is often impossible to review all the small functions that call the one function that you modified.}
   {shelly2015flaws}
 
-\plush{
-    \pptThought{Thus, we don't know anymore what exactly is object-oriented programming, and whether it helps us write better code.}
-    \par
-    {\small You can find more quotes in this blog post of mine: \href{https://www.yegor256.com/2016/08/15/what-is-wrong-object-oriented-programming.html}{What's Wrong With Object-Oriented Programming?}~\citep{bugayenko2016blog0815}}\par
-}
+\lnPitch{
+  \pptThought{Thus, we don't know anymore what exactly is object-oriented programming, and whether it helps us write better code.}
+  \par
+  {\small You can find more quotes in this blog post of mine: \href{https://www.yegor256.com/2016/08/15/what-is-wrong-object-oriented-programming.html}{What's Wrong With Object-Oriented Programming?}~\citep{bugayenko2016blog0815}}\par}
 
-\plush{\pptChapter[Intent]{Original Intent}}
+\lnPitch{\pptChapter[Intent]{Original Intent}}
 
 \lnQuote
   {david-parnas}
@@ -277,37 +274,38 @@ Immutability
   and
   \href{https://www.youtube.com/watch?v=bW5K5cJ-AVs}{part II}.}
 
-\plush{
+\lnPitch{
   \pptThought{A system is a composition of objects that are abstractions, which hide data and expose behavior*}
   \par
   {\small * This is how I understand the original intent.}}
 
-\pptSection[Abstraction]{1) What is an ``abstraction''?}
-\begin{pptWide}{2}
-\includegraphics[width=1.3in]{apple.jpg}
-\begin{itemize}
-\item Color: red
-\item Weight: 120g
-\item Price: \$0.99
-\end{itemize}
-\par\columnbreak\par
-\includegraphics[width=0.8in]{file-on-disc.jpg}
-\par
-{\small\begin{ffcode}
+\begin{lnSnippet}[file-js.txt]
 var file = {
   path: '/tmp/data.txt',
   read: function() { ... },
   write: function(txt) { ... }
 }
-\end{ffcode}
-}
-\end{pptWide}
-We deal with an abstraction as if it was a real thing, but eliminating unnecessary details.
-We do \ff{file.read()} instead of ``open file handler for data.txt, read byte by byte, store in
-byte buffer, wait for the end of file, and return the result.''
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Abstraction]{1) What is an ``abstraction''?}
+  \begin{pptWide}{2}
+  \includegraphics[width=1.3in]{apple.jpg}
+  \begin{itemize}
+  \item Color: red
+  \item Weight: 120g
+  \item Price: \$0.99
+  \end{itemize}
+  \par\columnbreak\par
+  \includegraphics[width=0.8in]{file-on-disc.jpg}
+  \par
+  {\small\ffinput{file-js.txt}}
+  \end{pptWide}
+  We deal with an abstraction as if it was a real thing, but eliminating unnecessary details.
+  We do \ff{file.read()} instead of ``open file handler for data.txt, read byte by byte, store in
+  byte buffer, wait for the end of file, and return the result.''}
 
-\plush{\begin{multicols}{2}
+\lnPitch{
+  \begin{multicols}{2}
   \includegraphics[width=.95\linewidth]{abstraction.png}
   \par\columnbreak\par
   ``Object-oriented design is first concerned with entities---things. These things may be tangible objects such as traffic lights, chairs, or airplanes. The entities may be abstract concepts such as roles, interactions, or incidents. From a design perspective, objects model the entities in the application domain.''
