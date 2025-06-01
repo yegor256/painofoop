@@ -8,11 +8,15 @@
 \usepackage{href-ul}
 \usepackage[noframes]{ffcode}
 \usepackage{soul}
+\usepackage{iexec}
 \usepackage{booktabs}
 \usepackage{svg}
 \bibliography{../bibliography/main.bib}
 
 \begin{document}
+
+\iexec[quiet,log]{wget --no-check-certificate -N --quiet https://www.yegor256.com/images/face-1024x1024.jpg}
+\iexec[quiet,log]{wget --no-check-certificate -N --quiet https://www.objectionary.com/cactus.svg}
 
 \includesvg[height=5em]{cactus.svg}
 
@@ -21,22 +25,27 @@
 This series of lectures by \href{https://www.yegor256.com}{Yegor Bugayenko} was first presented to students at \href{https://innopolis.university/en/}{Innopolis University} in 2023 and was \href{https://www.youtube.com/playlist?list=PLaIsQH4uc08ytf8POIIAkkR4ZsRq8DFiV}{video-recorded}.
 The complete set of slide decks is hosted and maintained in the \href{https://github.com/yegor256/painofoop}{yegor256/painofoop} GitHub repository.
 
-\begin{abstract}
+\textbf{What is the course about?}\\
 This course offers a critical review of the current state of object-oriented programming, with a particular focus on the Java, C++, Ruby, and JavaScript ecosystems.
 It examines various programming idioms—often referred to as ``best practices''---and critiques their negative impact on code quality.
 These include static methods, null references, getters and setters, ORM and DTO patterns, annotations, traits and mixins, inheritance, and others.
 In contrast, the course proposes alternative approaches that promote cleaner object-oriented programming practices.
-\end{abstract}
 
 \textbf{What is the goal?}\\
 The primary objective of the course is to help students understand the difference between ``object thinking''---which originally motivated the emergence of object-oriented programming---and modern practices that often severely degrade code quality.
 
+\floatstyle{plain}
+\restylefloat{figure}
+\begin{wrapfigure}{r}{5em}%
+\raggedleft%
+\includegraphics[width=\linewidth]{face-1024x1024.jpg}%
+\end{wrapfigure}
 \textbf{Who is the teacher?}\\
 Yegor has been developing software for over 30 years, working both as a hands-on programmer (see his GitHub account: \href{https://github.com/yegor256}{@yegor256}) and as a manager of other programmers.
 He is currently a software developer at Huawei (Moscow, Russia).
 His primary research focus is on software quality issues.
 Some of the lectures he has recently presented at software conferences can be found on \href{https://www.youtube.com/channel/UCr9qCdqXLm2SU0BIs6d_68Q}{his YouTube channel}.
-Yegor has also published \href{https://www.yegor256.com/books.html}{several} and maintains a \href{https://www.yegor256.com/contents.html}{blog} about software engineering and object-oriented programming.
+Yegor has also published \href{https://www.yegor256.com/books.html}{several books} and maintains a \href{https://www.yegor256.com/contents.html}{blog} about software engineering and object-oriented programming.
 He has previously taught courses at Innopolis University (Kazan, Russia) and HSE University (Moscow, Russia), including \href{https://github.com/yegor256/ppa}{Practical Program Analysis (2023)} and \href{https://github.com/yegor256/sqm}{Software Quality Metrics (2024)} (all videos are available).
 
 \textbf{Why this course?}\\
@@ -95,9 +104,9 @@ The following topics are discussed:
 \item Static Methods
 \item Getters
 \item Setters and Mutability
-\item ``-ER'' suffix
-\item NULL references
-\item Type casting and reflection
+\item ``-ER'' Suffix
+\item NULL References
+\item Type Casting and Reflection
 \item Inheritance
 \end{lectures}
 
@@ -136,7 +145,7 @@ Final grades are based on accumulated points: 25+ earns an ``A,'' 17+ a ``B,'' a
 
 If eight or fewer points are accumulated during the course, the student may still earn them before the retake.
 
-An online lecture is counted as ``attended'' only if a student was personally presented in Zoom for more than 75\% of the lecture's time.
+An online lecture is counted as ``attended'' only if a student was personally present in Zoom for more than 75\% of the lecture's time.
 Watching the lecture from the computer of a friend \ul{doesn't} count.
 
 \newpage
