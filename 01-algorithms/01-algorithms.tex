@@ -347,9 +347,7 @@ int area(x1, y1, x2, y2) {
   \end{pptWide}\par
   There are two abstractions at the right snippet (``area'' and ``distance''), while only one abstraction at the left one (just ``area'').}
 
-\pptSection[Levels]{Levels of abstraction}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[distance.txt]
 int distance(left, right) {
   int d = right - left;
   if (d < 0) { d = d * -1; }
@@ -360,41 +358,43 @@ int area(x1, y1, x2, y2) {
   return distance(x2, x1)
     * distance(y2, y1);
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-\begin{tikzpicture}[line width=2pt]
-\node[draw,rectangle,anchor=center] (area) {\texttt{area(3, 9, 13, 2)}};
-\node[draw,rectangle,below left=3cm and 0cm of area,anchor=center] (d1) {\texttt{distance(13, 3)}};
-\node[draw,rectangle,below right=3cm and 0cm of area,anchor=center] (d2) {\texttt{distance(2, 9)}};
-\draw[->] (area) -- (d1);
-\draw[->] (area) -- (d2);
-\end{tikzpicture}
-\end{pptWide}\par
-Higher level abstractions must not know and/or rely on semantics of lower level abstractions.
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Levels]{Levels of Abstraction}
+  \begin{pptWide}{2}
+  {\small\ffinput{distance.txt}}
+  \par\columnbreak\par
+  \begin{tikzpicture}[line width=2pt]
+  \node[draw,rectangle,anchor=center] (area) {\texttt{area(3, 9, 13, 2)}};
+  \node[draw,rectangle,below left=3cm and 0cm of area,anchor=center] (d1) {\texttt{distance(13, 3)}};
+  \node[draw,rectangle,below right=3cm and 0cm of area,anchor=center] (d2) {\texttt{distance(2, 9)}};
+  \draw[->] (area) -- (d1);
+  \draw[->] (area) -- (d2);
+  \end{tikzpicture}
+  \end{pptWide}\par
+  Higher level abstractions must not know and/or rely on semantics of lower level abstractions.}
 
-\pptSection[Rectangle]{2) What is ``data hiding''?}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[hiding-1.txt]
 f = new File("/tmp/data.txt");
 // The data escapes the object! :(
 p = f.getPath();
 FileUtils.deleteFile(p);
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[hiding-2.txt]
 f = new File("/tmp/data.txt");
 // The boolean data escapes too :)
 done = f.delete();
 assert(done);
-\end{ffcode}
-}
-\end{pptWide}
-\par
-Obviously, some data must escape your objects.
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Rectangle]{2) What is ``data hiding''?}
+  \begin{pptWide}{2}
+  {\small\ffinput{hiding-1.txt}}
+  \par\columnbreak\par
+  {\small\ffinput{hiding-2.txt}}
+  \end{pptWide}
+  \par
+  Obviously, some data must escape your objects.}
 
 \pptSection[Rectangle]{3) What is ``behavior exposing''?}
 \begin{pptWide}{2}
