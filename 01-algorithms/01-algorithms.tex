@@ -430,9 +430,7 @@ user.print();
   {\small\ffinput{alive.txt}}
   \end{pptWide}}
 
-\pptSection[Function]{An Object as a Function}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[dist-1.txt]
 int distance(left, right) {
   int d = right - left;
   if (d < 0) { d = d * -1; }
@@ -440,10 +438,8 @@ int distance(left, right) {
 int area(x1, y1, x2, y2) {
   return distance(x2, x1)
     * distance(y2, y1); }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[dist-2.txt]
 class Distance {
   private int r; private int l;
   Distance(l, r) { l = l; r = r; }
@@ -454,15 +450,17 @@ class Distance {
 int area(x1, y1, x2, y2) {
   return new Distance(x2, x1).value()
     * new Distance(y2, y1).value(); } }
-\end{ffcode}
-}
-\end{pptWide}\par
-The Java object \ff{Distance} on the right snippet is semantically equivalent to the C function \ff{distance()} on the left one.
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Function]{An Object as a Function}
+  \begin{pptWide}{2}
+  {\small\ffinput{dist-1.txt}}
+  \par\columnbreak\par
+  {\small\ffinput{dist-2.txt}}
+  \end{pptWide}\par
+  The Java object \ff{Distance} on the right snippet is semantically equivalent to the C function \ff{distance()} on the left one.}
 
-\pptSection[State]{Identity, State, Behavior}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[identity-1.txt]
 class Circle {
   private float radius;
   Circle(float r) {
@@ -474,10 +472,8 @@ class Circle {
   float area() {
     return 3.14 * radius * radius; }
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[identity-2.txt]
 // Identity:
 c1 = new Circle(42.0);
 c2 = new Circle(42.0);
@@ -490,10 +486,14 @@ c1.getRadius() == c2.getRadius();
 c1 = new Circle(42.0);
 c2 = new Circle(-42.0);
 c1.area() == c2.area();
-\end{ffcode}
-}
-\end{pptWide}\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[State]{Identity, State, Behavior}
+  \begin{pptWide}{2}
+  {\small\ffinput{identity-1.txt}}
+  \par\columnbreak\par
+  {\small\ffinput{identity-2.txt}}
+  \end{pptWide}}
 
 \pptSection[FigureUtils]{State vs. Behavior}
 \begin{pptWide}{2}
