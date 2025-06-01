@@ -46,13 +46,13 @@ public class Parser {
 \lnPitch{\pptChapter{History}}
 
 \lnPitch{
-    \pptSection[Sketchpad]{Who started it?}
+    \pptSection[Sketchpad]{Who Started It?}
     \pptPic{0.5}{ivan-sutherland-with-computer.jpg}\\
     Ivan Sutherland's seminal \textbf{Sketchpad} \ul{application} was an early inspiration for OOP, created between 1961 and 1962 and published in his Sketchpad Thesis in 1963. Any object could become a ``master,'' and additional instances of the objects were called “occurrences”. Sketchpad's masters share a lot in common with JavaScript's prototypal inheritance. \textcolor{gray}{(c)~Wikipedia}
 }
 
 \lnPitch{
-    \pptSection[Objects]{Who invented Objects, Classes, and Inheritance?}
+    \pptSection[Objects]{Who Invented Objects, Classes, and Inheritance?}
     \pptPic{0.6}{dahl-and-nygaard.jpg}\\
     \textbf{Simula} was developed in 1965 at the Norwegian Computing Center in Oslo, by Ole-Johan Dahl and Kristen Nygaard. Like Sketchpad, Simula featured objects, and eventually introduced \ul{classes}, class \ul{inheritance}, \ul{subclasses}, and \ul{virtual methods}. \textcolor{gray}{(c)~Wikipedia}
 }
@@ -76,7 +76,7 @@ End;
   \ffinput{simula.txt}}
 
 \lnPitch{
-    \pptSection[OOP]{Who coined the ``OOP'' term?}
+    \pptSection[OOP]{Who Coined the ``OOP'' Term?}
     \pptPic{0.6}{smalltalk-guys.jpg}\\
     \textbf{Smalltalk} was created in the 1970s at Xerox PARC by Learning Research Group (LRG) scientists, including
     Alan Kay, Dan Ingalls, Adele Goldberg, Ted Kaehler, Diana Merry, and Scott Wallace. \textcolor{gray}{(c)~Wikipedia}}
@@ -106,7 +106,7 @@ a deposit: 42
   {rentsch1982object}
 
 \lnPitch{
-    \pptSection[Stroustrup]{Who made it all popular?}
+    \pptSection[Stroustrup]{Who Made It All Popular?}
     \pptPic{0.7}{bjarne-in-1985.jpg}\\
     \textbf{C++} was created by Danish computer scientist Bjarne Stroustrup in 1985, by enhancing the C language with Simula-like features. C was chosen because it was general-purpose, fast, portable and widely used.\par
     {\small You may enjoy watching this \href{https://www.youtube.com/watch?v=ae6nFZn3auQ}{one-hour dialog} of Dr. Stroustrup and me.}}
@@ -142,7 +142,7 @@ private:
   \href{https://www.yegor256.com/2017/12/12/alan-kay-was-wrong.html}{Alan Kay Was Wrong About Him Being Wrong}~\citep{bugayenko2017blog1212}.}
 
 \lnPitch{
-  \pptSection[Languages]{What happened later?}
+  \pptSection[Languages]{What Happened Later?}
   C++ was released in 1985. And then...\par
   \begin{multicols}{2}
   Erlang (1986) \\
@@ -169,7 +169,7 @@ private:
   {nierstrasz1989survey}
 
 \lnPitch{
-  \pptSection[Features]{Incomplete list of OOP features, ... so far:}
+  \pptSection[Features]{Incomplete List of OOP Features, ... So Far:}
   {\small\begin{pptWide}{4}
   Polymorphism \\
   Nested Objects \\
@@ -300,7 +300,7 @@ var file = {
 }
 \end{lnSnippet}
 \lnPitch{
-  \pptSection[Abstraction]{1) What is an ``abstraction''?}
+  \pptSection[Abstraction]{1) What Is an ``Abstraction''?}
   \begin{pptWide}{2}
   \includegraphics[width=1.3in]{apple.jpg}
   \begin{itemize}
@@ -327,7 +327,7 @@ var file = {
 
 \lnQuote
   {edsger-dijkstra}
-  {The effective exploitation of his powers of abstraction must be regarded as one of the most vital activities of a competent programmer... By suitable application of our powers of abstraction, the intellectual effort required to conceive or to understand a program need not grow more than proportional to program length.}
+  {The effective exploitation of his \ul{powers of abstraction} must be regarded as one of the most vital activities of a competent programmer... By suitable application of our powers of abstraction, the intellectual effort required to conceive or to understand a program need not grow more than proportional to program length.}
   {dijkstra1972humble}
 
 \begin{lnSnippet}[area-1.txt]
@@ -352,7 +352,7 @@ int area(x1, y1, x2, y2) {
 }
 \end{lnSnippet}
 \lnPitch{
-  \pptSection[Rectangle]{How many abstractions are needed?}
+  \pptSection[Rectangle]{How Many Abstractions Are Needed?}
   \begin{pptWide}{2}
   {\small\ffinput{area-1.txt}}
   \par\columnbreak\par
@@ -400,7 +400,7 @@ done = f.delete();
 assert(done);
 \end{lnSnippet}
 \lnPitch{
-  \pptSection[Rectangle]{2) What is ``data hiding''?}
+  \pptSection[Rectangle]{2) What Is ``Data Hiding''?}
   \begin{pptWide}{2}
   {\small\ffinput{hiding-1.txt}}
   \par\columnbreak\par
@@ -434,7 +434,7 @@ var user = {
 user.print();
 \end{lnSnippet}
 \lnPitch{
-  \pptSection[Rectangle]{3) What is ``Behavior Exposing''?}
+  \pptSection[Rectangle]{3) What Is ``Behavior Exposing''?}
   \begin{pptWide}{2}
   This is so called ``anemic'' object:
   {\small\ffinput{anemic.txt}}
@@ -555,7 +555,7 @@ circle = new Circle(42);
 circle.drawOn(canvas);
 \end{lnSnippet}
 \lnPitch{
-  \pptSection[Composition]{4) What is ``composition''?}
+  \pptSection[Composition]{4) What Is ``Composition''?}
   \begin{pptWide}{2}
   {\small\ffinput{composition-1.txt}}
   \par\columnbreak\par
@@ -585,7 +585,7 @@ o, w
 orld
 \end{lnSnippet}
 \lnPitch{
-  \pptSection[While]{While-Do loop}
+  \pptSection[While]{While-Do Loop}
   \begin{pptWide}{2}
   {\small\ffinput{while-1.txt}}
   \par\columnbreak\par
@@ -623,7 +623,7 @@ while true
 end
 \end{lnSnippet}
 \lnPitch{
-  \pptSection[Buffer]{Buffer abstraction}
+  \pptSection[Buffer]{Buffer Abstraction}
   \begin{pptWide}{2}
   {\scriptsize\ffinput{buffer-1.txt}}
   \par\columnbreak\par
@@ -666,7 +666,7 @@ pull = Pull.new(buffer)
 while pull.again; end
 \end{lnSnippet}
 \lnPitch{
-  \pptSection[Loop]{Loop abstraction}
+  \pptSection[Loop]{Loop Abstraction}
   \begin{pptWide}{2}
   {\scriptsize\ffinput{loop-1.txt}}
   \par\columnbreak\par
@@ -706,7 +706,7 @@ end
 Pulls.new(Pull.new(Buffer.new)).fetch
 \end{lnSnippet}
 \lnPitch{
-  \pptSection[Loop]{Loop abstraction}
+  \pptSection[Loop]{Loop Abstraction}
   \begin{pptWide}{2}
   {\scriptsize\ffinput{loop-3.txt}}
   \par\columnbreak\par
@@ -749,14 +749,14 @@ Pulls.new(
 ).fetch
 \end{lnSnippet}
 \lnPitch{
-  \pptSection[Composition]{Object composition}
+  \pptSection[Composition]{Object Composition}
   \begin{pptWide}{2}
   {\scriptsize\ffinput{composition-full.txt}}
   \end{pptWide}}
 
 \lnPitch{\pptChapter[Enemies]{Enemies of Object Thinking}}
 
-\print{\pptSection[List]{What makes us think as algorithms}}
+\print{\pptSection[List]{What Makes Us Think as Algorithms}}
 \print{Static Methods}
 \print{Anemic Objects (Getters)}
 \print{Mutability (Setters)}
