@@ -396,10 +396,7 @@ assert(done);
   \par
   Obviously, some data must escape your objects.}
 
-\pptSection[Rectangle]{3) What is ``behavior exposing''?}
-\begin{pptWide}{2}
-This is so called ``anemic'' object:
-{\small\begin{ffcode}
+\begin{lnSnippet}[anemic.txt]
 var user = {
   login: 'jeff',
   password: 'swordfish',
@@ -410,11 +407,8 @@ function print(u) {
     you are ${u.age} today!`);
 }
 print(user);
-\end{ffcode}
-}
-\par\columnbreak\par
-This object is ``alive'':
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[alive.txt]
 var user = {
   login: 'jeff',
   password: 'swordfish',
@@ -425,13 +419,18 @@ var user = {
   }
 }
 user.print();
-\end{ffcode}
-}
-\end{pptWide}
-\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Rectangle]{3) What is ``Behavior Exposing''?}
+  \begin{pptWide}{2}
+  This is so called ``anemic'' object:
+  {\small\ffinput{anemic.txt}}
+  \par\columnbreak\par
+  This object is ``alive'':
+  {\small\ffinput{alive.txt}}
+  \end{pptWide}}
 
-\pptSection[Function]{An object as a function}
+\pptSection[Function]{An Object as a Function}
 \begin{pptWide}{2}
 {\small\begin{ffcode}
 int distance(left, right) {
