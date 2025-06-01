@@ -317,9 +317,7 @@ var file = {
   {The effective exploitation of his powers of abstraction must be regarded as one of the most vital activities of a competent programmer... By suitable application of our powers of abstraction, the intellectual effort required to conceive or to understand a program need not grow more than proportional to program length.}
   {dijkstra1972humble}
 
-\pptSection[Rectangle]{How many abstractions are needed?}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[area-1.txt]
 int area(x1, y1, x2, y2) {
   int w = x2 - x1;
   if (w < 0) { w = w * -1; }
@@ -327,10 +325,8 @@ int area(x1, y1, x2, y2) {
   if (h < 0) { h = h * -1; }
   return w * h;
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[area-2.txt]
 int distance(left, right) {
   int d = right - left;
   if (d < 0) { d = d * -1; }
@@ -341,11 +337,15 @@ int area(x1, y1, x2, y2) {
   return distance(x2, x1)
     * distance(y2, y1);
 }
-\end{ffcode}
-}
-\end{pptWide}\par
-There are two abstractions at the right snippet (``area'' and ``distance''), while only one abstraction at the left one (just ``area'').
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Rectangle]{How many abstractions are needed?}
+  \begin{pptWide}{2}
+  {\small\ffinput{area-1.txt}}
+  \par\columnbreak\par
+  {\small\ffinput{area-2.txt}}
+  \end{pptWide}\par
+  There are two abstractions at the right snippet (``area'' and ``distance''), while only one abstraction at the left one (just ``area'').}
 
 \pptSection[Levels]{Levels of abstraction}
 \begin{pptWide}{2}
