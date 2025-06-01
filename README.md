@@ -8,8 +8,7 @@ There are slides for my series of lectures for
 
 All recorded videos (so far) are in [this YouTube playlist][playlist].
 
-All compiled slide decks in PDF are
-[here](https://yegor256.github.io/painofoop/).
+All compiled slide decks in [PDF](https://yegor256.github.io/painofoop/).
 
 Research questions [are here][rq].
 
