@@ -54,7 +54,7 @@ public class Parser {
 \lnPitch{
     \pptSection[Objects]{Who invented Objects, Classes, and Inheritance?}
     \pptPic{0.6}{dahl-and-nygaard.jpg}\\
-    \textbf{Simula} was developed in the 1965 at the Norwegian Computing Center in Oslo, by Ole-Johan Dahl and Kristen Nygaard. Like Sketchpad, Simula featured objects, and eventually introduced \ul{classes}, class \ul{inheritance}, \ul{subclasses}, and \ul{virtual methods}. \textcolor{gray}{(c)~Wikipedia}
+    \textbf{Simula} was developed in 1965 at the Norwegian Computing Center in Oslo, by Ole-Johan Dahl and Kristen Nygaard. Like Sketchpad, Simula featured objects, and eventually introduced \ul{classes}, class \ul{inheritance}, \ul{subclasses}, and \ul{virtual methods}. \textcolor{gray}{(c)~Wikipedia}
 }
 
 \begin{lnSnippet}[simula.txt]
@@ -71,7 +71,7 @@ Begin
   End;
 End;
 \end{lnSnippet}
-\plush{
+\lnPitch{
   \pptSection[Simula-67]{Simula-67: Sample Code}
   \ffinput{simula.txt}}
 
@@ -96,7 +96,7 @@ Account extend [
 a := Account new
 a deposit: 42
 \end{lnSnippet}
-\plush{
+\lnPitch{
   \pptSection[Smalltalk]{Smalltalk: Sample Code}
   {\small\ffinput{smalltalk.txt}}}
 
@@ -108,7 +108,7 @@ a deposit: 42
 \lnPitch{
     \pptSection[Stroustrup]{Who made it all popular?}
     \pptPic{0.7}{bjarne-in-1985.jpg}\\
-    \textbf{C++} was created by Danish computer scientist Bjarne Stroustrup in 1985, by enhancing C language with Simula-like features. C was chosen because it was general-purpose, fast, portable and widely used.\par
+    \textbf{C++} was created by Danish computer scientist Bjarne Stroustrup in 1985, by enhancing the C language with Simula-like features. C was chosen because it was general-purpose, fast, portable and widely used.\par
     {\small You may enjoy watching this \href{https://www.youtube.com/watch?v=ae6nFZn3auQ}{one-hour dialog} of Dr. Stroustrup and me.}}
 
 \begin{lnSnippet}[cpp.txt]
@@ -129,7 +129,7 @@ private:
 \lnQuote
   [Ole Lehrmann Madsen]
   {ole-lehrmann-madsen}
-  {There are as many definitions of OOP as there papers and books on the topic.}
+  {There are as many definitions of OOP as there are papers and books on the topic.}
   {madsen1988object}
 
 \lnQuote
@@ -155,7 +155,7 @@ private:
   JavaScript 1995 \\
   Ruby 1995 \\
   Java 1995 \\
-  Go 1995 \\
+  Go 2009 \\
   PHP3 1998 \\
   C\# 2000 \\
   Rust 2010 \\
@@ -230,7 +230,7 @@ private:
 
 \lnPitch{
   \begin{pptMiddle}
-  \pptQuote{../faces/edsger-dijkstra.jpg}{Object oriented programs are offered as alternatives to correct ones... Object-oriented programming is  an \ul{exceptionally bad idea} which could only have originated in California.}{Edsger W. Dijkstra, 1989}
+  \pptQuote{../faces/edsger-dijkstra.jpg}{Object oriented programs are offered as alternatives to correct ones... Object-oriented programming is an \ul{exceptionally bad idea} which could only have originated in California.}{Edsger W. Dijkstra, 1989}
   \end{pptMiddle}}
 
 \lnPitch{\begin{pptMiddle}
@@ -242,7 +242,7 @@ private:
   \end{pptMiddle}}
 
 \lnPitch{\begin{pptMiddle}
-  \pptQuote{../faces/rich-hickey.jpg}{I think that large objected-oriented programs struggle with increasing complexity as you build this large object graph of mutable objects. You know, trying to understand and keep in your mind what will happen when you call a method and what will the side effects be.}{Rich Hickey, 2010 \newline Creator of Clojure}
+  \pptQuote{../faces/rich-hickey.jpg}{I think that large object-oriented programs struggle with increasing complexity as you build this large object graph of mutable objects. You know, trying to understand and keep in your mind what will happen when you call a method and what will the side effects be.}{Rich Hickey, 2010 \newline Creator of Clojure}
   \end{pptMiddle}}
 
 \lnPitch{\pptThought{The \ul{complexity} of object-oriented code remains its primary drawback}}
@@ -266,7 +266,7 @@ private:
 
 \lnQuote
   {david-west}
-  {The contemporary mainstream understanding of objects (which is not behavioral) is but a pale shadow of the original idea and anti-ethical to the original intent.}
+  {The contemporary mainstream understanding of objects (which is not behavioral) is but a pale shadow of the original idea and antithetical to the original intent.}
   {west2004object}
 
 \lnPitch{You may enjoy watching our conversation with Dr. David West, video-recorded and published on YouTube:
@@ -442,9 +442,9 @@ int area(x1, y1, x2, y2) {
 \begin{lnSnippet}[dist-2.txt]
 class Distance {
   private int r; private int l;
-  Distance(l, r) { l = l; r = r; }
+  Distance(l, r) { this.l = l; this.r = r; }
   int value() {
-    int d = right - left;
+    int d = r - l;
     if (d < 0) { d = d * -1; }
     return d; } }
 int area(x1, y1, x2, y2) {
@@ -465,7 +465,7 @@ class Circle {
   private float radius;
   Circle(float r) {
     radius = r; }
-  void getRadius() {
+  float getRadius() {
     return radius; }
   void setRadius(float r) {
     radius = r; }
@@ -495,9 +495,7 @@ c1.area() == c2.area();
   {\small\ffinput{identity-2.txt}}
   \end{pptWide}}
 
-\pptSection[FigureUtils]{State vs. Behavior}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[state-1.txt]
 class Circle {
   private float r;
   void setR(float r) { this.r = r; }
@@ -511,10 +509,8 @@ class FigureUtils {
 Circle c = new Circle();
 c.setR(42.0);
 float s = FigureUtils.area(c);
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[state-2.txt]
 class Circle {
   private float r;
   Circle(float r) { this.r = r; }
@@ -524,36 +520,40 @@ class Circle {
 }
 Circle c = new Circle(42.0);
 float s = c.area();
-\end{ffcode}
-}\par
-How to decide what is \ul{state} and what is \ul{behavior}?
-\end{pptWide}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[FigureUtils]{State vs. Behavior}
+  \begin{pptWide}{2}
+  {\small\ffinput{state-1.txt}}
+  \par\columnbreak\par
+  {\small\ffinput{state-2.txt}}
+  \par
+  How to decide what is \ul{state} and what is \ul{behavior}?
+  \end{pptWide}}
 
-\pptSection[Composition]{4) What is ``composition''?}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[composition-1.txt]
 canvas = new Canvas();
 canvas.addCircle(new Circle(42));
 canvas.draw();
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[composition-2.txt]
 canvas = new Canvas();
 circle = new Circle(42);
 circle.drawOn(canvas);
-\end{ffcode}
-}\par
-\end{pptWide}
-What is composition? What is the ``right'' composition?
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Composition]{4) What is ``composition''?}
+  \begin{pptWide}{2}
+  {\small\ffinput{composition-1.txt}}
+  \par\columnbreak\par
+  {\small\ffinput{composition-2.txt}}
+  \par
+  \end{pptWide}
+  What is composition? What is the ``right'' composition?}
 
-\plush{\pptChapter[O.T.]{Object Thinking vs. Algorithms}}
+\lnPitch{\pptChapter[O.T.]{Object Thinking vs. Algorithms}}
 
-\pptSection[While]{While-Do loop}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[while-1.txt]
 buffer = []
 while true
   c = STDIN.readchar
@@ -564,22 +564,22 @@ while true
   end
   buffer << c
 end
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[while-2.txt]
 $ echo 'Hello, world!' (*@\(\vert\)@*) ruby a.rb
 Hell
 o, w
 orld
-\end{ffcode}
-}
-\end{pptWide}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[While]{While-Do loop}
+  \begin{pptWide}{2}
+  {\small\ffinput{while-1.txt}}
+  \par\columnbreak\par
+  {\small\ffinput{while-2.txt}}
+  \end{pptWide}}
 
-\pptSection[Buffer]{Buffer abstraction}
-\begin{pptWide}{2}
-{\scriptsize\begin{ffcode}
+\begin{lnSnippet}[buffer-1.txt]
 buffer = []
 while true
   c = STDIN.readchar
@@ -590,10 +590,8 @@ while true
   end
   buffer << c
 end
-\end{ffcode}
-}
-\par\columnbreak\par
-{\scriptsize\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[buffer-2.txt]
 class Buffer
   def initialize; @data = []; end
   def push(c)
@@ -610,14 +608,16 @@ while true
   break if c == "\n"
   buffer.push c
 end
-\end{ffcode}
-}
-\end{pptWide}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Buffer]{Buffer abstraction}
+  \begin{pptWide}{2}
+  {\scriptsize\ffinput{buffer-1.txt}}
+  \par\columnbreak\par
+  {\scriptsize\ffinput{buffer-2.txt}}
+  \end{pptWide}}
 
-\pptSection[Loop]{Loop abstraction}
-\begin{pptWide}{2}
-{\scriptsize\begin{ffcode}
+\begin{lnSnippet}[loop-1.txt]
 class Buffer
   def initialize; @data = []; end
   def push(c)
@@ -634,10 +634,8 @@ while true
   break if c == "\n"
   buffer.push c
 end
-\end{ffcode}
-}
-\par\columnbreak\par
-{\scriptsize\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[loop-2.txt]
 class Buffer
   # the same
 end
@@ -653,14 +651,16 @@ end
 buffer = Buffer.new
 pull = Pull.new(buffer)
 while pull.again; end
-\end{ffcode}
-}
-\end{pptWide}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Loop]{Loop abstraction}
+  \begin{pptWide}{2}
+  {\scriptsize\ffinput{loop-1.txt}}
+  \par\columnbreak\par
+  {\scriptsize\ffinput{loop-2.txt}}
+  \end{pptWide}}
 
-\pptSection[Loop]{Loop abstraction}
-\begin{pptWide}{2}
-{\scriptsize\begin{ffcode}
+\begin{lnSnippet}[loop-3.txt]
 class Buffer
   # the same
 end
@@ -676,10 +676,8 @@ end
 buffer = Buffer.new
 pull = Pull.new(buffer)
 while pull.again; end
-\end{ffcode}
-}
-\par\columnbreak\par
-{\scriptsize\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[loop-4.txt]
 class Buffer
   # the same
 end
@@ -693,14 +691,16 @@ class Pulls
   end
 end
 Pulls.new(Pull.new(Buffer.new)).fetch
-\end{ffcode}
-}
-\end{pptWide}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Loop]{Loop abstraction}
+  \begin{pptWide}{2}
+  {\scriptsize\ffinput{loop-3.txt}}
+  \par\columnbreak\par
+  {\scriptsize\ffinput{loop-4.txt}}
+  \end{pptWide}}
 
-\pptSection[Composition]{Object composition}
-\begin{pptWide}{2}
-{\scriptsize\begin{ffcode}
+\begin{lnSnippet}[composition-full.txt]
 class Buffer
   def initialize; @data = []; end
   def push(c)
@@ -734,12 +734,14 @@ Pulls.new(
     Buffer.new
   )
 ).fetch
-\end{ffcode}
-}
-\end{pptWide}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Composition]{Object composition}
+  \begin{pptWide}{2}
+  {\scriptsize\ffinput{composition-full.txt}}
+  \end{pptWide}}
 
-\plush{\pptChapter[Enemies]{Enemies of Object Thinking}}
+\lnPitch{\pptChapter[Enemies]{Enemies of Object Thinking}}
 
 \print{\pptSection[List]{What makes us think as algorithms}}
 \print{Static Methods}
@@ -751,8 +753,8 @@ Pulls.new(
 \print{Inheritance}
 \plush{Global Variables and DI Containers}
 
-\plush{\pptChapter{Post-Test}}
+\lnPitch{\pptChapter{Post-Test}}
 
-\plush{\pptThought{\href{https://github.com/yegor256/hangman}{\ff{https://github.com/yegor256/hangman}}}}
+\lnPitch{\pptThought{\href{https://github.com/yegor256/hangman}{\ff{https://github.com/yegor256/hangman}}}}
 
 \end{document}
