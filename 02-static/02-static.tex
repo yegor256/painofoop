@@ -27,7 +27,7 @@ class FigureUtils {
 }
 \end{lnSnippet}
 \lnPitch{
-  \pptSection[Entities]{How many static ``entities'' do you see here?}
+  \pptSection[Entities]{How Many Static ``Entities'' Do You See Here?}
   \begin{pptWide}{2}
   {\small\ffinput{entities.java}}
   \par\columnbreak\par
@@ -82,9 +82,9 @@ class Circle {
   {west2004object}
 
 \print{\pptSection[Problems]{What's Wrong with ``Utils''?}}
-\print{1) They are \ul{unbreakable} dependencies}
-\print{2) They are \ul{eager}, not lazy}
-\plush{3) They are \ul{not cohesive}}
+  \print{1) They are \ul{unbreakable} dependencies}
+  \print{2) They are \ul{eager}, not lazy}
+  \plush{3) They are \ul{not cohesive}}
 
 \begin{lnSnippet}[coupling-utils.java]
 void paintIt(Circle c) {
@@ -128,7 +128,7 @@ void paintIt(Circle c) {
 }
 \end{lnSnippet}
 \lnPitch{
-  \pptSection[Eagerness]{2) Imperative, not Declarative}
+  \pptSection[Eagerness]{2) Imperative, Not Declarative}
   \begin{pptWide}{2}
   {\small\ffinput{eagerness-imperative.java}}
   \par\columnbreak\par
@@ -195,13 +195,12 @@ new Print(
 )
 \end{lnSnippet}
 \lnPitch{
-  \pptSection[Literals]{Public literals}
+  \pptSection[Literals]{Public Literals}
   \begin{pptWide}{2}
   {\small\ffinput{literals-constants.java}}
   \par\columnbreak\par
   {\small\ffinput{literals-oop.java}}
   \end{pptWide}
-  \par
   We must solve the problem of functionality duplication, not just data duplication~\citep{bugayenko2015blog0706}.}
 
 \begin{lnSnippet}[singletons-singleton.java]
@@ -233,24 +232,23 @@ c.addCircle(c2);
 
 \plush{\pptChapter[FastJson]{FastJson as Example}}
 
-\pptSection{JSONPath}
-\begin{pptWide}{2}
-\pptPic{.8}{size1.png}\par
-\pptPic{.8}{size2.png}\par
-\par\columnbreak\par
-Some mind-blowing statistics:
-\begin{itemize}
-  \item 3 constructors
-  \item 1 interface implemented
-  \item 59 methods at \ff{JSONPath}
-  \item 4,363 lines of code
-  \item 34 inner static classes
-  \item 74 times \ff{static} keyword
-\end{itemize}
-\end{pptWide}
-\par
-{\tiny \url{https://github.com/alibaba/fastjson/blob/master/src/main/java/com/alibaba/fastjson/JSONPath.java}\par}
-\plush{}
-
+\lnPitch{
+  \pptSection{JSONPath}
+  \begin{pptWide}{2}
+  \pptPic{.8}{size1.png}\par
+  \pptPic{.8}{size2.png}\par
+  \par\columnbreak\par
+  Some mind-blowing statistics:
+  \begin{itemize}
+    \item 3 constructors
+    \item 1 interface implemented
+    \item 59 methods at \ff{JSONPath}
+    \item 4,363 lines of code
+    \item 34 inner static classes
+    \item 74 times \ff{static} keyword
+  \end{itemize}
+  \end{pptWide}
+  \par
+  {\tiny \url{https://github.com/alibaba/fastjson/blob/master/src/main/java/com/alibaba/fastjson/JSONPath.java}\par}}
 
 \end{document}
