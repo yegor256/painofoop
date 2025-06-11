@@ -43,9 +43,7 @@ class FigureUtils {
 
 \plush{\pptChapter{Methods}}
 
-\pptSection[Purpose]{What static methods are for?}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[purpose-utils.java]
 class Circle {
   public float radius;
 }
@@ -55,26 +53,28 @@ class GeometryUtils {
     return c.radius * c.radius * 3.14;
   }
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[purpose-oop.java]
 class Circle {
   public float radius;
   float area() {
     return radius * radius * 3.14;
   }
 }
-\end{ffcode}
-}
-\end{pptWide}
-\par
-Most notable Java examples~\citep{bugayenko2015blog0220}:
-FileUtils, IOUtils, and StringUtils from
-\href{https://commons.apache.org/}{Apache Commons};
-Files from \href{https://openjdk.org/projects/jdk7/}{JDK~7};
-Iterators from \href{https://github.com/google/guava}{Google Guava}.
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Purpose]{What static methods are for?}
+  \begin{pptWide}{2}
+  {\small\ffinput{purpose-utils.java}}
+  \par\columnbreak\par
+  {\small\ffinput{purpose-oop.java}}
+  \end{pptWide}
+  \par
+  Most notable Java examples~\citep{bugayenko2015blog0220}:
+  FileUtils, IOUtils, and StringUtils from
+  \href{https://commons.apache.org/}{Apache Commons};
+  Files from \href{https://openjdk.org/projects/jdk7/}{JDK~7};
+  Iterators from \href{https://github.com/google/guava}{Google Guava}.}
 
 \lnQuote
   {david-west}
@@ -86,61 +86,59 @@ Iterators from \href{https://github.com/google/guava}{Google Guava}.
 \print{2) They are \ul{eager}, not lazy}
 \plush{3) They are \ul{not cohesive}}
 
-\pptSection[Coupling]{1) Tight Coupling}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[coupling-utils.java]
 void paintIt(Circle c) {
   float s = GeometryUtils.calcArea(c);
   float p = s * 5.55;
   // paint it using the "p"
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[coupling-oop.java]
 void paintIt(Circle c) {
   float s = c.area();
   float p = s * 5.55;
   // paint it using the "p"
 }
-\end{ffcode}
-}
-\end{pptWide}
-\par
-Which snippet is easier to test? Try to write a test for the first one,
-expecting \ff{s} to be equal to \ff{42.0}~\citep{bugayenko2014blog0505}.
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Coupling]{1) Tight Coupling}
+  \begin{pptWide}{2}
+  {\small\ffinput{coupling-utils.java}}
+  \par\columnbreak\par
+  {\small\ffinput{coupling-oop.java}}
+  \end{pptWide}
+  \par
+  Which snippet is easier to test? Try to write a test for the first one,
+  expecting \ff{s} to be equal to \ff{42.0}~\citep{bugayenko2014blog0505}.}
 
-\pptSection[Eagerness]{2) Imperative, not Declarative}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[eagerness-imperative.java]
 void paintIt(Circle c) {
   float s = GeometryUtils.calcArea(c);
   if (t) { return; }
   float p = s * 5.55;
   // paint it using the "p"
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[eagerness-declarative.java]
 void paintIt(Circle c) {
   float s = new AreaOf(c);
   if (t) { return; }
   float p = s * 5.55;
   // paint it using the "p"
 }
-\end{ffcode}
-}
-\end{pptWide}
-\par
-Which snippet is more eager to calculate the area of the circle?
-Which one does it when it's \ul{really} necessary?~\citep{bugayenko2015blog0226}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Eagerness]{2) Imperative, not Declarative}
+  \begin{pptWide}{2}
+  {\small\ffinput{eagerness-imperative.java}}
+  \par\columnbreak\par
+  {\small\ffinput{eagerness-declarative.java}}
+  \end{pptWide}
+  \par
+  Which snippet is more eager to calculate the area of the circle?
+  Which one does it when it's \ul{really} necessary?~\citep{bugayenko2015blog0226}}
 
-\pptSection[Cohesion]{3) Low Cohesion}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[cohesion-utils.java]
 class GeometryUtils {
   static float calcArea(Circle c);
   static float calcPerimeter(Circle c);
@@ -148,10 +146,8 @@ class GeometryUtils {
   static float calcCosinus(float s);
   // and many more...
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[cohesion-oop.java]
 class Circle {
   float area();
   float perimeter();
@@ -162,18 +158,20 @@ class Angle {
 class Float {
   float cosinus();
 }
-\end{ffcode}
-}
-\end{pptWide}
-\par
-Which class looks more cohesive to you, the utility class \ff{GeometryUtils} or the \ff{Circle}?
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Cohesion]{3) Low Cohesion}
+  \begin{pptWide}{2}
+  {\small\ffinput{cohesion-utils.java}}
+  \par\columnbreak\par
+  {\small\ffinput{cohesion-oop.java}}
+  \end{pptWide}
+  \par
+  Which class looks more cohesive to you, the utility class \ff{GeometryUtils} or the \ff{Circle}?}
 
 \plush{\pptChapter{Attributes}}
 
-\pptSection[Literals]{Public literals}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[literals-constants.java]
 class Constants {
   public static float PI = 3.1415926;
   public static String UTF_8 = "utf-8";
@@ -185,10 +183,8 @@ println("S'il vous pla(*@\^{i}@*)t",
   Constants.LOCALE);
 printf("It is %see speech!",
   Constants.LOCALE);
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[literals-oop.java]
 class Print { }
 class TextInFrench { }
 
@@ -197,16 +193,18 @@ new Print(
     "S'il vous pla(*@\^{i}@*)t"
   )
 )
-\end{ffcode}
-}
-\end{pptWide}
-\par
-We must solve the problem of functionality duplication, not just data duplication~\citep{bugayenko2015blog0706}.
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Literals]{Public literals}
+  \begin{pptWide}{2}
+  {\small\ffinput{literals-constants.java}}
+  \par\columnbreak\par
+  {\small\ffinput{literals-oop.java}}
+  \end{pptWide}
+  \par
+  We must solve the problem of functionality duplication, not just data duplication~\citep{bugayenko2015blog0706}.}
 
-\pptSection[Singletons]{Singletons}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[singletons-singleton.java]
 class Canvas {
   public static Canvas INSTANCE =
     new Canvas();
@@ -216,20 +214,22 @@ class Canvas {
 
 Canvas.INSTANCE.addCircle(c1);
 Canvas.INSTANCE.addCircle(c2);
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[singletons-oop.java]
 c = new Canvas();
 c.addCircle(c1);
 c.addCircle(c2);
-\end{ffcode}
-}
-\end{pptWide}
-\par
-Forget about singletons; never use them. Turn them into dependencies and pass
-them from object to object through the operator \ff{new}~\citep{bugayenko2016blog0627}.
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Singletons]{Singletons}
+  \begin{pptWide}{2}
+  {\small\ffinput{singletons-singleton.java}}
+  \par\columnbreak\par
+  {\small\ffinput{singletons-oop.java}}
+  \end{pptWide}
+  \par
+  Forget about singletons; never use them. Turn them into dependencies and pass
+  them from object to object through the operator \ff{new}~\citep{bugayenko2016blog0627}.}
 
 \plush{\pptChapter[FastJson]{FastJson as Example}}
 
