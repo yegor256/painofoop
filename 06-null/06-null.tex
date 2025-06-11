@@ -23,21 +23,15 @@
   {Over time, more and more errors will \ul{fail fast}, and you'll see the cost of debugging decrease and the \ul{quality} of your system improve.}
   {shore2004fail}
 
-\pptSection{Defaults}
-\begin{pptWide}{2}
-Fail Safe:\par
-{\small\begin{ffcode}
+\begin{lnSnippet}[defaults-safe.java]
 int size(File file) {
   if (!file.exists()) {
     return 0;
   }
   return file.length();
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-Fail Fast:\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[defaults-fast.java]
 int size(File file) {
   if (!file.exists()) {
     throw new IllegalArgumentException(
@@ -46,16 +40,20 @@ int size(File file) {
   }
   return file.length();
 }
-\end{ffcode}
-}
-\end{pptWide}
-\par
-The right snippet is more \ul{fragile}, leading to more errors in runtime, but eventually ... leading to less bugs~\citep{bugayenko2015blog0825}.
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection{Defaults}
+  \begin{pptWide}{2}
+  Fail Safe:\par
+  {\small\ffinput{defaults-safe.java}}
+  \par\columnbreak\par
+  Fail Fast:\par
+  {\small\ffinput{defaults-fast.java}}
+  \end{pptWide}
+  \par
+  The right snippet is more \ul{fragile}, leading to more errors in runtime, but eventually ... leading to less bugs~\citep{bugayenko2015blog0825}.}
 
-\pptSection[Swallowing]{Exception swallowing}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[swallowing-bad.java]
 String read(File file) {
   try {
     return new String(
@@ -66,10 +64,8 @@ String read(File file) {
     return ""; // default
   }
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[swallowing-good.java]
 String read(File file) {
   try {
     return new String(
@@ -81,12 +77,16 @@ String read(File file) {
       e);
   }
 }
-\end{ffcode}
-}
-\end{pptWide}
-\par
-The right snippet is \ul{escalating}, while the left one is \ul{swallowing}.
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Swallowing]{Exception swallowing}
+  \begin{pptWide}{2}
+  {\small\ffinput{swallowing-bad.java}}
+  \par\columnbreak\par
+  {\small\ffinput{swallowing-good.java}}
+  \end{pptWide}
+  \par
+  The right snippet is \ul{escalating}, while the left one is \ul{swallowing}.}
 
 \plush{
   \pptSection[SDLC]{Software Development Lifecycle}
@@ -118,45 +118,41 @@ The right snippet is \ul{escalating}, while the left one is \ul{swallowing}.
 
 \plush{\pptChapter[Returning]{Alternatives to Returning NULL}}
 
-\pptSection[Return]{Returning NULL or raising an error?}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[return-null.java]
 String nameOfEmployee(int id) {
   if (!em.existsInDb(id)) {
     return null;
   }
   return em.readFromDb(id);
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[return-exception.java]
 String nameOfEmployee(int id) {
   if (em.existsInDb(id)) {
     throw new EmployeeNotFound(id);
   }
   return em.readFromDb(id);
 }
-\end{ffcode}
-}
-\end{pptWide}
-\par
-The right snippet is ``Fail Fast,'' that's why more preferable~\citep{bugayenko2014blog0513, bugayenko2015blog1201}.
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Return]{Returning NULL or raising an error?}
+  \begin{pptWide}{2}
+  {\small\ffinput{return-null.java}}
+  \par\columnbreak\par
+  {\small\ffinput{return-exception.java}}
+  \end{pptWide}
+  \par
+  The right snippet is ``Fail Fast,'' that's why more preferable~\citep{bugayenko2014blog0513, bugayenko2015blog1201}.}
 
-\pptSection[List]{Returning a List or a NULL?}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[list-null.java]
 String nameOfEmployee(int id) {
   if (!em.existsInDb(id)) {
     return null;
   }
   return em.readFromDb(id);
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[list-collection.java]
 List<String> nameOfEmployee(int id) {
   List<String> names =
     new ArrayList<>(0);
@@ -165,21 +161,23 @@ List<String> nameOfEmployee(int id) {
   }
   return names;
 }
-\end{ffcode}
-}
-\end{pptWide}
-\par
-There are mo elegant alternatives in most languages, like |Optional| in Java~8+~\citep{bugayenko2018blog0522}.
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[List]{Returning a List or a NULL?}
+  \begin{pptWide}{2}
+  {\small\ffinput{list-null.java}}
+  \par\columnbreak\par
+  {\small\ffinput{list-collection.java}}
+  \end{pptWide}
+  \par
+  There are mo elegant alternatives in most languages, like |Optional| in Java~8+~\citep{bugayenko2018blog0522}.}
 
 \plush{
   \begin{pptMiddle}
   \pptPic{0.8}{tweet-vote.png}
   \end{pptMiddle}}
 
-\pptSection[Fake]{Returning a Fake Entity}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[fake-null.java]
 Employee employee(int id) {
   if (!em.existsInDb(id)) {
     return null;
@@ -190,10 +188,8 @@ Employee employee(int id) {
 e = employee(42);
 print(e.id());
 print(e.salary());
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[fake-entity.java]
 Employee employee(int id) {
   if (!em.existsInDb(id)) {
     return FakeEmployee(id);
@@ -205,17 +201,18 @@ e = employee(42);
 print(e.id());
 
 print(e.salary());
-\end{ffcode}
-}
-\end{pptWide}
-\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Fake]{Returning a Fake Entity}
+  \begin{pptWide}{2}
+  {\small\ffinput{fake-null.java}}
+  \par\columnbreak\par
+  {\small\ffinput{fake-entity.java}}
+  \end{pptWide}}
 
 \plush{\pptChapter[Checking]{Alternatives to Checking for NULL}}
 
-\pptSection[??-operator]{null-coalescing operator in C\#}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[coalescing-manual.cs]
 int? sizeOf(File f) {
   if (!f.exists()) {
     return null;
@@ -227,10 +224,8 @@ int? s = sizeOf(f);
 if (s == null) {
   s = 0;
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[coalescing-operator.cs]
 int? sizeOf(File f) {
   if (!f.exists()) {
     return null;
@@ -239,16 +234,18 @@ int? sizeOf(File f) {
 }
 
 int s = sizeOf(f) ?? 0;
-\end{ffcode}
-}
-\end{pptWide}
-\par
-Both snippets are bad design, though. They are workarounds.
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[??-operator]{null-coalescing operator in C\#}
+  \begin{pptWide}{2}
+  {\small\ffinput{coalescing-manual.cs}}
+  \par\columnbreak\par
+  {\small\ffinput{coalescing-operator.cs}}
+  \end{pptWide}
+  \par
+  Both snippets are bad design, though. They are workarounds.}
 
-\pptSection[Ruby]{\texttt{\&.} operator in Ruby}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[ruby-manual.rb]
 def employee(id)
   unless db.exists?(id)
     return nil
@@ -258,10 +255,8 @@ end
 
 e = employee(42)
 puts e.name unless e.nil?
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[ruby-operator.rb]
 def employee(id)
   unless db.exists?(id)
     return nil
@@ -270,16 +265,18 @@ def employee(id)
 end
 
 puts employee(42)&.name
-\end{ffcode}
-}
-\end{pptWide}
-\par
-Actually, the snippets produce different output when the employee is not found. How are they different?
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Ruby]{\texttt{\&.} operator in Ruby}
+  \begin{pptWide}{2}
+  {\small\ffinput{ruby-manual.rb}}
+  \par\columnbreak\par
+  {\small\ffinput{ruby-operator.rb}}
+  \end{pptWide}
+  \par
+  Actually, the snippets produce different output when the employee is not found. How are they different?}
 
-\pptSection[Kotlin]{NULL-awareness in Kotlin}
-\pptPin{\pptPic{0.9}{elvis-operator.jpg}}
-{\small\begin{ffcode}
+\begin{lnSnippet}[kotlin-null.kt]
 var a: String = "abc"
 a = null // compilation error
 
@@ -288,15 +285,15 @@ b = null // no error here
 
 println(b?.length) // prints what?
 println(b?.length ?: -1) // Elvis operator
-\end{ffcode}
-}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Kotlin]{NULL-awareness in Kotlin}
+  \pptPin{\pptPic{0.9}{elvis-operator.jpg}}
+  {\small\ffinput{kotlin-null.kt}}}
 
 \plush{\pptChapter[Checking]{Alternatives to Storing NULL}}
 
-\pptSection[Immutability]{Immutable objects}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[immutable-mutable.java]
 class Employee {
   private String name = null;
   void setName(String n) {
@@ -306,10 +303,8 @@ class Employee {
 
 e = new Employee();
 e.setName("Jeff");
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[immutable-immutable.java]
 class Employee {
   private final String name;
   Employee(String n) {
@@ -322,37 +317,40 @@ class Employee {
 
 e1 = new Employee();
 e2 = e1.withName("Jeff");
-\end{ffcode}
-}
-\end{pptWide}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Immutability]{Immutable objects}
+  \begin{pptWide}{2}
+  {\small\ffinput{immutable-mutable.java}}
+  \par\columnbreak\par
+  {\small\ffinput{immutable-immutable.java}}
+  \end{pptWide}}
 
 \plush{\pptChapter[Objects]{Object Thinking}}
 
-\pptBanner{Pay respect to your objects!}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[thinking-code.java]
 d = getDepartment(42);
 e = d.getEmployee("Jeff");
 if (e != null) {
   printf("Hello, %s", e.name());
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[thinking-conversation.txt]
 - Hello, is it the department no.42?
 - Yes.
 - Let me talk to your employee "Jeff".
 - Hold the line please...
 - Hello.
 - Are you NULL?
-\end{ffcode}
-}
-\includegraphics[width=3in]{oops.jpg}
-\end{pptWide}
-\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptBanner{Pay respect to your objects!}
+  \begin{pptWide}{2}
+  {\small\ffinput{thinking-code.java}}
+  \par\columnbreak\par
+  {\small\ffinput{thinking-conversation.txt}}
+  \includegraphics[width=3in]{oops.jpg}
+  \end{pptWide}}
 
 \plush{\pptChapter[Spring]{Spring Boot}}
 

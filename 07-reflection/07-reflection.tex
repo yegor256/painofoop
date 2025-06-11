@@ -13,25 +13,24 @@
 
 \plush{\pptChapter[What?]{What Is Reflection?}}
 
-\pptSection[Example]{Simple Example of Reflection in Java}
-\begin{multicols}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[reflection-example.java]
 void print(Object x) {
   if (x instance of File) {
     System.out.println("Yes!");
   }
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-``Reflective computational systems allow computations to observe and
-modify properties of their own behavior. It would be desirable for computations to avail themselves of these
-reflective capabilities, examining themselves in order to make use of
-\ul{meta-level information} in decisions about what to do next.''
-\lnSource{sobel1996introduction}
-\end{multicols}
-\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Example]{Simple Example of Reflection in Java}
+  \begin{multicols}{2}
+  {\small\ffinput{reflection-example.java}}
+  \par\columnbreak\par
+  ``Reflective computational systems allow computations to observe and
+  modify properties of their own behavior. It would be desirable for computations to avail themselves of these
+  reflective capabilities, examining themselves in order to make use of
+  \ul{meta-level information} in decisions about what to do next.''
+  \lnSource{sobel1996introduction}
+  \end{multicols}}
 
 \lnQuote
   [Yue Li]
@@ -41,10 +40,7 @@ reflective capabilities, examining themselves in order to make use of
 
 \plush{\pptChapter[Casting]{Type Casting and Subsumption}}
 
-\pptSection[Iterable]{Iterable \(\to\) Collection}
-\begin{pptWide}{2}
-Downcasting (\textcolor{red}{wrong!}):\par
-{\small\begin{ffcode}
+\begin{lnSnippet}[casting-wrong.java]
 int sizeOf(Iterable items) {
   int size = 0;
   if (items (*@\textcolor{orange}{instanceof}@*) Collection) {
@@ -56,11 +52,8 @@ int sizeOf(Iterable items) {
   }
   return size;
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-Method overloading (\textcolor{green}{right!}):\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[casting-right.java]
 int sizeOf(Iterable items) {
   int size = 0;
   for (Object item : items) {
@@ -72,15 +65,18 @@ int sizeOf(Iterable items) {
 int sizeOf((*@\textcolor{orange}{Collection}@*) items) {
   return items.size();
 }
-\end{ffcode}
-}
-\end{pptWide}
-\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Iterable]{Iterable \(\to\) Collection}
+  \begin{pptWide}{2}
+  Downcasting (\textcolor{red}{wrong!}):\par
+  {\small\ffinput{casting-wrong.java}}
+  \par\columnbreak\par
+  Method overloading (\textcolor{green}{right!}):\par
+  {\small\ffinput{casting-right.java}}
+  \end{pptWide}}
 
-\pptSection[Coupling]{Implicit Coupling}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[coupling-method.java]
 int sizeOf(Iterable items) {
   int size = 0;
   (*@\textcolor{orange}{if}@*) (items instanceof Collection) {
@@ -92,10 +88,8 @@ int sizeOf(Iterable items) {
   }
   return size;
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[coupling-usage.java]
 Iterable<Book> books1 =
   new PgBooks1("localhost:5432");
 int s1 = (*@\textcolor{orange}{sizeOf}@*)(books1);
@@ -103,19 +97,19 @@ int s1 = (*@\textcolor{orange}{sizeOf}@*)(books1);
 Collection<Book> books2 =
   new PgBooks2("localhost:5432");
 int s2 = (*@\textcolor{orange}{sizeOf}@*)(books2);
-\end{ffcode}
-}
-\end{pptWide}
-\par
-It may be hard to understand why |s2| is evaluated much faster than |s1|,
-while the signature of |sizeOf()| is the same~\citep{bugayenko2015blog0402}.
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Coupling]{Implicit Coupling}
+  \begin{pptWide}{2}
+  {\small\ffinput{coupling-method.java}}
+  \par\columnbreak\par
+  {\small\ffinput{coupling-usage.java}}
+  \end{pptWide}
+  \par
+  It may be hard to understand why |s2| is evaluated much faster than |s1|,
+  while the signature of |sizeOf()| is the same~\citep{bugayenko2015blog0402}.}
 
-\pptSection[JEP-394]{Pattern Matching in Java 16}%
-\begin{pptWide}{2}%
-Java 11 (\textcolor{red}{wrong!}):
-\par
-{\small\begin{ffcode}
+\begin{lnSnippet}[java11-pattern.java]
 int sizeOf(Iterable items) {
   int size = 0;
   if (items (*@\textcolor{orange}{instanceof}@*) Collection) {
@@ -127,13 +121,8 @@ int sizeOf(Iterable items) {
   }
   return size;
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-\pptPin{\raggedleft\includegraphics[width=.3\linewidth]{java-logo.pdf}}%
-Java 16 (\textcolor{red}{\textbf{even worse!}}):
-\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[java16-pattern.java]
 int sizeOf(Iterable items) {
   int size = 0;
   if ((*@\textcolor{orange}{items instanceof Collection c}@*)) {
@@ -145,16 +134,21 @@ int sizeOf(Iterable items) {
   }
   return size;
 }
-\end{ffcode}
-}
-\end{pptWide}
-\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[JEP-394]{Pattern Matching in Java 16}%
+  \begin{pptWide}{2}%
+  Java 11 (\textcolor{red}{wrong!}):
+  \par
+  {\small\ffinput{java11-pattern.java}}
+  \par\columnbreak\par
+  \pptPin{\raggedleft\includegraphics[width=.3\linewidth]{java-logo.pdf}}%
+  Java 16 (\textcolor{red}{\textbf{even worse!}}):
+  \par
+  {\small\ffinput{java16-pattern.java}}
+  \end{pptWide}}
 
-\pptSection[Matching]{C\#, Rust, and pattern matching}
-\begin{pptWide}{2}
-C\#:\par
-{\scriptsize\begin{ffcode}
+\begin{lnSnippet}[csharp-pattern.cs]
 public int sizeOf<T>(IEnumerable<T> items) {
   if (items (*@\textcolor{orange}{is}@*) IList<T> list) {
     return list.Count;
@@ -162,16 +156,8 @@ public int sizeOf<T>(IEnumerable<T> items) {
     return // count them one by one
   }
 }
-\end{ffcode}
-}
-\par
-Some other languages have \ul{pattern matching} feature,
-including Kotlin, Scala, Haskell, Elixir, Swift, F\#, and Erlang, ...
-which \textcolor{red}{contradicts} the principle of encapsulation.
-\par\columnbreak\par
-Rust:
-\par
-{\scriptsize\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[rust-pattern.rs]
 enum Color {
   RGB(u8, u8, u8),
   Transparent
@@ -188,19 +174,26 @@ fn main() {
   let c = Color::RGB(64, 16, 0);
   paint(c);
 }
-\end{ffcode}
-}
-\end{pptWide}
-\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Matching]{C\#, Rust, and pattern matching}
+  \begin{pptWide}{2}
+  C\#:\par
+  {\scriptsize\ffinput{csharp-pattern.cs}}
+  \par
+  Some other languages have \ul{pattern matching} feature,
+  including Kotlin, Scala, Haskell, Elixir, Swift, F\#, and Erlang, ...
+  which \textcolor{red}{contradicts} the principle of encapsulation.
+  \par\columnbreak\par
+  Rust:
+  \par
+  {\scriptsize\ffinput{rust-pattern.rs}}
+  \end{pptWide}
+  \par}
 
 \plush{\pptChapter[Factory]{Factory Method}}
 
-\pptSection[IF]{Conditional object construction}
-\begin{pptWide}{2}
-This is \textcolor{red}{wrong}:
-\par
-{\scriptsize\begin{ffcode}
+\begin{lnSnippet}[factory-wrong.java]
 interface Figure
   int area();
 class Square implements Figure
@@ -217,12 +210,8 @@ class FactoryOfFigures
       return (*@\textcolor{orange}{new Polygon(sides)}@*);
     }
   }
-\end{ffcode}
-}
-\par\columnbreak\par
-This is \textcolor{green}{better}:
-\par
-{\scriptsize\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[factory-right.java]
 class PolymorphicFigure implements Figure
   PolymorphicFigure(int sides)
   @Override int area() {
@@ -234,19 +223,23 @@ class PolymorphicFigure implements Figure
       return (*@\textcolor{orange}{new Polygon(sides).area()}@*);
     }
   }
-\end{ffcode}
-}
-\par
-Here, the semantic of object construction is not visible to
-the client---the \ul{coupling} is ``loose''~\citep{bugayenko2022blog0605}.
-\end{pptWide}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[IF]{Conditional object construction}
+  \begin{pptWide}{2}
+  This is \textcolor{red}{wrong}:
+  \par
+  {\scriptsize\ffinput{factory-wrong.java}}
+  \par\columnbreak\par
+  This is \textcolor{green}{better}:
+  \par
+  {\scriptsize\ffinput{factory-right.java}}
+  \par
+  Here, the semantic of object construction is not visible to
+  the client---the \ul{coupling} is ``loose''~\citep{bugayenko2022blog0605}.
+  \end{pptWide}}
 
-\pptSection[forName]{Generating class name from a string}
-\begin{pptWide}{2}
-This is \textcolor{red}{wrong}:
-\par
-{\scriptsize\begin{ffcode}
+\begin{lnSnippet}[forname-wrong.java]
 interface Figure
   int area();
 
@@ -259,12 +252,8 @@ class FactoryOfFigures
     Class<?> c = (*@\textcolor{orange}{Class.forName}@*)(name);
     return c.getConstructor()(*@\textcolor{orange}{.newInstance()}@*);
   }
-\end{ffcode}
-}
-\par\columnbreak\par
-This is \textcolor{green}{better}:
-\par
-{\scriptsize\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[forname-right.java]
 class PolymorphicFigure implements Figure
   PolymorphicFigure(String name)
   @Override int area() {
@@ -276,19 +265,25 @@ class PolymorphicFigure implements Figure
       return new Polygon(?).area();
     }
   }
-\end{ffcode}
-}
-\par
-This is better since the mechanics of class finding
-is explicit---no surprises expected~\citep{bugayenko2017blog1114}.
-\end{pptWide}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[forName]{Generating class name from a string}
+  \begin{pptWide}{2}
+  This is \textcolor{red}{wrong}:
+  \par
+  {\scriptsize\ffinput{forname-wrong.java}}
+  \par\columnbreak\par
+  This is \textcolor{green}{better}:
+  \par
+  {\scriptsize\ffinput{forname-right.java}}
+  \par
+  This is better since the mechanics of class finding
+  is explicit---no surprises expected~\citep{bugayenko2017blog1114}.
+  \end{pptWide}}
 
 \plush{\pptChapter[Classpath]{Classpath Scanning}}
 
-\pptSection[Class]{Finding Java classes}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[reflections-interface.java]
 interface Foo {}
 
 class Bar implements Foo {}
@@ -298,10 +293,8 @@ Reflections rts =
 Set<Class<?>> types = rts.get(
   SubTypes.of(Foo.class).asClass()
 );
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[reflections-annotation.java]
 public @interface Foo {}
 
 @Foo
@@ -314,19 +307,21 @@ Set<Class<?>> types = rts.get(
     (*@\textcolor{orange}{TypesAnnotated.with}@*)(Foo.class)
   ).asClass()
 );
-\end{ffcode}
-}
-\end{pptWide}
-\par
-The library is called \href{https://github.com/ronmamo/reflections}{Reflections}.
-Instead, use explicit object instantiation.
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Class]{Finding Java classes}
+  \begin{pptWide}{2}
+  {\small\ffinput{reflections-interface.java}}
+  \par\columnbreak\par
+  {\small\ffinput{reflections-annotation.java}}
+  \end{pptWide}
+  \par
+  The library is called \href{https://github.com/ronmamo/reflections}{Reflections}.
+  Instead, use explicit object instantiation.}
 
 \plush{\pptChapter{Annotations}}
 
-\pptSection[Class]{I lieu of static methods}
-\begin{pptWide}{2}
-{\scriptsize\begin{ffcode}
+\begin{lnSnippet}[annotations-static.java]
 interface Pub
   String isbn();
 
@@ -341,10 +336,8 @@ class Journal implements Pub
     /* ... */
   public (*@\textcolor{orange}{static}@*) String category()
     return "journal";
-\end{ffcode}
-}
-\par\columnbreak\par
-{\scriptsize\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[annotations-annotation.java]
 interface Pub
   String isbn();
 
@@ -362,15 +355,17 @@ class Book implements Pub
 class Journal implements Pub
   @Override public String isbn()
     /* ... */
-\end{ffcode}
-}
-\end{pptWide}
-\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Class]{I lieu of static methods}
+  \begin{pptWide}{2}
+  {\scriptsize\ffinput{annotations-static.java}}
+  \par\columnbreak\par
+  {\scriptsize\ffinput{annotations-annotation.java}}
+  \end{pptWide}
+  \par}
 
-\pptSection[Method]{Locating methods}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[path-annotation.java]
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.SOURCE)
 public @interface Path
@@ -380,10 +375,8 @@ class BookController
   (*@\textcolor{orange}{@Path("/book-title")}@*)
   String title()
     // Build HTML page and return it
-\end{ffcode}
-}
-\par\columnbreak\par
-{\scriptsize\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[path-dispatch.java]
 String dispatch(String url) {
   c = new BooksController();
   b = BooksController.class;
@@ -397,17 +390,19 @@ String dispatch(String url) {
   }
   return "404 Page not found";
 }
-\end{ffcode}
-}
-\end{pptWide}
-\par
-The |BookController| doesn't know how exactly the data
-in its annotation is being used and by whom~\citep{bugayenko2016blog0412}.
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Method]{Locating methods}
+  \begin{pptWide}{2}
+  {\small\ffinput{path-annotation.java}}
+  \par\columnbreak\par
+  {\scriptsize\ffinput{path-dispatch.java}}
+  \end{pptWide}
+  \par
+  The |BookController| doesn't know how exactly the data
+  in its annotation is being used and by whom~\citep{bugayenko2016blog0412}.}
 
-\pptSection[DIC]{Dependency Injection Container}
-\begin{pptWide}{2}
-{\scriptsize\begin{ffcode}
+\begin{lnSnippet}[dic-usage.java]
 interface Shipment
   int cost();
 
@@ -423,10 +418,8 @@ container = new Container();
 c = container(*@\textcolor{orange}{.make(Cart.class)}@*);
 c.setBook(new Book("1984"));
 x = c.cost();
-\end{ffcode}
-}
-\par\columnbreak\par
-{\scriptsize\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[dic-container.java]
 class Container {
   private HashMap<Class, Object> cache =
     new ConcurrentHashMap<>();
@@ -440,17 +433,19 @@ class Container {
     // 7. Return "cart".
   }
 }
-\end{ffcode}
-}
-How do you think, at the step no.2,
-what class will be instantiated?~\citep{bugayenko2014blog1003}
-\end{pptWide}
-\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[DIC]{Dependency Injection Container}
+  \begin{pptWide}{2}
+  {\scriptsize\ffinput{dic-usage.java}}
+  \par\columnbreak\par
+  {\scriptsize\ffinput{dic-container.java}}
+  How do you think, at the step no.2,
+  what class will be instantiated?~\citep{bugayenko2014blog1003}
+  \end{pptWide}
+  \par}
 
-\pptSection[DI]{Dependency Injection \textit{without} a Container}
-\begin{pptWide}{2}
-{\scriptsize\begin{ffcode}
+\begin{lnSnippet}[di-container.java]
 interface Shipment
   int cost();
 
@@ -466,10 +461,8 @@ container = new Container();
 c = container.make(Cart.class);
 c.setBook(new Book("1984"));
 x = c.cost();
-\end{ffcode}
-}
-\par\columnbreak\par
-{\scriptsize\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[di-constructor.java]
 interface Shipment
   int cost();
 
@@ -484,17 +477,19 @@ class Cart
 
 c = (*@\textcolor{orange}{new Cart(new MyShipment(), new Book("1984"))}@*);
 x = c.cost();
-\end{ffcode}
-}
-\end{pptWide}
-\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[DI]{Dependency Injection \textit{without} a Container}
+  \begin{pptWide}{2}
+  {\scriptsize\ffinput{di-container.java}}
+  \par\columnbreak\par
+  {\scriptsize\ffinput{di-constructor.java}}
+  \end{pptWide}
+  \par}
 
 \plush{\pptChapter[Types]{Discrimination by Type}}
 
-\pptSection[Polymorphism]{Polymorphism vs. Casting}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[polymorphism-classes.java]
 interface Figure
   void rotate(int d);
 class Circle implements Figure
@@ -503,12 +498,8 @@ class Circle implements Figure
 class Square implements Figure
   void rotate(int d) //...
   int side() //...
-\end{ffcode}
-}
-\par
-Philosophically speaking, type casting is discrimination~\citep{bugayenko2020blog1110}.
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[polymorphism-methods.java]
 // This is polymorphism:
 int area(Figure f)
   return f(*@\textcolor{orange}{.area()}@*);
@@ -522,10 +513,16 @@ int area(Figure f)
   } else {
     throw new Exception("oops");
   }
-\end{ffcode}
-}
-\end{pptWide}
-\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Polymorphism]{Polymorphism vs. Casting}
+  \begin{pptWide}{2}
+  {\small\ffinput{polymorphism-classes.java}}
+  \par
+  Philosophically speaking, type casting is discrimination~\citep{bugayenko2020blog1110}.
+  \par\columnbreak\par
+  {\small\ffinput{polymorphism-methods.java}}
+  \end{pptWide}
+  \par}
 
 \end{document}

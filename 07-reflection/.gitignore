@@ -1,3 +1,5 @@
 !java-logo.pdf
 *.java
 *.rb
+*.cs
+*.rs

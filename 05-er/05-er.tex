@@ -19,9 +19,7 @@
 
 \plush{\pptChapter[Alternatives]{Examples and Alternatives}}
 
-\pptSection{Parser}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[parser-utils.java]
 class Parser {
   static int parseInt(String t) {
     // Parse String into Integer
@@ -33,10 +31,8 @@ class Parser {
 }
 
 int x = Parser.parseInt("42");
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[parser-oop.java]
 class StringAsInt implements Number {
   private final String txt;
   StringAsInt(String t) { this.txt = t; }
@@ -48,14 +44,16 @@ class StringAsInt implements Number {
 
 Number n = new StringAsInt("42");
 int x = n.intValue();
-\end{ffcode}
-}
-\end{pptWide}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection{Parser}
+  \begin{pptWide}{2}
+  {\small\ffinput{parser-utils.java}}
+  \par\columnbreak\par
+  {\small\ffinput{parser-oop.java}}
+  \end{pptWide}}
 
-\pptSection{Reader}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[reader-utils.java]
 class Reader {
   static char readChar(InputStream i) {
     // Read the next char from the
@@ -66,10 +64,8 @@ class Reader {
 
 InputStream i = new FileInputStream(..);
 char c = Reader.readChar(i);
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[reader-oop.java]
 class Chars
   private final InputStream is;
   Chars(InputStream i)
@@ -83,14 +79,16 @@ class Chars
 InputStream i = new FileInputStream(..);
 Chars chars = new Chars(i);
 char c = chars.next();
-\end{ffcode}
-}
-\end{pptWide}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection{Reader}
+  \begin{pptWide}{2}
+  {\small\ffinput{reader-utils.java}}
+  \par\columnbreak\par
+  {\small\ffinput{reader-oop.java}}
+  \end{pptWide}}
 
-\pptSection{Controller}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[controller-traditional.java]
 class SimpleController {
   @GET
   @Path("/index")
@@ -104,10 +102,8 @@ class SimpleController {
     // and return HTTP 303
   }
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[controller-oop.java]
 class IndexPage implements HttpPage
   HttpResponse process(HttpRequest e) {
     // Build an index page and return
@@ -121,14 +117,16 @@ new AllPages(
   new IndexPage(),
   new UpdatePage()
 );
-\end{ffcode}
-}
-\end{pptWide}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection{Controller}
+  \begin{pptWide}{2}
+  {\small\ffinput{controller-traditional.java}}
+  \par\columnbreak\par
+  {\small\ffinput{controller-oop.java}}
+  \end{pptWide}}
 
-\pptSection{Validator}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[validator-traditional.java]
 class Validator {
   bool isValid(int age) {
     return age >= 18;
@@ -141,10 +139,8 @@ if (!v.isValid(a)) {
     "Age is not valid"
   );
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\scriptsize\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[validator-oop.java]
 interface Age
   int value();
 class DefaultAge implements Age
@@ -163,14 +159,16 @@ class ValidAge implements Age {
       throw new Exception("Age is not valid");
     return v;
 Age a = new ValidAge(new DefaultAge(23));
-\end{ffcode}
-}
-\end{pptWide}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection{Validator}
+  \begin{pptWide}{2}
+  {\small\ffinput{validator-traditional.java}}
+  \par\columnbreak\par
+  {\scriptsize\ffinput{validator-oop.java}}
+  \end{pptWide}}
 
-\pptSection{Encoder}
-\begin{pptWide}{2}
-{\scriptsize\begin{ffcode}
+\begin{lnSnippet}[encoder-utils.java]
 package java.net;
 
 class URLEncoder {
@@ -182,12 +180,8 @@ class URLEncoder {
 }
 String e = URLEncoder.encode("@foo");
 e.equals("%40foo");
-\end{ffcode}
-}
-You may want to read more about this in
-my blog~\citep{bugayenko2015blog0309,bugayenko2017blog0912}.
-\par\columnbreak\par
-{\scriptsize\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[encoder-oop.java]
 class Encoded implements String {
   private final String origin;
   private final String encoding;
@@ -203,12 +197,18 @@ class Encoded implements String {
 }
 String e = new Encoded("@foo");
 e.value().equals("%40foo");
-\end{ffcode}
-}
-\end{pptWide}
-\par
-The right snippet won't work in Java, since \ff{String} is a final class, not an interface, unfortunately.
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection{Encoder}
+  \begin{pptWide}{2}
+  {\scriptsize\ffinput{encoder-utils.java}}
+  You may want to read more about this in
+  my blog~\citep{bugayenko2015blog0309,bugayenko2017blog0912}.
+  \par\columnbreak\par
+  {\scriptsize\ffinput{encoder-oop.java}}
+  \end{pptWide}
+  \par
+  The right snippet won't work in Java, since \ff{String} is a final class, not an interface, unfortunately.}
 
 \plush{\pptSection[Proof]{Proof: Classes with -ER Suffixes Are More Complex}
   \begin{multicols}{2}
@@ -223,9 +223,7 @@ The right snippet won't work in Java, since \ff{String} is a final class, not an
 
 \plush{\pptChapter[-Client]{-Client Suffix}}
 
-\pptSection[AWS]{AWS Java Client}
-\begin{pptWide}{2}
-{\scriptsize\begin{ffcode}
+\begin{lnSnippet}[aws-client.java]
 class AmazonS3Client {
   createBucket(String name);
   deleteBucket(String name);
@@ -239,35 +237,35 @@ client = new AmazonS3Client("us-1");
 client.createBucket("foo");
 client.putObject("foo", "a.txt");
 client.writeObject("foo", "a.txt", "data");
-\end{ffcode}
-}
-\par\columnbreak\par
-{\scriptsize\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[aws-oop.java]
 region = new S3Region("us-1");
 bucket = region.createBucket("foo");
 object = bucket.putObject("a.txt");
 object.write("data");
-\end{ffcode}
-}
-It's here: \href{https://github.com/jcabi/jcabi-s3}{jcabi/jcabi-s3}.
-\end{pptWide}
-\par
-The left snippet is:
-\begin{inparaenum}[1)]
-\item procedural,
-\item hard to test,
-\item resembles a utility class,
-and
-\item is hard to extend.
-\end{inparaenum}
-The right one is object-oriented.
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[AWS]{AWS Java Client}
+  \begin{pptWide}{2}
+  {\scriptsize\ffinput{aws-client.java}}
+  \par\columnbreak\par
+  {\scriptsize\ffinput{aws-oop.java}}
+  It's here: \href{https://github.com/jcabi/jcabi-s3}{jcabi/jcabi-s3}.
+  \end{pptWide}
+  \par
+  The left snippet is:
+  \begin{inparaenum}[1)]
+  \item procedural,
+  \item hard to test,
+  \item resembles a utility class,
+  and
+  \item is hard to extend.
+  \end{inparaenum}
+  The right one is object-oriented.}
 
 \plush{\pptChapter[Performance]{What About Performance?}}
 
-\pptSection[Sticky]{Sticky Parseable Object}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[sticky-original.java]
 class StringAsInt implements Number {
   private final String txt;
   StringAsInt(String t) { this.txt = t; }
@@ -279,10 +277,8 @@ class StringAsInt implements Number {
 
 Number n = new StringAsInt("42");
 int x = n.intValue();
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[sticky-cached.java]
 class StickyInt implements Number {
   private final Number origin;
   private int cache = 0;
@@ -294,16 +290,18 @@ class StickyInt implements Number {
       cached = true;
     }
     return cache; } }
-\end{ffcode}
-}
-\end{pptWide}
-\par
-Is it thread-safe though?
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Sticky]{Sticky Parseable Object}
+  \begin{pptWide}{2}
+  {\small\ffinput{sticky-original.java}}
+  \par\columnbreak\par
+  {\small\ffinput{sticky-cached.java}}
+  \end{pptWide}
+  \par
+  Is it thread-safe though?}
 
-\pptSection[Safe]{Thread-safe Sticky Parseable Object}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[threadsafe-unsafe.java]
 class StickyInt implements Number {
   private final Number origin;
   private int cache = 0;
@@ -316,10 +314,8 @@ class StickyInt implements Number {
     return cache;
   }
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\scriptsize\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[threadsafe-safe.java]
 class StickyInt implements Number {
   private final Number origin;
   private final AtomicReference<Integer> cache =
@@ -336,18 +332,20 @@ class StickyInt implements Number {
     );
   }
 }
-\end{ffcode}
-}
-\end{pptWide}
-\par
-The left snippet is not thread-safety, while the right one is.
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Safe]{Thread-safe Sticky Parseable Object}
+  \begin{pptWide}{2}
+  {\small\ffinput{threadsafe-unsafe.java}}
+  \par\columnbreak\par
+  {\scriptsize\ffinput{threadsafe-safe.java}}
+  \end{pptWide}
+  \par
+  The left snippet is not thread-safety, while the right one is.}
 
 \plush{\pptChapter[MVC]{Model-View-Controller (MVC)}}
 
-\pptSection[Controller]{The Controller}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[mvc-controller.java]
 class Controller {
   @GET
   @Path("/b{id}")
@@ -358,18 +356,17 @@ class Controller {
     return v.renderHtml();
   }
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-\pptPic{0.7}{mvc.png}\par
-This is bad OOP~\citep{bugayenko2016blog1213}.
-\end{pptWide}
-\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Controller]{The Controller}
+  \begin{pptWide}{2}
+  {\small\ffinput{mvc-controller.java}}
+  \par\columnbreak\par
+  \pptPic{0.7}{mvc.png}\par
+  This is bad OOP~\citep{bugayenko2016blog1213}.
+  \end{pptWide}}
 
-\pptSection[HTML]{Book as HTML}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[html-controller.java]
 class Controller {
   @GET
   @Path("/b{id}")
@@ -380,10 +377,8 @@ class Controller {
     return v.renderHtml();
   }
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\scriptsize\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[html-oop.java]
 interface Book
   String title();
 class PgBook implements Book
@@ -397,12 +392,16 @@ class PageOnPath implements Page
   private final String path;
   private final Page origin;
   String html() // renders if path matches
-\end{ffcode}
-}
-\end{pptWide}
-\par
-Check \href{https://github.com/yegor256/jpages}{yegor256/jpages} and \href{https://github.com/yegor256/takes}{yegor256/takes}.
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[HTML]{Book as HTML}
+  \begin{pptWide}{2}
+  {\small\ffinput{html-controller.java}}
+  \par\columnbreak\par
+  {\scriptsize\ffinput{html-oop.java}}
+  \end{pptWide}
+  \par
+  Check \href{https://github.com/yegor256/jpages}{yegor256/jpages} and \href{https://github.com/yegor256/takes}{yegor256/takes}.}
 
 \plush{\begin{pptMiddle}
   \pptChapter[Takes]{Rultor + Takes}

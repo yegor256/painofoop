@@ -26,9 +26,7 @@
   {Functions that use pointers or references to base classes must be able to use objects of derived classes without knowing it.}
   {martin2008clean}
 
-\pptSection[Subtyping]{Subtyping}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[subtyping-interfaces.java]
 interface Figure
   float area();
 
@@ -41,28 +39,28 @@ interface Polygon extends Figure
 void paint(Figure f)
   float s = f.area();
   // ...
-\end{ffcode}
-}
-\par\columnbreak\par
-\begin{tikzpicture}[
-  every path/.style={line width=3pt,-{Stealth[inset=0pt,width=10mm,length=10mm,open]}},
-  every node/.style={font={\ttfamily}}]
-\node[draw] (figure) {Figure};
-\node[draw, below right=4cm and 2cm of figure] (circle) {Circle};
-\node[draw, below left=3cm and 2cm of figure] (polygon) {Polygon};
-\draw (circle) -- (figure);
-\draw (polygon) -- (figure);
-\end{tikzpicture}
-\par
-$ \texttt{Circle} \sqsubseteq \texttt{Figure} $
-\par
-\texttt{Circle <: Figure}
-\end{pptWide}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Subtyping]{Subtyping}
+  \begin{pptWide}{2}
+  {\small\ffinput{subtyping-interfaces.java}}
+  \par\columnbreak\par
+  \begin{tikzpicture}[
+    every path/.style={line width=3pt,-{Stealth[inset=0pt,width=10mm,length=10mm,open]}},
+    every node/.style={font={\ttfamily}}]
+  \node[draw] (figure) {Figure};
+  \node[draw, below right=4cm and 2cm of figure] (circle) {Circle};
+  \node[draw, below left=3cm and 2cm of figure] (polygon) {Polygon};
+  \draw (circle) -- (figure);
+  \draw (polygon) -- (figure);
+  \end{tikzpicture}
+  \par
+  $ \texttt{Circle} \sqsubseteq \texttt{Figure} $
+  \par
+  \texttt{Circle <: Figure}
+  \end{pptWide}}
 
-\pptSection[Generics]{Parametric Polymorphism (Generics)}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[generics-without.java]
 class StackOfStrings {
   void push(String str) // ...
   String pop() // ...
@@ -76,10 +74,8 @@ s1.push("Hello, world!");
 
 var s2 = new StackOfIntegers();
 s2.push(42);
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[generics-with.java]
 class <T> Stack<T> {
   void push(T item) // ...
   T pop() // ...
@@ -90,14 +86,16 @@ s1.push("Hello, world!");
 
 var s2 = new Stack<Integer>();
 s2.push(42);
-\end{ffcode}
-}
-\end{pptWide}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Generics]{Parametric Polymorphism (Generics)}
+  \begin{pptWide}{2}
+  {\small\ffinput{generics-without.java}}
+  \par\columnbreak\par
+  {\small\ffinput{generics-with.java}}
+  \end{pptWide}}
 
-\pptSection[Overloading]{Ad Hoc Polymorphism (Method Overloading)}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[overloading-without.java]
 class Cart {
   void add(int pid) // ...
   void addString(String pid) {
@@ -109,10 +107,8 @@ var c = new Cart();
 c.add(42);
 c.addString("17");
 c.addString("Hello, world!");
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[overloading-with.java]
 class Cart {
   void add(int pid) // ...
   void add(String pid) {
@@ -124,10 +120,14 @@ var c = new Cart();
 c.add(42);
 c.add("17");
 c.add("Hello, world!");
-\end{ffcode}
-}
-\end{pptWide}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Overloading]{Ad Hoc Polymorphism (Method Overloading)}
+  \begin{pptWide}{2}
+  {\small\ffinput{overloading-without.java}}
+  \par\columnbreak\par
+  {\small\ffinput{overloading-with.java}}
+  \end{pptWide}}
 
 \plush{\pptChapter[Inheritance]{Implementation Inheritance}}
 
@@ -147,9 +147,7 @@ c.add("Hello, world!");
   {Someone asked him: ``If you could do Java over again, what would you change?'' ``I'd leave out classes,'' he replied.}
   {holub2003extends}
 
-\pptSection[Reuse]{Code reuse}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[reuse-inheritance.java]
 class Square
   private float width;
   float area()
@@ -160,29 +158,27 @@ class Circle extends Square
     super(radius);
   @Override float area()
     return 3.14 * super.area();
-\end{ffcode}
-}
-\par\columnbreak\par
-\begin{tikzpicture}[
-  every path/.style={line width=3pt,-{Stealth[inset=0pt,width=10mm,length=10mm,open]}},
-  every node/.style={font={\ttfamily}}]
-\node[draw] (square) {Square};
-\node[draw, below right=4cm and 2cm of square] (circle) {Circle};
-\draw[draw=red] (circle) -- (square);
-\end{tikzpicture}
-\par
-Here, the |Circle| is \ul{not} a |Square|.
-It merely reuses the code that was negligently left open in the |Square|.
-\end{pptWide}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Reuse]{Code reuse}
+  \begin{pptWide}{2}
+  {\small\ffinput{reuse-inheritance.java}}
+  \par\columnbreak\par
+  \begin{tikzpicture}[
+    every path/.style={line width=3pt,-{Stealth[inset=0pt,width=10mm,length=10mm,open]}},
+    every node/.style={font={\ttfamily}}]
+  \node[draw] (square) {Square};
+  \node[draw, below right=4cm and 2cm of square] (circle) {Circle};
+  \draw[draw=red] (circle) -- (square);
+  \end{tikzpicture}
+  \par
+  Here, the |Circle| is \ul{not} a |Square|.
+  It merely reuses the code that was negligently left open in the |Square|.
+  \end{pptWide}}
 
 \plush{\pptThought{Inheriting means ``receive (money, property, or a title) as an heir at the death of the previous holder.'' Who is dead, you ask? An object is dead if it allows other objects to inherit its encapsulated code and data.}}
 
-\pptSection[Composition]{Composition over inheritance}
-\begin{pptWide}{2}
-Implementation Inheritance:
-\par
-{\small\begin{ffcode}
+\begin{lnSnippet}[composition-inheritance.java]
 class Square
   private float width;
   float area()
@@ -193,12 +189,8 @@ class Circle extends Square
     super(radius);
   @Override float area()
     return 3.14 * super.area();
-\end{ffcode}
-}
-\par\columnbreak\par
-Composition:
-\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[composition-composition.java]
 final class Square
   private float width;
   float area()
@@ -210,17 +202,22 @@ final class Circle
     this.s = new Square(radius);
   float area()
     return 3.14 * s.area();
-\end{ffcode}
-}
-\end{pptWide}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Composition]{Composition over inheritance}
+  \begin{pptWide}{2}
+  Implementation Inheritance:
+  \par
+  {\small\ffinput{composition-inheritance.java}}
+  \par\columnbreak\par
+  Composition:
+  \par
+  {\small\ffinput{composition-composition.java}}
+  \end{pptWide}}
 
 \plush{\pptThought{All classes, without exceptions, should be either \ff{final} or \ff{abstract}}}
 
-\pptSection[Multiple]{Multiple inheritance}
-\begin{pptWide}{2}
-\par
-{\small\begin{ffcode}
+\begin{lnSnippet}[multiple-inheritance.cpp]
 class Pi
   float value()
     return 3.1415926;
@@ -234,25 +231,25 @@ class Circle extends Square, Pi
   Circle(float r): Square(r), Pi() {}
   virtual float area()
     return Pi.value() * Square.area();
-\end{ffcode}
-}
-\par\columnbreak\par
-\begin{tikzpicture}[
-  every path/.style={line width=3pt,-{Stealth[inset=0pt,width=10mm,length=10mm,open]}},
-  every node/.style={font={\ttfamily}}]
-\node[draw] (square) {Square};
-\node[draw, below right=0.5cm and 6cm of square] (pi) {Pi};
-\node[draw, below right=4cm and 2cm of square] (circle) {Circle};
-\draw[draw=red] (circle) -- (square);
-\draw[draw=red] (circle) -- (pi);
-\end{tikzpicture}
-\end{pptWide}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Multiple]{Multiple inheritance}
+  \begin{pptWide}{2}
+  \par
+  {\small\ffinput{multiple-inheritance.cpp}}
+  \par\columnbreak\par
+  \begin{tikzpicture}[
+    every path/.style={line width=3pt,-{Stealth[inset=0pt,width=10mm,length=10mm,open]}},
+    every node/.style={font={\ttfamily}}]
+  \node[draw] (square) {Square};
+  \node[draw, below right=0.5cm and 6cm of square] (pi) {Pi};
+  \node[draw, below right=4cm and 2cm of square] (circle) {Circle};
+  \draw[draw=red] (circle) -- (square);
+  \draw[draw=red] (circle) -- (pi);
+  \end{tikzpicture}
+  \end{pptWide}}
 
-\pptSection[Parents]{Multiple super types}
-\begin{pptWide}{2}
-\par
-{\small\begin{ffcode}
+\begin{lnSnippet}[multiple-interfaces.java]
 interface Actor
   void move(int dx, int dy);
 
@@ -265,19 +262,22 @@ class Circle implements Figure, Actor
     // ...
   @Override void move(int dx, int dy)
     // ...
-\end{ffcode}
-}
-\par\columnbreak\par
-\begin{tikzpicture}[
-  every path/.style={line width=3pt,-{Stealth[inset=0pt,width=10mm,length=10mm,open]}},
-  every node/.style={font={\ttfamily}}]
-\node[draw] (figure) {Figure};
-\node[draw, below right=0.5cm and 6cm of figure] (actor) {Actor};
-\node[draw, below right=4cm and 2cm of figure] (circle) {Circle};
-\draw[draw=green] (circle) -- (figure);
-\draw[draw=green] (circle) -- (actor);
-\end{tikzpicture}
-\end{pptWide}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Parents]{Multiple super types}
+  \begin{pptWide}{2}
+  \par
+  {\small\ffinput{multiple-interfaces.java}}
+  \par\columnbreak\par
+  \begin{tikzpicture}[
+    every path/.style={line width=3pt,-{Stealth[inset=0pt,width=10mm,length=10mm,open]}},
+    every node/.style={font={\ttfamily}}]
+  \node[draw] (figure) {Figure};
+  \node[draw, below right=0.5cm and 6cm of figure] (actor) {Actor};
+  \node[draw, below right=4cm and 2cm of figure] (circle) {Circle};
+  \draw[draw=green] (circle) -- (figure);
+  \draw[draw=green] (circle) -- (actor);
+  \end{tikzpicture}
+  \end{pptWide}}
 
 \end{document}
