@@ -29,9 +29,7 @@
   \end{multicols}}
 
 
-\pptSection[What?]{Which one is a getter?}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[which-getnext.java]
 class MiddleSquare {
   private short seed;
   MiddleSquare(short s) { seed = s; }
@@ -42,10 +40,8 @@ class MiddleSquare {
     return seed;
   }
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[which-getseed.java]
 class MiddleSquare {
   private short seed;
   MiddleSquare(short s) { seed = s; }
@@ -54,15 +50,16 @@ class MiddleSquare {
     return this.seed;
   }
 }
-\end{ffcode}
-}
-\end{pptWide}
-\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[What?]{Which one is a getter?}
+  \begin{pptWide}{2}
+  {\small\ffinput{which-getnext.java}}
+  \par\columnbreak\par
+  {\small\ffinput{which-getseed.java}}
+  \end{pptWide}}
 
-\pptSection[Boilerplate]{Boilerplate getters}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[boilerplate-manual.rb]
 class Document
   def initialize(n)
     @name = n
@@ -73,10 +70,8 @@ class Document
 end
 d = Document.new("/tmp/test.txt")
 puts d.name
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[boilerplate-attr.rb]
 class Document
   (*@\textcolor{orange}{attr\_reader}@*) :name
   def initialize(n)
@@ -86,12 +81,16 @@ end
 
 d = Document.new("/tmp/test.txt")
 puts d.name
-\end{ffcode}
-}
-\end{pptWide}
-\par
-Some modern programming languages (e.g. Ruby) offer an ability to generate the \ul{boilerplate} for mutators and accessors in a single line.
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Boilerplate]{Boilerplate getters}
+  \begin{pptWide}{2}
+  {\small\ffinput{boilerplate-manual.rb}}
+  \par\columnbreak\par
+  {\small\ffinput{boilerplate-attr.rb}}
+  \end{pptWide}
+  \par
+  Some modern programming languages (e.g. Ruby) offer an ability to generate the \ul{boilerplate} for mutators and accessors in a single line.}
 
 \plush{\pptSection[Purpose]{What getters are for?}
   \begin{pptWide}{2}
@@ -102,9 +101,7 @@ Some modern programming languages (e.g. Ruby) offer an ability to generate the \
   \par
   This is what GPT-4 replied to my question: ``Why should we use getters in Java instead of making class fields public? What are the benefits?''}
 
-\pptSection[DTO]{Data Transfer Objects (DTO)}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[dto-class.java]
 class BookDTO {
   private int id;
   private String author;
@@ -115,10 +112,8 @@ class BookDTO {
   String getAuthor() { return author; }
   String getTitle() { return title; }
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[dto-usage.java]
 class JsonApi {
   BookDTO getById(int id) { /* ... */ }
 }
@@ -127,12 +122,16 @@ BookDTO dto = api.getById(42);
 
 print(dto(*@\textcolor{orange}{.getTitle()}@*));
 print(dto(*@\textcolor{orange}{.getAuthor()}@*));
-\end{ffcode}
-}
-\end{pptWide}
-\par
-There is no excuse for the use of DTO~\citep{bugayenko2016blog0706}. Almost...
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[DTO]{Data Transfer Objects (DTO)}
+  \begin{pptWide}{2}
+  {\small\ffinput{dto-class.java}}
+  \par\columnbreak\par
+  {\small\ffinput{dto-usage.java}}
+  \end{pptWide}
+  \par
+  There is no excuse for the use of DTO~\citep{bugayenko2016blog0706}. Almost...}
 
 \plush{\pptChapter{Encapsulation}}
 
@@ -146,9 +145,7 @@ There is no excuse for the use of DTO~\citep{bugayenko2016blog0706}. Almost...
   {In most ways, encapsulation is a \ul{discipline} more than a real barrier; seldom is the \ul{integrity} of an object protected in any absolute sense, and this is especially true of software objects, so it is up to the user of an object to \ul{respect} that object's encapsulation.}
   {west2004object}
 
-\pptSection[Integrity]{Who is protecting the integrity better?}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[integrity-getter.java]
 class User {
   private String name;
   User(String n) { name = n; }
@@ -159,10 +156,8 @@ class User {
 if (employees.contains(user(*@\textcolor{orange}{.getName()}@*))) {
   /* pay a salary */
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[integrity-method.java]
 class User {
   private String name;
   User(String n) { name = n; }
@@ -173,16 +168,18 @@ class User {
 if (user(*@\textcolor{orange}{.isEmployee()}@*)) {
   /* pay a salary */
 }
-\end{ffcode}
-}
-\end{pptWide}
-\par
-Which class \ul{hides} its data better?
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Integrity]{Who is protecting the integrity better?}
+  \begin{pptWide}{2}
+  {\small\ffinput{integrity-getter.java}}
+  \par\columnbreak\par
+  {\small\ffinput{integrity-method.java}}
+  \end{pptWide}
+  \par
+  Which class \ul{hides} its data better?}
 
-\pptSection[Semantic]{Who knows about data semantic?}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[semantic-getter.java]
 class Box {
   private int weight;
   Box(int kg) { weight = kg; }
@@ -193,10 +190,8 @@ class Box {
 int w = box(*@\textcolor{orange}{.getWeight()}@*);
 int lbs = w / 0.454;
 printf("The weight is \%d lbs\n");
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[semantic-method.java]
 class Box {
   private int weight;
   Box(int kg) { weight = kg; }
@@ -206,12 +201,16 @@ class Box {
 }
 int lbs = box(*@\textcolor{orange}{.getLbs()}@*);
 printf("The weight is \%d lbs\n");
-\end{ffcode}
-}
-\end{pptWide}
-\par
-What happens if the \ff{Box} decides to store the \ff{weight} in pounds instead of kilograms? How will it know how many of its clients still assume that the \ff{weight} is in kilograms?~\citep{bugayenko2014blog0916}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Semantic]{Who knows about data semantic?}
+  \begin{pptWide}{2}
+  {\small\ffinput{semantic-getter.java}}
+  \par\columnbreak\par
+  {\small\ffinput{semantic-method.java}}
+  \end{pptWide}
+  \par
+  What happens if the \ff{Box} decides to store the \ff{weight} in pounds instead of kilograms? How will it know how many of its clients still assume that the \ff{weight} is in kilograms?~\citep{bugayenko2014blog0916}}
 
 \plush{\pptChapter[Alternative]{The Alternative}}
 
@@ -228,9 +227,7 @@ What happens if the \ff{Box} decides to store the \ff{weight} in pounds instead 
   \lnSource{fowler2013tell}
   \end{multicols}}
 
-\pptSection[TellDontAsk]{1) Tell Don't Ask, an Example}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[telldontask-class.java]
 class BookDTO {
   private int id;
   private String author;
@@ -239,31 +236,31 @@ class BookDTO {
     { id = i; author = a; title = t; }
   void print() { /* ... */ }
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[telldontask-usage.java]
 class JsonApi {
   BookDTO getById(int id) { /* ... */ }
 }
 
 BookDTO dto = api.getById(42);
 dto.print();
-\end{ffcode}
-}
-\end{pptWide}
-\par
-The \ff{print()} method may also be called a ``printer''~\citep{bugayenko2016blog0405}.
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[TellDontAsk]{1) Tell Don't Ask, an Example}
+  \begin{pptWide}{2}
+  {\small\ffinput{telldontask-class.java}}
+  \par\columnbreak\par
+  {\small\ffinput{telldontask-usage.java}}
+  \end{pptWide}
+  \par
+  The \ff{print()} method may also be called a ``printer''~\citep{bugayenko2016blog0405}.}
 
 \lnQuote
   {../faces/allen-holub}
   {Though getter/setter methods are commonplace in Java, they are not particularly object-oriented. In fact, they can \ul{damage} your code's maintainability. Moreover, the presence of numerous getter and setter methods is a red flag that the program isn't necessarily well designed from an OO perspective.}
   {holub2003why}
 
-\pptSection[NoPrefix]{2) Get rid of the ``get'' prefix}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[noprefix-class.java]
 class Book {
   private int id;
   private String author;
@@ -274,10 +271,8 @@ class Book {
   String author() { return author; }
   String title() { return title; }
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[noprefix-usage.java]
 class JsonApi {
   Book getById(int id) { /* ... */ }
 }
@@ -286,15 +281,16 @@ Book book = api.getById(42);
 
 print(book.author());
 print(book.title());
-\end{ffcode}
-}
-\end{pptWide}
-\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[NoPrefix]{2) Get rid of the ``get'' prefix}
+  \begin{pptWide}{2}
+  {\small\ffinput{noprefix-class.java}}
+  \par\columnbreak\par
+  {\small\ffinput{noprefix-usage.java}}
+  \end{pptWide}}
 
-\pptSection[Public]{3) Make fields public}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[public-class.java]
 class Book {
   public final int id;
   public final String author;
@@ -302,10 +298,8 @@ class Book {
   Book(int i, String a, String t)
     { id = i; author = a; title = t; }
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[public-usage.java]
 class JsonApi {
   Book getById(int id) { /* ... */ }
 }
@@ -314,10 +308,13 @@ Book book = api.getById(42);
 
 print(book.author);
 print(book.title);
-\end{ffcode}
-}
-\end{pptWide}
-\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Public]{3) Make fields public}
+  \begin{pptWide}{2}
+  {\small\ffinput{public-class.java}}
+  \par\columnbreak\par
+  {\small\ffinput{public-usage.java}}
+  \end{pptWide}}
 
 \end{document}
