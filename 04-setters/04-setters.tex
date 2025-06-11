@@ -13,9 +13,7 @@
 
 \plush{\pptChapter{Pre-Test}}
 
-\pptSection[How?]{How would you do this?}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[how-setter.java]
 Message m = new Message();
 m.(*@\textcolor{orange}{setName}@*)("Sarah");
 m.print(); // Hello, Sarah!
@@ -25,10 +23,8 @@ m.print(); // Hello, Victor!
 
 m.(*@\textcolor{orange}{setName}@*)("Leyla");
 m.print(); // Hello, Leyla!
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[how-immutable.java]
 Message m1 = (*@\textcolor{orange}{new}@*) Message("Sarah");
 m1.print(); // Hello, Sarah!
 
@@ -37,17 +33,18 @@ m2.print(); // Hello, Victor!
 
 Message m3 = (*@\textcolor{orange}{new}@*) Message("Leyla");
 m3.print(); // Hello, Leyla!
-\end{ffcode}
-}
-\end{pptWide}
-\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[How?]{How would you do this?}
+  \begin{pptWide}{2}
+  {\small\ffinput{how-setter.java}}
+  \par\columnbreak\par
+  {\small\ffinput{how-immutable.java}}
+  \end{pptWide}}
 
 \plush{\pptChapter{Mutability}}
 
-\pptSection[Definition]{Which object is \ul{im}mutable?}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[definition-mutable.java]
 class Book {
   private String title;
   Book(String t) { title = t; }
@@ -60,10 +57,8 @@ class Book {
 }
 b = new Book();
 b.(*@\textcolor{orange}{setTitle}@*)("Object Thinking");
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[definition-immutable.java]
 class Book {
   private final String title;
   Book(String t) { title = t; }
@@ -76,11 +71,14 @@ class Book {
 }
 b1 = new Book();
 b2 = b1.(*@\textcolor{orange}{withTitle}@*)("Object Thinking");
-\end{ffcode}
-}
-\end{pptWide}
-\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Definition]{Which object is \ul{im}mutable?}
+  \begin{pptWide}{2}
+  {\small\ffinput{definition-mutable.java}}
+  \par\columnbreak\par
+  {\small\ffinput{definition-immutable.java}}
+  \end{pptWide}}
 
 \print{\pptSection[Gradients]{There are four gradients of immutability}}
 \print{I. Constant}
@@ -89,9 +87,7 @@ b2 = b1.(*@\textcolor{orange}{withTitle}@*)("Object Thinking");
 \print{IV. Encapsulated Mutability}
 \plush{{\small You may read my blog about this~\citep{bugayenko2016blog0907}.\par}}
 
-\pptSection[Constant]{Gradient I: Constant}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[constant-class.java]
 class Book {
   private final String t;
   Book(String t) { this.t = t; }
@@ -99,25 +95,24 @@ class Book {
     (*@\textcolor{orange}{return this.t}@*);
   }
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[constant-usage.java]
 Book b = new Book("Object Thinking");
 String t1 = b.title();
 String t2 = b.title()
-\end{ffcode}
-}
-\par
-The \ff{title()} method returns exactly the same data on each call.
-This object is definitely \ul{immutable}.
-\end{pptWide}
-\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Constant]{Gradient I: Constant}
+  \begin{pptWide}{2}
+  {\small\ffinput{constant-class.java}}
+  \par\columnbreak\par
+  {\small\ffinput{constant-usage.java}}
+  \par
+  The \ff{title()} method returns exactly the same data on each call.
+  This object is definitely \ul{immutable}.
+  \end{pptWide}}
 
-\pptSection[NotConstant]{Gradient II: Not a Constant}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[notconstant-class.java]
 class Book {
   private final String t;
   Book(String t) { this.t = t; }
@@ -127,26 +122,25 @@ class Book {
     );
   }
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[notconstant-usage.java]
 Book b = new Book("Object Thinking");
 String t1 = b.title();
 String t2 = b.title()
-\end{ffcode}
-}
-\par
-The \ff{title()} method returns different data on each new call,
-depending on \ul{system timer}.
-Does it make the object mutable or not?
-\end{pptWide}
-\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[NotConstant]{Gradient II: Not a Constant}
+  \begin{pptWide}{2}
+  {\small\ffinput{notconstant-class.java}}
+  \par\columnbreak\par
+  {\small\ffinput{notconstant-usage.java}}
+  \par
+  The \ff{title()} method returns different data on each new call,
+  depending on \ul{system timer}.
+  Does it make the object mutable or not?
+  \end{pptWide}}
 
-\pptSection[Represented]{Gradient III: Represented Mutability}
-\begin{pptWide}{2}
-{\scriptsize\begin{ffcode}
+\begin{lnSnippet}[represented-class.java]
 class Book {
   private final Path path;
   Book(Path p) { this.path = p; }
@@ -164,27 +158,26 @@ class Book {
     );
   }
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[represented-usage.java]
 Book b = new Book("Object Thinking");
 String t1 = b.title();
 b.rename("Elegant Objects");
 String t2 = b.title()
-\end{ffcode}
-}
-\par
-The \ff{title()} method returns different data on each new call,
-depending on the content of the \ul{file} in the \ul{file system}.
-Does it make the object mutable or not?
-\end{pptWide}
-\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Represented]{Gradient III: Represented Mutability}
+  \begin{pptWide}{2}
+  {\scriptsize\ffinput{represented-class.java}}
+  \par\columnbreak\par
+  {\small\ffinput{represented-usage.java}}
+  \par
+  The \ff{title()} method returns different data on each new call,
+  depending on the content of the \ul{file} in the \ul{file system}.
+  Does it make the object mutable or not?
+  \end{pptWide}}
 
-\pptSection[Encapsulated]{Gradient IV: Encapsulated Mutability}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[encapsulated-class.java]
 class Book {
   private final (*@\textcolor{orange}{StringBuffer}@*) buffer;
   Book rename(String t) {
@@ -196,23 +189,24 @@ class Book {
     return this.buffer.toString();
   }
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[encapsulated-usage.java]
 Book b = new Book("Object Thinking");
 String t1 = b.title();
 b.rename("Elegant Objects");
 String t2 = b.title()
-\end{ffcode}
-}
-\par
-The \ff{title()} method returns different data on each new call,
-depending on the content of the \ul{memory block}.
-Does it make the object mutable or not?
-\end{pptWide}
-\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Encapsulated]{Gradient IV: Encapsulated Mutability}
+  \begin{pptWide}{2}
+  {\small\ffinput{encapsulated-class.java}}
+  \par\columnbreak\par
+  {\small\ffinput{encapsulated-usage.java}}
+  \par
+  The \ff{title()} method returns different data on each new call,
+  depending on the content of the \ul{memory block}.
+  Does it make the object mutable or not?
+  \end{pptWide}}
 
 \plush{
   \pptThought{Only gradients III and IV cause problems, while ``Constant'' and ``Not a Constant'' objects are harmless.}
@@ -232,10 +226,7 @@ Does it make the object mutable or not?
   {Writing large-scale functional programs is a topic for a different book, but we find that a little immutability within the implementation of a class leads to \ul{much safer} code and that, if we do a good job, the code \ul{reads well} too.}
   {freeman2009growing}
 
-\pptSection[Side-effects]{1) Side effects}
-\begin{pptWide}{2}
-With a side effect:\par
-{\small\begin{ffcode}
+\begin{lnSnippet}[sideeffects-with.java]
 public String post(Request request) {
   request.(*@\textcolor{orange}{setMethod}@*)("POST");
   return request.fetch();
@@ -246,11 +237,8 @@ r.setMethod("GET");
 String first = this.post(r);
 
 String second = r.fetch();
-\end{ffcode}
-}
-\par\columnbreak\par
-Without a side effect:\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[sideeffects-without.java]
 public String post(Request request) {
   return request
     .(*@\textcolor{orange}{withMtd}@*)("POST")
@@ -261,29 +249,26 @@ r = new Request("x.com").withMtd("GET");
 String first = this.post(r);
 
 String second = r.fetch();
-\end{ffcode}
-}
-\end{pptWide}
-\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Side-effects]{1) Side effects}
+  \begin{pptWide}{2}
+  With a side effect:\par
+  {\small\ffinput{sideeffects-with.java}}
+  \par\columnbreak\par
+  Without a side effect:\par
+  {\small\ffinput{sideeffects-without.java}}
+  \end{pptWide}}
 
-\pptSection[Concurrency]{2) Thread (un-)safety}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[concurrency-class.java]
 class Books {
   private (*@\textcolor{orange}{int}@*) c = 0;
   void add() {
     this.c = this.c + 1;
   }
 }
-\end{ffcode}
-\begin{tabular}{l>{\raggedright}p{11cm}}%
-  \raisebox{-0.9\height}{\pptPic{0.2}{goetz.png}} & \small \citet{goetz2006java} explained the advantages of immutable objects
-  in more details in their very famous book ``Java Concurrency in Practice'' (highly recommended!) \\
-\end{tabular}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[concurrency-usage.java]
 ExecutorService e =
   Executors.newCachedThreadPool();
 final Books books = new Books();
@@ -297,24 +282,27 @@ for (int i = 0; i < 1000; i++) {
   );
 }
 // What is the value of "books.c"?
-\end{ffcode}
-}
-\end{pptWide}
-\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Concurrency]{2) Thread (un-)safety}
+  \begin{pptWide}{2}
+  {\small\ffinput{concurrency-class.java}}
+  \begin{tabular}{l>{\raggedright}p{11cm}}%
+    \raisebox{-0.9\height}{\pptPic{0.2}{goetz.png}} & \small \citet{goetz2006java} explained the advantages of immutable objects
+    in more details in their very famous book ``Java Concurrency in Practice'' (highly recommended!) \\
+  \end{tabular}
+  \par\columnbreak\par
+  {\small\ffinput{concurrency-usage.java}}
+  \end{pptWide}}
 
-\pptSection[Coupling]{3) Temporal Coupling}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[coupling-temporal1.java]
 r = new Request("x.com");
 r.setMethod("POST");
 String first = r.fetch();
 r.setBody("text=hello");
 String second = r.fetch();
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[coupling-temporal2.java]
 r = new Request("x.com");
 
 // 100 lines later:
@@ -323,12 +311,16 @@ r = new Request("x.com");
 
 r.setBody("text=hello");
 String second = r.fetch();
-\end{ffcode}
-}
-\end{pptWide}
-\par
-``\ul{Sequential} coupling (also known as \ul{temporal} coupling) is a form of coupling where a class requires its methods to be called in a particular sequence.'' --- \href{https://en.wikipedia.org/wiki/Sequential_coupling}{Wikipedia}.
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Coupling]{3) Temporal Coupling}
+  \begin{pptWide}{2}
+  {\small\ffinput{coupling-temporal1.java}}
+  \par\columnbreak\par
+  {\small\ffinput{coupling-temporal2.java}}
+  \end{pptWide}
+  \par
+  ``\ul{Sequential} coupling (also known as \ul{temporal} coupling) is a form of coupling where a class requires its methods to be called in a particular sequence.'' --- \href{https://en.wikipedia.org/wiki/Sequential_coupling}{Wikipedia}.}
 
 \lnQuote
   {robert-martin}
@@ -345,9 +337,7 @@ String second = r.fetch();
   {Back in the early days of programming, this was named temporal coupling, and it is a pretty \ul{nasty thing} when you do it excessively. When you group things together just because they have to happen at the same time, the relationship between them isn’t very strong. Later you might find that you have to do one of those things without the other, but at that point they might have grown together. Without a seam, separating them can be hard work.}
   {feathers2004working}
 
-\pptSection[Identity]{4) Identity Mutability}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[identity-mutability.java]
 Map<Date, String> map = new HashMap<>();
 Date date = new Date();
 map.put(date, "hello, world!");
@@ -358,13 +348,15 @@ assert map.containsKey(date);
 date.setTime(12345L);
 // (*@\textcolor{red}{Why this is FALSE??}@*):
 assert map.containsKey(date);
-\end{ffcode}
-}
-\par\columnbreak\par
-``In order for an object to be shared safely, it must be immutable: it cannot be changed except by full replacement.''\par
-\lnSource{evans2004domain}
-\end{pptWide}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Identity]{4) Identity Mutability}
+  \begin{pptWide}{2}
+  {\small\ffinput{identity-mutability.java}}
+  \par\columnbreak\par
+  ``In order for an object to be shared safely, it must be immutable: it cannot be changed except by full replacement.''\par
+  \lnSource{evans2004domain}
+  \end{pptWide}}
 
 \lnQuote
   {eric-evans}
@@ -383,9 +375,7 @@ assert map.containsKey(date);
   {One of the first and most easily-recognizable problems in using objects as a front-end to a relational data store is that of \ul{how to map} classes to tables.}
   {neward2006vietnam}
 
-\pptSection[JPA]{Java Persistence API}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[jpa-entity.java]
 @Entity
 @Table(name = "movie")
 public class Movie {
@@ -397,25 +387,24 @@ public class Movie {
   // getters
   // setters
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-{\small\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[jpa-usage.java]
 EntityManager em = getEntityManager();
 em.getTransaction().begin();
 Movie movie = em.(*@\textcolor{orange}{findById}@*)(1L);
 movie.setName("The Godfather");
 em.(*@\textcolor{orange}{persist}@*)(movie);
 em.getTransaction().commit();
-\end{ffcode}
-}
-\end{pptWide}
-\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[JPA]{Java Persistence API}
+  \begin{pptWide}{2}
+  {\small\ffinput{jpa-entity.java}}
+  \par\columnbreak\par
+  {\small\ffinput{jpa-usage.java}}
+  \end{pptWide}}
 
-\pptSection[SQL-speaking]{SQL speaking objects}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[sql-interface.java]
 interface Movie {
   int id();
   String title();
@@ -423,13 +412,8 @@ interface Movie {
 }
 Movie m = new PgMovie(ds, 1L);
 m.(*@\textcolor{orange}{rename}@*)("The Godfather");
-\end{ffcode}
-}
-\par
-Here I'm using \href{https://github.com/jcabi/jcabi-jdbc}{jcabi-jdbc},
-an object-oriented wrapper around JDBC data source.
-\par\columnbreak\par
-{\scriptsize\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[sql-implementation.java]
 final class PgMovie implements Movie
   private final Source dbase;
   private final int number;
@@ -447,25 +431,27 @@ final class PgMovie implements Movie
       .set(n)
       .set(this.number)
       .execute();
-\end{ffcode}
-}
-\end{pptWide}
-\par
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[SQL-speaking]{SQL speaking objects}
+  \begin{pptWide}{2}
+  {\small\ffinput{sql-interface.java}}
+  \par
+  Here I'm using \href{https://github.com/jcabi/jcabi-jdbc}{jcabi-jdbc},
+  an object-oriented wrapper around JDBC data source.
+  \par\columnbreak\par
+  {\scriptsize\ffinput{sql-implementation.java}}
+  \end{pptWide}}
 
-\pptSection[JOINs]{Complex SQL queries}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[joins-factory.java]
 final class PgMovies
   private final Source dbase;
   public PgMovies(DataSource data)
     this.dbase = data;
   public Movie movie(Long id)
     return new PgMovie(this.dbase, id);
-\end{ffcode}
-}
-\par\columnbreak\par
-{\scriptsize\begin{ffcode}
+\end{lnSnippet}
+\begin{lnSnippet}[joins-movie.java]
 final class PgMovie implements Movie
   private final Source dbase;
   private final int number;
@@ -482,10 +468,14 @@ final class PgMovie implements Movie
       .sql("(*@\textcolor{orange}{SELECT name FROM movie JOIN author ON author.id = movie.author WHERE movie.id = ?}@*)")
       .set(this.number)
       .select(new SingleOutcome<String>(String.class));
-\end{ffcode}
-}
-\end{pptWide}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[JOINs]{Complex SQL queries}
+  \begin{pptWide}{2}
+  {\small\ffinput{joins-factory.java}}
+  \par\columnbreak\par
+  {\scriptsize\ffinput{joins-movie.java}}
+  \end{pptWide}}
 
 \plush{\pptChapter[Apache]{Apache Commons Email}}
 
