@@ -13,9 +13,7 @@
 
 \plush{\pptChapter{Pre-Test}}
 
-\pptSection[Entities]{How many static ``entities'' do you see here?}
-\begin{pptWide}{2}
-{\small\begin{ffcode}
+\begin{lnSnippet}[entities.java]
 class FigureUtils {
   static final float PI = 3.1415926;
   static final FigureUtils INSTANCE;
@@ -27,19 +25,21 @@ class FigureUtils {
     return 2 * c.radius * PI;
   }
 }
-\end{ffcode}
-}
-\par\columnbreak\par
-How many?
-\begin{itemize}
-\item three
-\item four
-\item five
-\item six
-\item maybe seven
-\end{itemize}
-\end{pptWide}
-\plush{}
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[Entities]{How many static ``entities'' do you see here?}
+  \begin{pptWide}{2}
+  {\small\ffinput{entities.java}}
+  \par\columnbreak\par
+  How many?
+  \begin{itemize}
+  \item three
+  \item four
+  \item five
+  \item six
+  \item maybe seven
+  \end{itemize}
+  \end{pptWide}}
 
 \plush{\pptChapter{Methods}}
 
